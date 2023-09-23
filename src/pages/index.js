@@ -1,14 +1,20 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Head from "next/head"; /* eslint-disable react/no-unescaped-entities */
+import React from "react";
+import Link from "next/link";
 
 export default function Home() {
-  return <>
-    <p>
-      lfkajslkfj
-    </p>
-  </>;
+  return (
+    <div
+      style={{
+        margin: "20px",
+      }}
+    >
+      <Head>
+        <title>Home</title>
+      </Head>
+      <Link href="/auth/updateInfo">
+        <button>Update Info</button>
+      </Link>
+    </div>
+  );
 }
