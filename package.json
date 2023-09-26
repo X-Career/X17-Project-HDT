@@ -9,10 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "antd": "^5.9.2",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
-    "next": "13.4.19",
+    "next": "^13.4.19",
+    "node-sass": "^9.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0",
+    "sass": "^1.68.0",
+    "sass-loader": "^13.3.2"
   }
 }

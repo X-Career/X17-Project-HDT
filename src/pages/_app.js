@@ -1,5 +1,14 @@
-import '@/styles/globals.css'
+import { useRouter } from 'next/router';
+import "../styles/globals.scss"
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  return (
+    <router>
+      <Component {...pageProps} />
+    </router>
+  );
 }
+
+export default MyApp;
