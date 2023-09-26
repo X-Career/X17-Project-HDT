@@ -12,7 +12,7 @@ export default function Home() {
       <Head>
         <title>Home</title>
       </Head>
-      <Link href="/auth/updateInfo">
+      <Link href="/users/updateInfo">
         <button>Update Info</button>
       </Link>
     </div>

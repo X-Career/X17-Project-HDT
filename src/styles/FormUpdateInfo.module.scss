@@ -1,0 +1,24 @@
+.update_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    label {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        input {
+            width: calc(100% - 8rem);
+            padding: 5px 3px;
+            margin: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
