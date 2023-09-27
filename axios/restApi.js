@@ -27,7 +27,7 @@ export const restApi = async (method, endpointKey, requestData = null) => {
 
     return {
       data: response.data,
-      message: "Success",
+      message: response.data.message || "success",
       success: true,
       status: response.status,
     };

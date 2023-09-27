@@ -9,4 +9,5 @@ const initialState = {
   error: null,
 };
 
-export const authSlice = createAsyncSlice("auth", login, initialState);
+const authSlice = createAsyncSlice("auth", login, initialState);
+export default authSlice.reducer;
