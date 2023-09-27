@@ -33,7 +33,7 @@ export const restApi = async (method, endpointKey, requestData = null) => {
     };
   } catch (error) {
     return {
-      data: null,
+      data: error.response.data,
       message: "Error: " + error.message,
       success: false,
     };
