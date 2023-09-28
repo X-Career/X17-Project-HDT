@@ -1,12 +1,9 @@
 import { createAsyncSlice } from "../reduxToolkit";
-
-const initialState = {
-  value: 0,
-};
+import { initialState } from "../../global/initState";
 
 const testSlice = createAsyncSlice("test", null, initialState, {
   increaseValue: (state) => {
-    state.value += 1;
+    state.data += 1;
   },
 });
 
