@@ -1,7 +1,8 @@
 .update_form {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     label {
         display: flex;
         width: 100%;
@@ -10,15 +11,54 @@
         input {
             width: calc(100% - 8rem);
             padding: 5px 3px;
-            margin: 10px;
-            border: 1px solid #333;
+            border: none;
             border-radius: 5px;
             outline: none;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #fff;
+            background: transparent;
+            cursor: default;
+            &:hover {
+                background-color: #a2a2a26e;
+                cursor: default;
+            }
+            &:focus {
+                border: 1px solid #333;
+                background-color: unset;
+                cursor: text;
+            }
+            &:active {
+                cursor: text;
+            }
         }
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
+        }
+        .submitBtn,
+        .cancelBtn {
+            color: #090909;
+            padding: 0.5em;
+            border-radius: 0.5em;
+            background: #e8e8e8;
+            border: 1px solid #e8e8e8;
+            transition: all 0.1s;
+            box-shadow:
+                0 15px 25px -4px rgba(0, 0, 0, 0.5),
+                inset 0 -3px 4px -1px rgba(0, 0, 0, 0.2),
+                0 -10px 15px -1px #ffffff99,
+                inset 0 3px 4px -1px #ffffff33,
+                inset 0 0 5px 1px #ffffffcc,
+                inset 0 20px 30px 0 #ffffff33;
+            &:active {
+                box-shadow:
+                    0 10px 25px -4px #00000066,
+                    inset 0 -8px 25px -1px #ffffffe6,
+                    0 -10px 15px -1px #ffffff99,
+                    inset 0 8px 20px 0 #00000033,
+                    inset 0 0 5px 1px #ffffff99;
+            }
         }
     }
 }

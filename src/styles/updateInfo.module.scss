@@ -6,16 +6,16 @@
     height: 90vh;
     max-width: 624px;
     margin: 0px auto;
+    border-radius: 8px;
+    overflow: hidden;
     box-shadow:
-        0px 1px 1px #091e4240,
-        0px 0px 1px #091e424f;
-    border-radius: 5px;
+        0 2px 4px #0000001a,
+        0 8px 16px #0000001a;
     .contain_avt {
         width: 200px;
         display: flex;
         flex-direction: column;
         -webkit-box-pack: justify;
-        background: #ffffff;
         .file_input {
             position: relative;
             display: inline-block;
@@ -32,18 +32,11 @@
             }
             input[type="file"] {
                 display: none;
-                cursor: unset;
-            }
-            .camera_icon {
-                position: absolute;
-                top: 40px;
-                left: 38px;
-                cursor: pointer;
             }
         }
     }
     .contain_info {
         margin: 20px 30px 0 0;
-        width: 100%;
+        width: 54%;
     }
 }

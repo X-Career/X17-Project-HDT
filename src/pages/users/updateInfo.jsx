@@ -5,42 +5,80 @@ import Image from "next/image";
 import Head from "next/head";
 import css from "../../styles/updateInfo.module.scss";
 import FormUpdateInfo from "../../components/FormUpdateInfo";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UpdateInfo() {
-  const [show, setShow] = useState(false);
   const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const random = Math.floor(Math.random() * 1001);
-  const [file, setFile] = useState(
-    `https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/${random}.jpg`
-  );
+  const [file, setFile] = useState(users.avatarUrl);
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 2000,
+    pauseOnHover: true,
+    draggable: true,
+  };
+  useEffect(() => {
+    axios
+      .get(`${url}/userInfo`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setUsers(response.data.data);
+      })
+      .catch((error) => {});
+  }, []);
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFile(reader.result);
-        localStorage.setItem("file", reader.result);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (localStorage.file) {
+      setFile(localStorage.file);
+    }
+  }, [file]);
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTBlZjc5MTMxM2U0YmNkOGM5ZDkwZDIiLCJpYXQiOjE2OTYwMDUwNTQsImV4cCI6MTY5NjAxMjI1NH0.s_-cGt6Zz93i3M72qo6KLp59yX8h1QTliP9ZROSzhz0";
+  const url = "http://localhost:5000/api/v1/user";
+  const handleFileChange = async (event) => {
+    // const file = event.target.files[0];
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.onload = () => {
+    //     setFile(reader.result);
+    //     localStorage.setItem("file", reader.result);
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
+    try {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append("data", file);
+
+      const response = await axios.put(`${url}/updateAvatar`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setUsers({
+        ...users,
+        avatarUrl: response.data.data.avatarUrl,
+      });
+
+      localStorage.setItem("avatarUrl", response.data.data.avatarUrl);
+      toast.success("Avatar updated successfully!", toastOptions);
+    } catch (error) {
+      toast.error("An error occurred while updating the avatar!", toastOptions);
     }
   };
-  const url = "https://64565c585f9a4f236141d794.mockapi.io/user";
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`${url}`)
-      .then((response) => response.json())
-      .then((result) => {
-        setUsers(result);
-        setIsLoading(false);
-      });
-  }, []);
+
   return (
     <div
       style={{
@@ -69,18 +107,23 @@ export default function UpdateInfo() {
                   wordWrap: "break-word",
                 }}
               >
-                BIOlaksjfaosifjaoiwjfoaiwjfoijawfoijoaijwfoaijsofajsflkajsfaoisjfaiosf
+                {users.bio}
               </p>
             </div>
             <input type="file" ref={fileInputRef} onChange={handleFileChange} />
           </div>
         </div>
         <div className={css.contain_info}>
-          <div>
-            <b>About</b>
+          <div style={{ marginBottom: 13 }}>
+            <b>About Me</b>
           </div>
           <div className={css.contain_info_center}>
-            <FormUpdateInfo  />
+            <FormUpdateInfo
+              token={token}
+              url={url}
+              users={users}
+              setUsers={setUsers}
+            />
           </div>
         </div>
       </div>
