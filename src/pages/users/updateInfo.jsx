@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function UpdateInfo() {
-  const [users, setUsers] = useState([]);
-  const [file, setFile] = useState(users.avatarUrl);
+  const [users, setUsers] = useState({});
+  const [file, setFile] = useState("");
   const toastOptions = {
     position: "bottom-right",
     autoClose: 2000,
@@ -19,61 +19,48 @@ export default function UpdateInfo() {
     draggable: true,
   };
   useEffect(() => {
-    axios
-      .get(`${url}/userInfo`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
+    (async () => {
+      try {
+        const response = await axios.get(`${url}/userInfo`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsers(response.data.data);
-      })
-      .catch((error) => {});
-  }, []);
+        if (response.data.data.avatarUrl) {
+          setFile(response.data.data.avatarUrl);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [file]);
+
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
 
-  useEffect(() => {
-    if (localStorage.file) {
-      setFile(localStorage.file);
-    }
-  }, [file]);
-
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTBlZjc5MTMxM2U0YmNkOGM5ZDkwZDIiLCJpYXQiOjE2OTYwMDUwNTQsImV4cCI6MTY5NjAxMjI1NH0.s_-cGt6Zz93i3M72qo6KLp59yX8h1QTliP9ZROSzhz0";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTBlZjc5MTMxM2U0YmNkOGM5ZDkwZDIiLCJpYXQiOjE2OTYwMTkxNDEsImV4cCI6MTY5NjAyNjM0MX0.HGZF9IZ7-6azz3wg6YNyj8o4SHwn-Lks8zmdK5SJHus";
   const url = "http://localhost:5000/api/v1/user";
   const handleFileChange = async (event) => {
-    // const file = event.target.files[0];
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     setFile(reader.result);
-    //     localStorage.setItem("file", reader.result);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
+    const file = event.target.files[0];
     try {
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append("data", file);
+      if (file) {
+        const formData = new FormData();
+        formData.append("data", file);
 
-      const response = await axios.put(`${url}/updateAvatar`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      setUsers({
-        ...users,
-        avatarUrl: response.data.data.avatarUrl,
-      });
-
-      localStorage.setItem("avatarUrl", response.data.data.avatarUrl);
-      toast.success("Avatar updated successfully!", toastOptions);
+        const response = await axios.post(`${url}/updateAvatar`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setFile(response.data.data.avatar);
+        toast.success("Avatar updated successfully!", toastOptions);
+      }
     } catch (error) {
       toast.error("An error occurred while updating the avatar!", toastOptions);
     }
@@ -99,6 +86,7 @@ export default function UpdateInfo() {
                 height={100}
                 alt="Avatar"
                 className={css.contain_avt_image}
+                priority={true}
                 onClick={handleImageClick}
               />
               <p

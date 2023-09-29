@@ -96,10 +96,10 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
   }
-}
+} */
 .Toastify__toast-container--bottom-right {
   bottom: -16em;
   right: 1em;
