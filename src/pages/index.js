@@ -11,11 +11,7 @@ export default function Home() {
   return (
     <main>
       <Header />
-      <div className={styles.main}>
-        <LeftSidebar />
-        Home Page
-        <RightSidebar />
-      </div>
+      <div className={styles.main}>Home Page</div>
       <Footer />
     </main>
   );
