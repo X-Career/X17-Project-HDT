@@ -1,0 +1,74 @@
+.Header{
+    font-weight: bold;
+    font-size: 100px;
+    margin-left: 15%;
+    margin-top: 20vh;
+    .Travel {
+      color: #3B82F6;
+    }
+  }
+  .Slogan{
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 16%;
+    color: #1f7bf2;
+  }
+  .LoginContainer{  
+      display: flex;
+      margin-left: 50%;
+      justify-content: center;
+      align-items: center;
+      max-width:25%;
+      border: 1px solid #f0f2f5;
+      border-radius: 6px;
+      background-color:#f8f0f0 ;
+      box-shadow: 0px 0px 10px 10px rgba(145, 131, 131, 0.103);
+  }
+  .Title{
+      font-weight: bold;
+      color: #3B82F6;  
+      margin-bottom: 0.5rem;
+  }
+  .Icon{
+      display: flex;
+      justify-content: center;
+  }
+  .ContainerInput{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+  }
+  .InputBox{
+    margin: 15px 0px 15px 0px;
+    Input{
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-left: 30px;
+    }
+  }
+  
+  .SignupBtn{
+      background-color:#48b931 ;
+      border: none;
+      border-radius: 8px;
+      margin: 15px;
+      padding: 15px 30px 15px 30px;
+      font: bold;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .LoginBtn{
+      background-color:#1f7bf2;
+      border: none;
+      border-radius: 8px;
+      margin: 15px;
+      padding: 15px 30px 15px 30px;
+      font: bold;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }

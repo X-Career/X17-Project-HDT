@@ -1,26 +1,55 @@
-.BlogContainer{  
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(8, 112, 184, 0.7);
-}
-.travel-blog {
+.Header{
   font-weight: bold;
-  font-size: 30px;
-  .travel {
+  font-size: 100px;
+  margin-left: 15%;
+  margin-top: 20vh;
+  .Travel {
     color: #3B82F6;
   }
 }
-.title{
+.Slogan{
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 16%;
+  color: #1f7bf2;
+}
+.SignupContainer{  
+    display: flex;
+    margin-left: 50%;
+    justify-content: center;
+    align-items: center;
+    max-width:25%;
+    border: 1px solid #f0f2f5;
+    border-radius: 6px;
+    background-color:#f8f0f0 ;
+    box-shadow: 0px 0px 10px 10px rgba(145, 131, 131, 0.103);
+}
+.Title{
     font-weight: bold;
     color: #3B82F6;  
     margin-bottom: 0.5rem;
 }
-.Email{
-    margin-top: 20px;
+.Icon{
+    display: flex;
+    justify-content: center;
 }
+.ContainerInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.InputBox{
+  margin: 15px 0px 15px 0px;
+  Input{
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 30px;
+  }
+}
+
 .SignupBtn{
     background-color:#48b931 ;
     border: none;

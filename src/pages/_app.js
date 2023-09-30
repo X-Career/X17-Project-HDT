@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import "../styles/globals.scss"
+import "../styles/Signup.module.scss"
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
