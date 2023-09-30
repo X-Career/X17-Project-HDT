@@ -1,10 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useRef, useEffect } from "react";
-// import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import css from "../../styles/updateInfo.module.scss";
-import FormUpdateInfo from "../../components/FormUpdateInfo";
+import css from "@/styles/updateInfo.module.scss";
+import FormUpdateInfo from "@/components/formUpdateInfo/FormUpdateInfo";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,7 +42,7 @@ export default function UpdateInfo() {
   };
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTBlZjc5MTMxM2U0YmNkOGM5ZDkwZDIiLCJpYXQiOjE2OTYwMTkxNDEsImV4cCI6MTY5NjAyNjM0MX0.HGZF9IZ7-6azz3wg6YNyj8o4SHwn-Lks8zmdK5SJHus";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTBlZjc5MTMxM2U0YmNkOGM5ZDkwZDIiLCJpYXQiOjE2OTYwNzU0MzMsImV4cCI6MTY5NjA3NjYzM30.N7-QBcqWGKYzfvCEyOq7-PUHocXtg2LgB8gTOcprC3c";
   const url = "http://localhost:5000/api/v1/user";
   const handleFileChange = async (event) => {
     const file = event.target.files[0];

@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import css from "../styles/FormUpdateInfo.module.scss";
+import React, { useRef } from "react";
+import css from "./FormUpdateInfo.module.scss";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-const FormUpdateInfo = ({ users, setUsers, setIsLoading, url, token }) => {
+const FormUpdateInfo = ({ users, setUsers, url, token }) => {
   const toastOptions = {
     position: "bottom-right",
     autoClose: 2000,
