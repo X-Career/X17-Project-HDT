@@ -58,15 +58,6 @@ export default function Home() {
                   onChange={e => {setPassword(e.target.value)}}
                 />
               </div>
-              <div className={styles.InputBox}>
-                <MdLockOutline/>
-                <input
-                  type="password"
-                  placeholder="Confirm pasword"
-                  className={styles.Input}
-                  onChange={e => {setConfirmPassword(e.target.value)}}
-                />
-              </div>
               </div>
               <div> 
                 <Link href="/signup">
