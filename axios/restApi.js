@@ -14,7 +14,7 @@ export const restApi = async (
     let response;
     switch (method) {
       case METHODS.GET:
-        response = await instance.get(endpoint);
+        response = await instance.get(endpoint, requestData);
         break;
       case METHODS.POST:
         response = await instance.post(endpoint, requestData, headers);

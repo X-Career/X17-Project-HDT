@@ -28,7 +28,7 @@ export const createAsyncSlice = (name, asyncThunk, initialState, reducer) => {
               })
               .addCase(asyncThunk.fulfilled, (state, action) => {
                 state.loading = false;
-                state.data = action.payload;
+                state.data = action.payload.data;
               })
               .addCase(asyncThunk.rejected, (state, action) => {
                 state.loading = false;
