@@ -32,6 +32,13 @@
   font-weight: 700;
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.userBar,
 .navBar {
   display: flex;
   gap: 24px;
@@ -67,4 +74,18 @@
   right: 12px;
   border-radius: 9999px;
   cursor: pointer;
+}
+
+.btns {
+  border: 1px solid #333;
+  border-radius: 24px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon {
+  font-size: 20px;
+  font-weight: 900;
 }
