@@ -1,19 +1,23 @@
 import instance from "./axios-config";
 import { METHODS } from "../global";
-export const restApi = async (method, endpointKey, requestData = null) => {
+export const restApi = async (
+  method,
+  endpointKey,
+  requestData = null,
+  headers = null
+) => {
   try {
     const endpoint = endpointKey;
     if (!endpoint) {
       throw new Error("Endpoint không tồn tại");
     }
-
     let response;
     switch (method) {
       case METHODS.GET:
         response = await instance.get(endpoint);
         break;
       case METHODS.POST:
-        response = await instance.post(endpoint, requestData);
+        response = await instance.post(endpoint, requestData, headers);
         break;
       case METHODS.PUT:
         response = await instance.put(endpoint, requestData);

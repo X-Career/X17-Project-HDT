@@ -2,9 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import restApi from "../axios/restApi";
 import { createSlice } from "@reduxjs/toolkit";
 
-export const createApiThunk = (methodName, actionName) => {
+export const createApiThunk = (methodName, actionName, headers) => {
   return createAsyncThunk(actionName, async (requestData) => {
-    const response = await restApi(methodName, actionName, requestData);
+    const response = await restApi(
+      methodName,
+      actionName,
+      requestData,
+      headers
+    );
     return response;
   });
 };
