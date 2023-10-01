@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const createApiThunk = (methodName, actionName) => {
   return createAsyncThunk(actionName, async (requestData) => {
     const response = await restApi(methodName, actionName, requestData);
-    return response;
+    return response.data;
   });
 };
 export const createAsyncSlice = (name, asyncThunk, initialState, reducer) => {
@@ -23,7 +23,7 @@ export const createAsyncSlice = (name, asyncThunk, initialState, reducer) => {
               })
               .addCase(asyncThunk.fulfilled, (state, action) => {
                 state.loading = false;
-                state.data = action.payload;
+                state.data = action.payload.data;
               })
               .addCase(asyncThunk.rejected, (state, action) => {
                 state.loading = false;

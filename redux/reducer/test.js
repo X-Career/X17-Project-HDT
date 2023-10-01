@@ -5,7 +5,10 @@ const testSlice = createAsyncSlice("test", null, initialState, {
   increaseValue: (state) => {
     state.data += 1;
   },
+  creaseValue: (state) => {
+    state.data -= 1;
+  },
 });
 
-export const { increaseValue } = testSlice.actions;
+export const { increaseValue, creaseValue } = testSlice.actions;
 export default testSlice.reducer;
