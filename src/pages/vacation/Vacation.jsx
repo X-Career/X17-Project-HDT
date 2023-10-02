@@ -1,8 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { FaPlus, FaUserFriends, FaLock } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import Select from "@mui/material/Select";
@@ -69,12 +66,7 @@ const vacation = () => {
                   <span>e.g. My last vacaton...</span>
                 </label>
               </div>
-
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateRangePicker
-                  localeText={{ start: "Start-day", end: "End-day" }}
-                />
-              </LocalizationProvider>
+              {/* datepick */}
               {showAddTripmates && (
                 <div className={combinedStyles} style={{ marginTop: "20px" }}>
                   <input
