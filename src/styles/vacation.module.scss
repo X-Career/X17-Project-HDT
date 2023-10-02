@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noticia+Text&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.container {
+  font-family: "Source Sans 3", sans-serif !important;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  .content {
+    padding-bottom: 48px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .vacation {
+      width: 100%;
+      h1 {
+        text-align: center;
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 16px !important;
+      }
+      .vacationForm {
+        padding-top: 24px;
+        width: 100%;
+        max-width: 50%;
+        @media only screen and (max-width: 1025px) {
+          max-width: 70%;
+          margin-left: 15%;
+        }
+        margin-left: 25%;
+        text-align: center !important;
+        form {
+          width: 100%;
+          .tripmates {
+            opacity: 0;
+            transform: translateY(-50%);
+            animation: slideIn 0.5s ease-in-out forwards;
+          }
+
+          @keyframes slideIn {
+            0% {
+              opacity: 0;
+              transform: translateY(-50%);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .form-field {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: 3 ease-in-out;
+          }
+          button {
+            padding: 12px 24px;
+            border-radius: 100px;
+            background-color: #f75940;
+            border: 0;
+            border-width: 1px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            transition: 0.25 ease;
+            &:hover {
+              background-color: #e23e57;
+              cursor: pointer;
+            }
+          }
+          .form-plus {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+
+            .form-invite-hidden {
+              display: none;
+            }
+
+            .form-invite {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              &:hover {
+                cursor: pointer;
+                color: rgb(102, 161, 250);
+              }
+            }
+          }
+          .form-input {
+            width: 100%;
+            padding: 20px 20px;
+            border-radius: 8px;
+            transition: 0.25 ease;
+            border: 1px solid #eee;
+
+            &:focus {
+              outline: none;
+              border-color: #8598cc;
+            }
+            &:not(:placeholder-shown) + .form-label {
+              :last-child {
+                display: none;
+              }
+              :first-child {
+                top: 0;
+                font-size: 0.8rem;
+                background-color: white;
+              }
+            }
+            &:focus + .form-label {
+              transition: 0.25 ease;
+              :first-child {
+                top: 0;
+                font-size: 0.8rem;
+                background-color: white;
+              }
+              :last-child {
+                left: 21px;
+              }
+            }
+          }
+          .form-label {
+            display: flex;
+
+            span {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              left: 21px;
+              user-select: none;
+              color: #999;
+              pointer-events: none;
+              transition: 0.5s ease;
+              font-weight: 400;
+              font-size: 14px;
+            }
+            :first-child {
+              color: black;
+              font-weight: 700;
+            }
+            :last-child {
+              font-style: italic;
+              color: #999;
+              left: 25%;
+              @media only screen and (max-width: 1025px) {
+                left: 30%;
+              }
+              @media only screen and (max-width: 500px) {
+                left: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
