@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.scss";
@@ -20,14 +22,22 @@ const Header = () => {
           </Link>
           <div className={styles.navBar}>
             <Link href="/" className={styles.navItem}>
-              Latest
+              Home
             </Link>
-            <Link href="/" className={styles.navItem}>
-              Most Viewed
+            <Link href="/vacations" className={styles.navItem}>
+              Vacations
             </Link>
-            <Link href="/" className={styles.navItem}>
-              Most Reactions
+            <Link href="/albums" className={styles.navItem}>
+              Albums
             </Link>
+            {/* Chỉ render khi người dùng đăng nhập hoặc có thể render trong Home
+            Page */}
+            {/* <Link href="/create-vacation" className={styles.navItem}>
+              Create vacation
+            </Link>
+            <Link href="/create-album" className={styles.navItem}>
+              Create album
+            </Link> */}
           </div>
         </div>
 
