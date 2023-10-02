@@ -3,14 +3,19 @@ import css from "./FormUpdateInfo.module.scss";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-const FormUpdateInfo = ({ users, setUsers, url, token }) => {
+import { useDispatch } from "react-redux";
+import { updateUserInfo } from "../../../redux/reducer/updateUserInfoSlice";
+
+const FormUpdateInfo = ({ users, setUsers }) => {
   const toastOptions = {
     position: "bottom-right",
     autoClose: 2000,
     pauseOnHover: true,
     draggable: true,
   };
+
+  const dispatch = useDispatch();
+
   const inputRef = useRef(null);
   const handleInputClick = (event) => {
     event.target.select();
@@ -34,22 +39,19 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      const response = await axios.put(
-        `${url}/updateInfo`,
-        { ...users },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  const handleSubmit = () => {
+    dispatch(updateUserInfo({ ...users }))
+      .then((response) => {
+        if (!response.payload?.success) {
+          toast.error(response.payload?.data?.message, toastOptions);
+        } else {
+          toast.success("Done", toastOptions);
         }
-      );
-      inputRef.current.blur();
-      toast.success("Done", toastOptions);
-    } catch (error) {
-      toast.error(error.response.data.message, toastOptions);
-    }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    inputRef.current.blur();
   };
 
   return (
@@ -61,7 +63,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="text"
           name="firstName"
           autoComplete="off"
-          defaultValue={users.firstName}
+          defaultValue={users?.firstName}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -75,7 +77,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="text"
           name="lastName"
           autoComplete="off"
-          defaultValue={users.lastName}
+          defaultValue={users?.lastName}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -89,7 +91,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="text"
           name="username"
           autoComplete="off"
-          defaultValue={users.username}
+          defaultValue={users?.username}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -103,7 +105,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="text"
           name="bio"
           autoComplete="off"
-          defaultValue={users.bio}
+          defaultValue={users?.bio}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -117,7 +119,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="text"
           name="gender"
           autoComplete="off"
-          defaultValue={users.gender}
+          defaultValue={users?.gender}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -131,7 +133,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="text"
           name="age"
           autoComplete="off"
-          defaultValue={users.age}
+          defaultValue={users?.age}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -145,7 +147,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="date"
           name="dateOfBirth"
           autoComplete="off"
-          defaultValue={users.dateOfBirth}
+          defaultValue={users?.dateOfBirth}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -159,7 +161,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="password"
           name="crrPassword"
           autoComplete="off"
-          defaultValue={users.password}
+          defaultValue={users?.password}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}
@@ -173,7 +175,7 @@ const FormUpdateInfo = ({ users, setUsers, url, token }) => {
           type="password"
           name="newPassword"
           autoComplete="off"
-          defaultValue={users.password}
+          defaultValue={users?.password}
           onChange={handleChange}
           onClick={handleInputClick}
           onFocus={handleInputFocus}

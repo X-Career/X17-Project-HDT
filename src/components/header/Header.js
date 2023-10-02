@@ -51,11 +51,11 @@ const Header = () => {
             <BiSearch className={styles.searchIcon} />
           </div>
           <div className={styles.auth}>
-            <Link className={styles.btns} href="/sign-in">
+            <Link className={styles.btns} href="/auth/sign-in">
               <AiOutlineLogin className={styles.icon} />
               Log In
             </Link>
-            <Link className={styles.btns} href="/sign-up">
+            <Link className={styles.btns} href="/auth/sign-up">
               <AiOutlineUserAdd className={styles.icon} />
               Sign Up
             </Link>
