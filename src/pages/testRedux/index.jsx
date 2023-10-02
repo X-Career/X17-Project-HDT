@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../redux/reducer/authSlice";
+import { login } from "../../../redux/reducer/authLoginSlice";
 import { increaseValue, creaseValue } from "../../../redux/reducer/test";
-import { getUserInfo } from "../../../redux/reducer/getUserInfoSLice";
+import { getInfo } from "../../../redux/reducer/getInfoSlice";
 
 const index = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const index = () => {
     dispatch(increaseValue());
   };
   const handleGetUserInfo = () => {
-    dispatch(getUserInfo());
+    dispatch(getInfo());
   };
   const tru = () => {
     dispatch(creaseValue());
