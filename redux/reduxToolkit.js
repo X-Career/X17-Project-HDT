@@ -10,7 +10,7 @@ export const createApiThunk = (methodName, actionName, headers) => {
       requestData,
       headers
     );
-    return response;
+    return response.data;
   });
 };
 export const createAsyncSlice = (name, asyncThunk, initialState, reducer) => {
@@ -28,7 +28,7 @@ export const createAsyncSlice = (name, asyncThunk, initialState, reducer) => {
               })
               .addCase(asyncThunk.fulfilled, (state, action) => {
                 state.loading = false;
-                state.data = action.payload.data;
+                state.data = action.payload;
               })
               .addCase(asyncThunk.rejected, (state, action) => {
                 state.loading = false;

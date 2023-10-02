@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState, useRef, useEffect, useDeferredValue } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import css from "@/styles/updateInfo.module.scss";
@@ -20,7 +20,8 @@ export default function UpdateInfo() {
     pauseOnHover: true,
     draggable: true,
   };
-  const getUserInfo = useSelector((state) => state.getInfo?.data?.data?.data);
+  const getUserInfo = useSelector((state) => state.getInfo);
+
 
   useEffect(() => {
     dispatch(getInfo());
@@ -32,6 +33,8 @@ export default function UpdateInfo() {
       setFile(getUserInfo.avatarUrl);
     }
   }, [getUserInfo]);
+
+  console.log(getUserInfo?.data?.data);
 
   const fileInputRef = useRef(null);
 

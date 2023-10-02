@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import css from "./FormUpdateInfo.module.scss";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUserInfo } from "../../../redux/reducer/updateUserInfoSlice";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
