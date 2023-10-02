@@ -11,19 +11,7 @@ import Head from "next/head";
 export default function Home() {
   return (
     <main>
-      <Head>
-        <title>Home</title>
-      </Head>
-      <Header />
-      <div className={styles.main}>
-        <LeftSidebar />
-        Home Page
-        <Link href="/users/updateInfo">
-          <button>Update Info</button>
-        </Link>
-        <RightSidebar />
-      </div>
-      <Footer />
+      <div className={styles.main}>Home Page</div>
     </main>
   );
 }
