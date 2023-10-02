@@ -1,12 +1,19 @@
 import { combineReducers } from "redux";
-import authSlice from "./authSlice";
 import testSlice from "./test";
-import userInfo from "./getUserInfoSLice";
-import refreshTokenSlice from "./refreshToken";
+import authRegisterSlice from "./authRegisterSlice";
+import authLoginSlice from "./authLoginSlice";
+import getInfoSlice from "./getInfoSlice";
+import updateSlice from "./updateUserInfoSlice";
+import updateImageSlice from "./updateImageSlice";
+import refreshTokenSlice from "./refreshTokenSlice";
+
 const rootReducer = combineReducers({
-  auth: authSlice,
   test: testSlice,
-  userInfo: userInfo,
+  register: authRegisterSlice,
+  login: authLoginSlice,
+  getInfo: getInfoSlice,
+  update: updateSlice,
+  updateImage: updateImageSlice,
   token: refreshTokenSlice,
 });
 

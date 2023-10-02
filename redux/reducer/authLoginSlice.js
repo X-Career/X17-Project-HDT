@@ -3,6 +3,6 @@ import { METHODS } from "../../global";
 import { initialState } from "../../global/initState";
 
 export const login = createApiThunk(METHODS.POST, "/auth/login");
+const authLoginSlice = createAsyncSlice("authLogin", login, initialState);
 
-const authSlice = createAsyncSlice("auth", login, initialState);
-export default authSlice.reducer;
+export default authLoginSlice.reducer;
