@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "@/styles/auth.module.scss";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../redux/reducer/authLoginSlice";
 
 const SignIn = () => {
@@ -18,6 +18,7 @@ const SignIn = () => {
     pauseOnHover: true,
     draggable: true,
   };
+  const loginInfo = useSelector((state) => state.login);
   const handleDataChange = (e) => {
     const { name, value } = e.target;
     setUsers({ ...users, [name]: value });
@@ -28,21 +29,20 @@ const SignIn = () => {
     }
   };
 
+  useEffect(() => {
+    if (!loginInfo.data?.success && !loginInfo.loading) {
+      toast.error(loginInfo.data?.message, toastOptions);
+    } else if (loginInfo.data?.success && !loginInfo.loading) {
+      toast.success(loginInfo.data?.message, toastOptions);
+      localStorage.setItem("accessToken", loginInfo.data?.data?.accessToken);
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    }
+  }, [loginInfo]);
+
   const handleSubmit = () => {
-    dispatch(login({ ...users })).then((response) => {
-      if (!response.payload?.success) {
-        toast.error(response.payload?.message, toastOptions);
-      } else {
-        toast.success(response.payload?.message, toastOptions);
-        localStorage.setItem(
-          "accessToken",
-          response.payload?.data?.accessToken
-        );
-        setTimeout(() => {
-          router.push("/");
-        }, 1500);
-      }
-    });
+    dispatch(login({ ...users }));
   };
   return (
     <div>
