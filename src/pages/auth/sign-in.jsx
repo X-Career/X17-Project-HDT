@@ -8,12 +8,26 @@ import { useDispatch, useSelector } from "react-redux";
 import Head from "next/head";
 
 const SignIn = () => {
+  const router = useRouter();
   const [users, setUsers] = useState();
   const handleDataChange = (e) => {
     const { name, value } = e.target;
     setUsers({ ...users, [name]: value });
   };
+  // const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
+  const callAPI = async () => {
+    try {
+      const response = await axios.post("/auth/sign-in", users);
+      localStorage.setItem("userData", JSON.stringify(response.data));
+      // dispatch(loginUser(response.data));
+    } catch (error) {
+      toast.error("Đăng nhập thất bại. Vui lòng thử lại!");
+      console.log(error);
+    }
+  };
+  
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -21,7 +35,8 @@ const SignIn = () => {
   };
 
   const handleSubmit = () => {
-    // router.push("/");
+    callAPI(users)
+    router.push("/");
   };
   return (
     <div>

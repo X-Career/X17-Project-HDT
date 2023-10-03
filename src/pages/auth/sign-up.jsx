@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import css from "@/styles/auth.module.scss";
 import Link from "next/link";
+import axios from 'axios'
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +16,15 @@ const SignUp = () => {
     setUsers({ ...users, [name]: value });
   };
 
+  const callAPI = async (userData) => {
+    try {
+      const response = await axios.post("/auth/sign-up", userData);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -22,7 +32,8 @@ const SignUp = () => {
   };
 
   const handleSubmit = () => {
-    // router.push("/auth/sign-in");
+    callAPI(users)
+    router.push("/auth/sign-in");
   };
 
   return (
