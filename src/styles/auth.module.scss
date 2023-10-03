@@ -1,3 +1,38 @@
+.animate {
+  -webkit-animation: animateZoom 0.6s;
+  animation: animateZoom 0.6s;
+}
+
+@-webkit-keyframes animateZoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animateZoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatedBackground {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .signUpForm,
 .signInForm {
   * {
@@ -24,39 +59,16 @@
     text-decoration: none;
     cursor: pointer;
   }
-}
-
-.animate {
-  -webkit-animation: animateZoom 0.6s;
-  animation: animateZoom 0.6s;
-}
-
-@-webkit-keyframes animateZoom {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
-
-@keyframes animateZoom {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
-
-.signUpForm,
-.signInForm {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
+  background-image: url("https://andreivictor.ro/codepen/scroll-bg-animation-pinterest/bg_pasta_grid-3f880df3.jpg");
+  background-size: cover;
+  background-repeat: repeat;
+  animation: animatedBackground 60s linear infinite;
   form {
     width: 500px;
     box-shadow: 0px 6px 16px -6px #01010180;
@@ -88,6 +100,35 @@
         font-size: 12px;
         color: #ffffff80;
       }
+    }
+    &[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      margin: 10px 0;
+      padding: 0;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 20%;
+        left: 14%;
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+      }
+    }
+    &[type="checkbox"]:checked::before {
+      opacity: 1;
     }
   }
   .signUpBtn,

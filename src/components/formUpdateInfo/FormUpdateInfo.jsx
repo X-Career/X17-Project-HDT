@@ -5,15 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { updateUserInfo } from "../../../redux/reducer/updateUserInfoSlice";
+import { toastOptions } from "@/utils/toast";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 2000,
-    pauseOnHover: true,
-    draggable: true,
-  };
-
   const dispatch = useDispatch();
 
   const inputRef = useRef(null);
@@ -42,10 +36,10 @@ const FormUpdateInfo = ({ users, setUsers }) => {
   const handleSubmit = () => {
     dispatch(updateUserInfo({ ...users }))
       .then((response) => {
-        if (!response.payload?.success) {
-          toast.error(response.payload?.data?.message, toastOptions);
-        } else {
+        if (response.payload?.success) {
           toast.success("Done", toastOptions);
+        } else {
+          toast.error(response.payload?.message, toastOptions);
         }
       })
       .catch((error) => {
@@ -198,9 +192,9 @@ const FormUpdateInfo = ({ users, setUsers }) => {
       </div>
       <ToastContainer
         style={{
-          width: 250,
+          width: 230,
           position: "absolute",
-          bottom: "-13.2rem",
+          bottom: "-10rem",
         }}
       />
     </div>

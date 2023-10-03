@@ -7,34 +7,30 @@ import FormUpdateInfo from "@/components/formUpdateInfo/FormUpdateInfo";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getInfo } from "../../../redux/reducer/getInfoSlice";
-import { updateImage } from "../../../redux/reducer/updateImageSlice";
+import { getInfo } from "../../../../redux/reducer/getInfoSlice";
+import { updateImage } from "../../../../redux/reducer/updateImageSlice";
+import { toastOptions } from "@/utils/toast";
 
 export default function UpdateInfo() {
   const dispatch = useDispatch();
   const [users, setUsers] = useState({});
   const [file, setFile] = useState("");
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 2000,
-    pauseOnHover: true,
-    draggable: true,
-  };
   const getUserInfo = useSelector((state) => state.getInfo);
 
+  useEffect(() => {
+    dispatch(getInfo());
+  }, []);
 
   useEffect(() => {
     dispatch(getInfo());
   }, [file]);
 
   useEffect(() => {
-    if (getUserInfo?.avatarUrl) {
-      setUsers(getUserInfo);
-      setFile(getUserInfo.avatarUrl);
+    if (getUserInfo?.data?.data?.avatarUrl) {
+      setUsers(getUserInfo?.data?.data);
+      setFile(getUserInfo?.data?.data?.avatarUrl);
     }
   }, [getUserInfo]);
-
-  console.log(getUserInfo?.data?.data);
 
   const fileInputRef = useRef(null);
 
@@ -58,11 +54,7 @@ export default function UpdateInfo() {
     }
   };
   return (
-    <div
-      style={{
-        margin: "20px",
-      }}
-    >
+    <div>
       <Head>
         <title>Update Info</title>
       </Head>

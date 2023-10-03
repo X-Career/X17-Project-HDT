@@ -10,7 +10,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     .vacation {
       width: 100%;
       h1 {
@@ -37,7 +36,6 @@
             transform: translateY(-50%);
             animation: slideIn 0.5s ease-in-out forwards;
           }
-
           @keyframes slideIn {
             0% {
               opacity: 0;
@@ -48,7 +46,6 @@
               transform: translateY(0);
             }
           }
-
           .form-field {
             position: relative;
             width: 100%;
@@ -79,14 +76,13 @@
             .form-invite-hidden {
               display: none;
             }
-
             .form-invite {
               display: flex;
               align-items: center;
               gap: 0.5rem;
               &:hover {
                 cursor: pointer;
-                color: rgb(102, 161, 250);
+                color: #66a1fa;
               }
             }
           }
@@ -96,7 +92,6 @@
             border-radius: 8px;
             transition: 0.25 ease;
             border: 1px solid #eee;
-
             &:focus {
               outline: none;
               border-color: #8598cc;
@@ -125,7 +120,6 @@
           }
           .form-label {
             display: flex;
-
             span {
               position: absolute;
               top: 50%;

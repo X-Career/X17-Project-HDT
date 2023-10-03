@@ -11,6 +11,9 @@ import Head from "next/head";
 export default function Home() {
   return (
     <main>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className={styles.main}>Home Page</div>
     </main>
   );

@@ -1,18 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import css from "@/styles/auth.module.scss";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch, useSelector } from "react-redux";
-import Head from "next/head";
+import { useDispatch } from "react-redux";
+import { register } from "../../../../redux/reducer/authRegisterSlice";
 
 const SignUp = () => {
   const router = useRouter();
-  const [users, setUsers] = useState();
-  const handleDataChange = (e) => {
+  const dispatch = useDispatch();
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 1200,
+    pauseOnHover: true,
+    draggable: true,
+  };
+  const [users, setUsers] = useState({});
+
+  const handleInputClick = (event) => {
+    event.target.select();
+  };
+
+  const handleInputFocus = (event) => {
+    event.target.select();
+  };
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setUsers({ ...users, [name]: value });
+    setUsers((user) => ({
+      ...user,
+      [name]: value,
+    }));
   };
 
   const handleKeyDown = (e) => {
@@ -22,7 +42,16 @@ const SignUp = () => {
   };
 
   const handleSubmit = () => {
-    // router.push("/auth/sign-in");
+    dispatch(register({ ...users })).then((response) => {
+      if (!response.payload?.success) {
+        toast.error(response.payload?.message, toastOptions);
+      } else {
+        toast.success(response.payload?.message, toastOptions);
+        setTimeout(() => {
+          router.push("/auth/sign-in");
+        }, 2000);
+      }
+    });
   };
 
   return (
@@ -38,8 +67,10 @@ const SignUp = () => {
               type="email"
               id="email"
               name="email"
-              placeholder="Email Address*"
-              onChange={handleDataChange}
+              placeholder="*Email Address"
+              onChange={handleChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               autoComplete="off"
               required
             />
@@ -47,8 +78,10 @@ const SignUp = () => {
               type="password"
               id="password"
               name="password"
-              placeholder="Password*"
-              onChange={handleDataChange}
+              placeholder="*Password (At least 6 characters and 1 uppercase)"
+              onChange={handleChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               autoComplete="off"
               required
             />
@@ -56,8 +89,10 @@ const SignUp = () => {
               type="text"
               id="username"
               name="username"
-              placeholder="Username*"
-              onChange={handleDataChange}
+              placeholder="*Username"
+              onChange={handleChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               autoComplete="off"
               required
             />
@@ -65,8 +100,10 @@ const SignUp = () => {
               type="text"
               id="firstName"
               name="firstName"
-              placeholder="First Name*"
-              onChange={handleDataChange}
+              placeholder="*First Name"
+              onChange={handleChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               autoComplete="off"
               required
             />
@@ -74,8 +111,10 @@ const SignUp = () => {
               type="text"
               id="lastName"
               name="lastName"
-              placeholder="Last Name*"
-              onChange={handleDataChange}
+              placeholder="*Last Name"
+              onChange={handleChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               autoComplete="off"
               required
             />
@@ -83,9 +122,11 @@ const SignUp = () => {
               type="text"
               id="gender"
               name="gender"
-              placeholder="Gender*"
+              placeholder="*Gender"
               onKeyDown={handleKeyDown}
-              onChange={handleDataChange}
+              onChange={handleChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               autoComplete="off"
               required
             />
@@ -110,6 +151,11 @@ const SignUp = () => {
           </center>
         </form>
       </div>
+      <ToastContainer
+        style={{
+          width: 230,
+        }}
+      />
     </div>
   );
 };

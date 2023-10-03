@@ -1,19 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import css from "@/styles/auth.module.scss";
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch, useSelector } from "react-redux";
-import Head from "next/head";
+import { useDispatch } from "react-redux";
+import { login } from "../../../../redux/reducer/authLoginSlice";
 
 const SignIn = () => {
-  const [users, setUsers] = useState();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [users, setUsers] = useState({});
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 1000,
+    pauseOnHover: true,
+    draggable: true,
+  };
   const handleDataChange = (e) => {
     const { name, value } = e.target;
     setUsers({ ...users, [name]: value });
   };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -21,7 +29,20 @@ const SignIn = () => {
   };
 
   const handleSubmit = () => {
-    // router.push("/");
+    dispatch(login({ ...users })).then((response) => {
+      if (!response.payload?.success) {
+        toast.error(response.payload?.message, toastOptions);
+      } else {
+        toast.success(response.payload?.message, toastOptions);
+        localStorage.setItem(
+          "accessToken",
+          response.payload?.data?.accessToken
+        );
+        setTimeout(() => {
+          router.push("/");
+        }, 1500);
+      }
+    });
   };
   return (
     <div>
@@ -51,6 +72,18 @@ const SignIn = () => {
               autoComplete="off"
               required
             />
+            <div
+              style={{
+                display: "flex",
+                margin: 0,
+                padding: "0 30px",
+                gap: 10,
+                alignItems: "center",
+              }}
+            >
+              <input type="checkbox" onChange={() => {}} />
+              Remember Me
+            </div>
             <button
               type="button"
               className={css.signInBtn}
@@ -69,6 +102,11 @@ const SignIn = () => {
           </center>
         </form>
       </div>
+      <ToastContainer
+        style={{
+          width: 230,
+        }}
+      />
     </div>
   );
 };
