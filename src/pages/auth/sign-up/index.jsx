@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import css from "@/styles/auth.module.scss";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../../../redux/reducer/authRegisterSlice";
 
 const SignUp = () => {
@@ -17,6 +17,7 @@ const SignUp = () => {
     pauseOnHover: true,
     draggable: true,
   };
+  const registerInfo = useSelector((state) => state.register);
   const [users, setUsers] = useState({});
 
   const handleInputClick = (event) => {
@@ -41,17 +42,19 @@ const SignUp = () => {
     }
   };
 
+  useEffect(() => {
+    if (!registerInfo.data?.success && !registerInfo.loading) {
+      toast.error(registerInfo.data?.message, toastOptions);
+    } else if (registerInfo.data?.success && !registerInfo.loading) {
+      toast.success(registerInfo.data?.message, toastOptions);
+      setTimeout(() => {
+        router.push("/auth/sign-in");
+      }, 2000);
+    }
+  }, [registerInfo]);
+
   const handleSubmit = () => {
-    dispatch(register({ ...users })).then((response) => {
-      if (!response.payload?.success) {
-        toast.error(response.payload?.message, toastOptions);
-      } else {
-        toast.success(response.payload?.message, toastOptions);
-        setTimeout(() => {
-          router.push("/auth/sign-in");
-        }, 2000);
-      }
-    });
+    dispatch(register({ ...users }));
   };
 
   return (

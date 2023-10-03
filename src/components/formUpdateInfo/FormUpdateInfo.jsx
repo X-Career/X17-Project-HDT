@@ -1,15 +1,15 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import css from "./FormUpdateInfo.module.scss";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserInfo } from "../../../redux/reducer/updateUserInfoSlice";
 import { toastOptions } from "@/utils/toast";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
   const dispatch = useDispatch();
-
+  const updateInfo = useSelector((state) => state.update);
   const inputRef = useRef(null);
   const handleInputClick = (event) => {
     event.target.select();
@@ -33,19 +33,27 @@ const FormUpdateInfo = ({ users, setUsers }) => {
     }
   };
 
+  useEffect(() => {
+    if (updateInfo.data?.success && !updateInfo.loading) {
+      toast.success("Done", toastOptions);
+    } else if (!updateInfo.data?.success && !updateInfo.loading) {
+      toast.error(updateInfo.data?.message, toastOptions);
+    }
+  }, [updateInfo]);
+
   const handleSubmit = () => {
-    dispatch(updateUserInfo({ ...users }))
-      .then((response) => {
-        if (response.payload?.success) {
-          toast.success("Done", toastOptions);
-        } else {
-          toast.error(response.payload?.message, toastOptions);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
     inputRef.current.blur();
+    dispatch(updateUserInfo({ ...users }));
+    // .then((response) => {
+    //   if (response.payload?.success) {
+    //     toast.success("Done", toastOptions);
+    //   } else {
+    //     toast.error(response.payload?.message, toastOptions);
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
   };
 
   return (

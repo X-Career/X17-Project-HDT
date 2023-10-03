@@ -9,24 +9,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getInfo } from "../../../../redux/reducer/getInfoSlice";
 import { updateImage } from "../../../../redux/reducer/updateImageSlice";
-import { toastOptions } from "@/utils/toast";
 
 export default function UpdateInfo() {
   const dispatch = useDispatch();
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 3500,
+    pauseOnHover: true,
+    draggable: true,
+  };
   const [users, setUsers] = useState({});
   const [file, setFile] = useState("");
   const getUserInfo = useSelector((state) => state.getInfo);
-
-  useEffect(() => {
-    dispatch(getInfo());
-  }, []);
+  const updateAvatar = useSelector((state) => state.updateImage);
 
   useEffect(() => {
     dispatch(getInfo());
   }, [file]);
 
   useEffect(() => {
-    if (getUserInfo?.data?.data?.avatarUrl) {
+    if (getUserInfo.data?.data) {
       setUsers(getUserInfo?.data?.data);
       setFile(getUserInfo?.data?.data?.avatarUrl);
     }
@@ -38,18 +40,20 @@ export default function UpdateInfo() {
     fileInputRef.current.click();
   };
 
+  useEffect(() => {
+    if (updateAvatar.data?.success && !updateAvatar.loading) {
+      setFile(updateAvatar?.data?.data?.avatarUrl);
+    }
+  }, [updateAvatar]);
+
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    try {
-      if (file) {
-        const formData = new FormData();
-        formData.append("data", file);
-        dispatch(updateImage(formData)).then(() => {
-          setFile(null);
-        });
-        toast.success("Avatar updated successfully!", toastOptions);
-      }
-    } catch (error) {
+    if (file) {
+      const formData = new FormData();
+      formData.append("data", file);
+      dispatch(updateImage(formData));
+      toast.success("Avatar updated successfully!", toastOptions);
+    } else {
       toast.error("An error occurred while updating the avatar!", toastOptions);
     }
   };
@@ -84,7 +88,12 @@ export default function UpdateInfo() {
                 {users?.bio}
               </p>
             </div>
-            <input type="file" ref={fileInputRef} onChange={handleFileChange} />
+            <input
+              type="file"
+              accept="image/jpg, image/jpeg, image/png"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
           </div>
         </div>
         <div className={css.contain_info}>

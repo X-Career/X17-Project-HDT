@@ -4,7 +4,8 @@ import { FaPlus, FaUserFriends, FaLock } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import styles from "../../styles/vacation.module.scss";
+import styles from "@/styles/vacation.module.scss";
+
 const vacation = () => {
   const [privacy, setPrivacy] = React.useState("public");
   const combinedStyles = `${styles["form-field"]} ${styles["tripmates"]}`;
@@ -26,6 +27,7 @@ const vacation = () => {
       {icon} {label}
     </div>
   );
+
   return (
     <div className={styles["container"]}>
       <div className={styles["content"]}>
