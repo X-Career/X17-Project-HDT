@@ -7,11 +7,8 @@ import Footer from "@/components/footer/Footer";
 import styles from "@/styles/Home.module.css";
 import AuthLayout from "./Layout/AuthLayout";
 import DefaultLayout from "./Layout/DefaultLayout";
-import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
-
   const router = useRouter();
   const getLayout = (pathname) => {
     if (pathname.startsWith("/auth")) {
