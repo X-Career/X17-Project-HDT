@@ -171,4 +171,8 @@ const SignUp = () => {
   );
 };
 
+SignUp.getInitialProps = () => {
+  return { noLayOut: true };
+};
+
 export default SignUp;

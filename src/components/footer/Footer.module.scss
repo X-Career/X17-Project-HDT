@@ -1,11 +1,136 @@
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
-  height: 80px;
+  // height: 80px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  background-color: bisque;
+  color: #333;
+}
+
+.footerAbove {
+  display: flex;
   justify-content: space-between;
-  background-color: blue;
-  color: #fff;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.footerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.formField {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 8px 60px 8px 8px;
+    border: none;
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin-right: 8px;
+    padding: 4px 8px;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: bisque;
+    }
+  }
+}
+
+.aboveBtns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
+
+    &:hover {
+      color: blue;
+    }
+  }
+}
+
+.aboveSocial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  gap: 8px;
+
+  .socials {
+    display: flex;
+    gap: 12px;
+    font-size: 28px;
+
+    button {
+      background: transparent;
+      font-size: 28px;
+      border: none;
+      padding: 0;
+
+      &:hover {
+        color: blue;
+      }
+    }
+  }
+}
+
+.footerBelow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+
+.belowBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  button {
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+      color: blue;
+    }
+  }
 }

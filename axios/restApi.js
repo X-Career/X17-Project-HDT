@@ -14,7 +14,7 @@ const restApi = async (
     } else if (listReqParams && endpointKey.includes("$params")) {
       endpointKey = endpointKey.replace("$params", listReqParams);
     }
-
+    console.log(requestData);
     const requestDataFormat = requestData?.payload?.body;
     let response;
     switch (method) {
@@ -34,6 +34,7 @@ const restApi = async (
         throw new Error(`Phương thức không hợp lệ: ${method}`);
     }
 
+    // Xử lý và trả về dữ liệu từ phản hồi
     return {
       data: response.data,
       message: response.data.message || "success",
@@ -41,6 +42,7 @@ const restApi = async (
       status: response.status,
     };
   } catch (error) {
+    // Xử lý và trả về lỗi nếu có
     return {
       data: error.response ? error.response.data : null,
       message: "Error: " + error.message,
