@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createVacation } from "../../../redux/reducer/createVacationSlice";
+import { createVacation } from "../../../redux/reducer/vacation/createVacationSlice";
 import { FaPlus, FaUserFriends, FaLock } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import Select from "@mui/material/Select";

@@ -7,8 +7,8 @@ import FormUpdateInfo from "@/components/formUpdateInfo/FormUpdateInfo";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getInfo } from "../../../../redux/reducer/getInfoSlice";
-import { updateImage } from "../../../../redux/reducer/updateImageSlice";
+import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
+import { updateImage } from "../../../../redux/reducer/user/updateImageSlice";
 
 export default function UpdateInfo() {
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../../../redux/reducer/authRegisterSlice";
+import { register } from "../../../../redux/reducer/auth/authRegisterSlice";
 
 const SignUp = () => {
   const router = useRouter();
