@@ -4,7 +4,7 @@ import { initialState } from "../../global/initState";
 
 export const updateVacation = createApiThunk(
   METHODS.PUT,
-  "/user/updateVacation/$params"
+  "/vacation/updateVacation/$params"
 );
 const updateVacationSlice = createAsyncSlice(
   "updateVacation",

@@ -15,7 +15,6 @@ const restApi = async (
       endpointKey = endpointKey.replace("$params", listReqParams);
     }
     console.log(requestData);
-    console.log(headers);
     const requestDataFormat = requestData?.payload?.body;
     let response;
     switch (method) {

@@ -11,14 +11,11 @@ import { FaLocationCrosshairs } from "react-icons/fa6";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoMdPersonAdd } from "react-icons/io";
-import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 const { RangePicker } = DatePicker;
 import { Modal } from "antd";
-import { BsTrash3Fill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getVacation } from "../../../redux/reducer/vacationDetail";
 import dayjs from "dayjs";
-import { formatCustomDate } from "../../../utils/index.js";
 import { useRouter } from "next/router";
 import { updateVacation } from "../../../redux/reducer/updateVacationSlice";
 import { updateImageCover } from "../../../redux/reducer/milestone/updateCoverImgSLice";
@@ -26,7 +23,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastOptions from "../../../utils/index.js";
 import Milestone from "../../components/Milestone/Milestone";
+import { AiFillSave } from "react-icons/ai";
+import { FaWindowClose } from "react-icons/fa";
 import { set } from "date-fns";
+import Loading from "../../components/loadingPage/Loading";
 const vacationsDetail = () => {
   const antIcon = (
     <LoadingOutlined
@@ -38,6 +38,7 @@ const vacationsDetail = () => {
   );
   const dispatch = useDispatch();
   const router = useRouter();
+  const [coverUrl, setCoverUrl] = useState();
   const inputRef = useRef();
   const [fileImgUpload, setFileImgUpload] = useState("");
   const uploadLoading = useSelector((state) => state.updateCoverImg);
@@ -51,14 +52,65 @@ const vacationsDetail = () => {
   const [dates, setDates] = useState(null);
   const [value, setValue] = useState(null);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [isModalChangeImgOpen, setIsModalChangeImgOpen] = useState(false);
+  const [isModalAddTripmate, setIsModalAddTripmate] = useState(false);
+  const [isDateChanged, setIsDateChanged] = useState(false);
+  const [newDates, setNewDates] = useState(null);
+  const [newValue, setNewValue] = useState(null);
+  const handleDateChange = (val) => {
+    setNewValue(val);
+    setRequestData(newValue);
+    setIsDateChanged(true);
+  };
+  const handleUnSave = () => {
+    if (vacationData) {
+      setValue([
+        dayjs(vacationData.data.startDay),
+        dayjs(vacationData.data.endDay),
+      ]);
+      setNewValue(null);
+      setIsDateChanged(false);
+      setRequestData(null);
+    }
+  };
+  const handleSaveDate = () => {
+    updateVacationHandle();
+  };
+  useEffect(() => {
+    if (newValue && newValue[0] && newValue[1]) {
+      const startDate = dayjs(newValue[0]).format("D/M/YYYY");
+      const endDate = dayjs(newValue[1]).format("D/M/YYYY");
+      setRequestData({
+        startDay: startDate,
+        endDay: endDate,
+      });
+    }
+  }, [newValue]);
+
+  useEffect(() => {
+    console.log(newValue);
+  }, [newValue]);
   const showModalChangeImg = () => {
     setIsModalChangeImgOpen(true);
   };
 
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+    const newData = {
+      privacy: event.target.value,
+    };
+    setRequestData(newData);
+  };
+  useEffect(() => {
+    console.log(requestData);
+  }, [requestData]);
   const handleCancel = () => {
     setIsModalChangeImgOpen(false);
+  };
+  const handleCancelAddTripmate = () => {
+    setIsModalAddTripmate(false);
   };
   useEffect(() => {
     if (id) {
@@ -95,6 +147,8 @@ const vacationsDetail = () => {
       setTitle(vacationData.data.title);
       setLocation(vacationData.data.location);
       setSelectedOption(vacationData.data.privacy);
+      setCoverUrl(vacationData.data.avatarUrl);
+      setDescription(vacationData.data.description);
     }
   }, [vacationData]);
   const onOpenChange = (open) => {
@@ -120,24 +174,31 @@ const vacationsDetail = () => {
   }, [updateCheck]);
   const handleBlur = () => {
     let newContent = event.target.textContent;
-    if (newContent != title && newContent != location) {
-      console.log(newContent);
+    if (
+      newContent != title &&
+      newContent != location &&
+      newContent != description
+    ) {
       updateVacationHandle();
     }
   };
+  const handleSelectBlur = () => {
+    updateVacationHandle();
+  };
   const handleDragOver = (event) => {
     event.preventDefault();
+  };
+  const showModalAddTripmate = () => {
+    setIsModalAddTripmate(true);
   };
   const handleDrop = (event) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     setFileImgUpload(file);
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setFileImg(reader.result);
-        console.log(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -159,9 +220,7 @@ const vacationsDetail = () => {
   };
   const handleUpdateCover = () => {
     const formData = new FormData();
-    console.log(fileImgUpload);
     formData.append("data", fileImgUpload);
-    console.log(formData);
     dispatch(
       updateImageCover({
         payload: {
@@ -173,17 +232,25 @@ const vacationsDetail = () => {
       })
     );
   };
+  useEffect(() => {}, [uploadLoading.loading]);
   useEffect(() => {
-    console.log(uploadLoading.loading);
-  }, [uploadLoading.loading]);
-
+    if (
+      uploadLoading.data &&
+      uploadLoading.data.message === "CoverImg uploaded successfully!"
+    ) {
+      setCoverUrl(uploadLoading.data.data.avatarUrl);
+      setIsModalChangeImgOpen(false);
+      toast.success(uploadLoading.data.message, toastOptions);
+    }
+  }, [uploadLoading.data]);
   return (
     <>
       {vacationData ? (
         <div className={styles["container"]}>
           <div className={styles["header"]}>
             <div className={styles["coverImg"]}>
-              <Image src={paris} alt="" />
+              <img src={coverUrl} className={styles["imgcover"]} />
+
               <div className={styles["edit"]} onClick={showModalChangeImg}>
                 <FaPencilAlt />
               </div>
@@ -275,13 +342,16 @@ const vacationsDetail = () => {
                     <button
                       style={{
                         fontSize: "16px",
-                        fontWeight: "normal",
-                        padding: "5px 10px",
+                        fontWeight: 400,
+                        padding: "5px 15px",
                         border: "none",
+                        borderRadius: "5px",
+                        color: "#5491f5",
+                        cursor: "pointer",
                       }}
                       onClick={() => inputRef.current.click()}
                     >
-                      Upload a photo
+                      Browse
                     </button>
                   </div>
                 )}
@@ -300,7 +370,11 @@ const vacationsDetail = () => {
               </div>
               <div className={styles["infoBot"]}>
                 <div className={styles["privacy"]}>
-                  <select value={selectedOption}>
+                  <select
+                    value={selectedOption}
+                    onChange={handleSelectChange}
+                    onBlur={handleSelectBlur}
+                  >
                     <option value="private">Private</option>
                     <option value="friends">Friends</option>
                     <option value="public">Public</option>
@@ -320,10 +394,16 @@ const vacationsDetail = () => {
               </div>
             </div>
             <div className={styles["headerDes"]}>
-              <details open>
-                <summary>Description</summary>
-                <p>{vacationData.data.description}</p>
-              </details>
+              <div className={styles["description"]}>
+                <span
+                  contentEditable
+                  id="description"
+                  onInput={handleContentChange}
+                  onBlur={handleBlur}
+                >
+                  {description}
+                </span>
+              </div>
               <details open>
                 <summary>Tripmates</summary>
                 <div className={styles["tripmate-content"]}>
@@ -342,29 +422,50 @@ const vacationsDetail = () => {
                       Dùng add tripmate để thêm bạn đồng hành
                     </div>
                   )}
-                  <div className={styles["tripmate-add"]}>
+                  <div
+                    className={styles["tripmate-add"]}
+                    onClick={showModalAddTripmate}
+                  >
                     <IoMdPersonAdd />
                     <span>Add tripmate</span>
                   </div>
                 </div>
               </details>
+              <Modal
+                title="Add Tripmates"
+                open={isModalAddTripmate}
+                onCancel={handleCancelAddTripmate}
+              >
+                <input type="text" placeholder="Username or Email..." />
+              </Modal>
             </div>
           </div>
           <div className={styles["milestone"]}>
             <div className={styles["milestoneHeader"]}>
               <h1>Milestones</h1>
-              <RangePicker
-                value={dates || value}
-                onCalendarChange={(val) => {
-                  setDates(val);
-                }}
-                onChange={(val) => {
-                  setValue(val);
-                }}
-                onOpenChange={onOpenChange}
-                changeOnBlur
-                className={styles["date"]}
-              />
+              <div className={styles["datezone"]}>
+                <RangePicker
+                  value={dates || value}
+                  onChange={(val) => {
+                    setValue(val);
+                    handleDateChange(val);
+                  }}
+                  onOpenChange={onOpenChange}
+                  className={styles["date"]}
+                />
+                {isDateChanged && (
+                  <div className={styles["savezone"]}>
+                    <AiFillSave
+                      className={styles["save"]}
+                      onClick={handleSaveDate}
+                    />
+                    <FaWindowClose
+                      className={styles["save"]}
+                      onClick={handleUnSave}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
             <div className={styles["milestoneContent"]}>
               <Milestone vacationId={id} />
@@ -378,7 +479,9 @@ const vacationsDetail = () => {
           />
         </div>
       ) : (
-        <div>loading..</div>
+        <div>
+          <Loading />
+        </div>
       )}
     </>
   );

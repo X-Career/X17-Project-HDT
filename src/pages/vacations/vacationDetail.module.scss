@@ -54,6 +54,28 @@
       flex-direction: column;
       justify-content: center;
       padding: 5%;
+      .description {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+
+        span {
+          font-size: 20px;
+          font-weight: bold;
+          font-style: italic;
+          outline: none;
+          padding: 2px 4px;
+          border-radius: 0.5rem;
+
+          &:focus {
+            background-color: #ffffff;
+          }
+          &:hover {
+            background-color: #ffffff;
+          }
+        }
+      }
       details {
         summary {
           font-size: 20px;
@@ -309,8 +331,31 @@
     .milestoneHeader {
       display: flex;
       justify-content: space-between;
+
       @media only screen and (max-width: 400px) {
         flex-direction: column;
+      }
+      .datezone {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        .savezone {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          .save {
+            font-size: 1.5rem;
+            color: #5491f5;
+            transition: 0.5s ease-in-out;
+            &:hover {
+              cursor: pointer;
+              color: #ff0000;
+              transform: rotateY("angle");
+            }
+          }
+        }
       }
       h1 {
         font-size: 20px;
