@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../../redux/reducer/authLoginSlice";
+import { login } from "../../../../redux/reducer/auth/authLoginSlice";
 
 const SignIn = () => {
   const router = useRouter();
@@ -96,7 +96,7 @@ const SignIn = () => {
             <button
               type="button"
               className={css.signInBtn}
-              onClick={(e) => handleSubmit(e)}
+              onClick={() => handleSubmit()}
             >
               Sign In
             </button>

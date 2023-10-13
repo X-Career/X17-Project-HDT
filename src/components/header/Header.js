@@ -3,13 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.scss";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineUserAdd, AiOutlineLogin } from "react-icons/ai";
 
 const Header = () => {
-  const handleLogout = () => {
-    localStorage.clear();
-  };
+  const router = useRouter();
   return (
     <div className={styles.header}>
       <div className={styles.navLogo}>
@@ -53,15 +53,17 @@ const Header = () => {
             />
             <BiSearch className={styles.searchIcon} />
           </div>
-          <div className={styles.auth} onClick={() => handleLogout()}>
+          <div
+            className={styles.auth}
+            onClick={() => {
+              localStorage.clear();
+              router.push("/auth/sign-in");
+            }}
+          >
             <Link className={styles.btns} href="/auth/sign-in">
               <AiOutlineLogin className={styles.icon} />
               Log Out
             </Link>
-            {/* <Link className={styles.btns} href="/auth/sign-up">
-              <AiOutlineUserAdd className={styles.icon} />
-              Sign Up
-            </Link> */}
           </div>
         </div>
       </div>

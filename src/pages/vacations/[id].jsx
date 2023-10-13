@@ -21,7 +21,7 @@ import { updateVacation } from "../../../redux/reducer/updateVacationSlice";
 import { updateImageCover } from "../../../redux/reducer/milestone/updateCoverImgSLice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import toastOptions from "../../../utils/index.js";
+import toastOptions from "@/utils/index.js";
 import Milestone from "../../components/Milestone/Milestone";
 import { AiFillSave } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
@@ -67,8 +67,8 @@ const vacationsDetail = () => {
   const handleUnSave = () => {
     if (vacationData) {
       setValue([
-        dayjs(vacationData.data.startDay),
-        dayjs(vacationData.data.endDay),
+        dayjs(vacationData.data?.startDay),
+        dayjs(vacationData.data?.endDay),
       ]);
       setNewValue(null);
       setIsDateChanged(false);
@@ -88,10 +88,6 @@ const vacationsDetail = () => {
       });
     }
   }, [newValue]);
-
-  useEffect(() => {
-    console.log(newValue);
-  }, [newValue]);
   const showModalChangeImg = () => {
     setIsModalChangeImgOpen(true);
   };
@@ -103,9 +99,6 @@ const vacationsDetail = () => {
     };
     setRequestData(newData);
   };
-  useEffect(() => {
-    console.log(requestData);
-  }, [requestData]);
   const handleCancel = () => {
     setIsModalChangeImgOpen(false);
   };
@@ -141,14 +134,14 @@ const vacationsDetail = () => {
   useEffect(() => {
     if (vacationData) {
       setValue([
-        dayjs(vacationData.data.startDay),
-        dayjs(vacationData.data.endDay),
+        dayjs(vacationData.data?.startDay),
+        dayjs(vacationData.data?.endDay),
       ]);
-      setTitle(vacationData.data.title);
-      setLocation(vacationData.data.location);
-      setSelectedOption(vacationData.data.privacy);
-      setCoverUrl(vacationData.data.avatarUrl);
-      setDescription(vacationData.data.description);
+      setTitle(vacationData.data?.title);
+      setLocation(vacationData.data?.location);
+      setSelectedOption(vacationData.data?.privacy);
+      setCoverUrl(vacationData.data?.avatarUrl);
+      setDescription(vacationData.data?.description);
     }
   }, [vacationData]);
   const onOpenChange = (open) => {
@@ -412,8 +405,8 @@ const vacationsDetail = () => {
               <details open>
                 <summary>Tripmates</summary>
                 <div className={styles["tripmate-content"]}>
-                  {vacationData.data.participants.length > 0 ? (
-                    vacationData.data.participants.map((tripmate, index) => (
+                  {vacationData.data?.participants?.length > 0 ? (
+                    vacationData.data?.participants?.map((tripmate, index) => (
                       <div className={styles["tripmate-item"]} key={index}>
                         <span>{tripmate}</span>
                         <AiOutlineClose />

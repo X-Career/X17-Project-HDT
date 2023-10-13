@@ -33,8 +33,8 @@ instance.interceptors.response.use(
           const response = await axios.post(`${baseURL}/auth/refresh-token`, {
             refreshToken: refreshToken,
           });
-          localStorage.setItem("accessToken", response.data.data.token);
-          localStorage.setItem("refreshToken", response.data.data.RT);
+          localStorage.setItem("accessToken", response.data?.data?.token);
+          localStorage.setItem("refreshToken", response.data?.data?.RT);
           return instance(originalRequest);
         } catch (refreshError) {
           console.log("blabla");

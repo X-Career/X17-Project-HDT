@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserInfo } from "../../../redux/reducer/updateUserInfoSlice";
-import { toastOptions } from "@/utils/toast";
+import { toastOptions } from "@/utils/index";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
   const dispatch = useDispatch();

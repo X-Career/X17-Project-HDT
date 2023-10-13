@@ -13,7 +13,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import dayjs from "dayjs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import toastOptions from "../../../utils/index.js";
+import toastOptions from "@/utils/index.js";
 import { useRouter } from "next/router";
 const vacation = () => {
   const router = useRouter();
