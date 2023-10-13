@@ -43,17 +43,15 @@ const FormUpdateInfo = ({ users, setUsers }) => {
 
   const handleSubmit = () => {
     inputRef.current.blur();
-    dispatch(updateUserInfo({ ...users }));
-    // .then((response) => {
-    //   if (response.payload?.success) {
-    //     toast.success("Done", toastOptions);
-    //   } else {
-    //     toast.error(response.payload?.message, toastOptions);
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
+    dispatch(
+      updateUserInfo({
+        payload: {
+          body: {
+            ...users,
+          },
+        },
+      })
+    );
   };
 
   return (

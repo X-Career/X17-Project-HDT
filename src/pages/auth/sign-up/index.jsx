@@ -54,7 +54,15 @@ const SignUp = () => {
   }, [registerInfo]);
 
   const handleSubmit = () => {
-    dispatch(register({ ...users }));
+    dispatch(
+      register({
+        payload: {
+          body: {
+            ...users,
+          },
+        },
+      })
+    );
   };
 
   return (

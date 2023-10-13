@@ -5,11 +5,11 @@ import Footer from "@/components/footer/Footer";
 
 const DefaultLayout = ({ children }) => {
   return (
-    <>
+    <AuthProtect>
       <Header />
       <div>{children}</div>
       <Footer />
-    </>
+    </AuthProtect>
   );
 };
 

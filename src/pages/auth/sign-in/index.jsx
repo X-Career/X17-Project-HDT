@@ -35,6 +35,7 @@ const SignIn = () => {
     } else if (loginInfo.data?.success && !loginInfo.loading) {
       toast.success(loginInfo.data?.message, toastOptions);
       localStorage.setItem("accessToken", loginInfo.data?.data?.accessToken);
+      localStorage.setItem("refreshToken", loginInfo.data?.data?.refreshToken);
       setTimeout(() => {
         router.push("/");
       }, 1500);
@@ -42,7 +43,15 @@ const SignIn = () => {
   }, [loginInfo]);
 
   const handleSubmit = () => {
-    dispatch(login({ ...users }));
+    dispatch(
+      login({
+        payload: {
+          body: {
+            ...users,
+          },
+        },
+      })
+    );
   };
   return (
     <div>

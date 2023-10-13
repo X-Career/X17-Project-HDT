@@ -51,7 +51,13 @@ export default function UpdateInfo() {
     if (file) {
       const formData = new FormData();
       formData.append("data", file);
-      dispatch(updateImage(formData));
+      dispatch(
+        updateImage({
+          payload: {
+            body: formData,
+          },
+        })
+      );
       toast.success("Avatar updated successfully!", toastOptions);
     } else {
       toast.error("An error occurred while updating the avatar!", toastOptions);
