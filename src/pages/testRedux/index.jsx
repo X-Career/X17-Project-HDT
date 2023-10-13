@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../redux/reducer/authLoginSlice";
 import { increaseValue, creaseValue } from "../../../redux/reducer/test";
 import { getInfo } from "../../../redux/reducer/getInfoSlice";
+import Loading from "../../components/loadingPage/Loading";
 
 const index = () => {
   const dispatch = useDispatch();
@@ -28,11 +29,7 @@ const index = () => {
 
   return (
     <div>
-      <p>{count}</p>
-      <button onClick={plus}>plus</button>
-      <button onClick={tru}>tru</button>
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleGetUserInfo}>get</button>
+      <Loading />
     </div>
   );
 };

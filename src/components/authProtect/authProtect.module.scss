@@ -1,0 +1,26 @@
+.authProtect {
+    width: 100%;
+    height: 100vh;
+    &.isCheckingAuth {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .loader {
+        border: 4px solid #d1d1d1;
+        margin: 0 auto;
+        border-top: 4px solid #b28ce7;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 0.6s linear infinite;
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

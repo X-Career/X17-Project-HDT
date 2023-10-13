@@ -1,27 +1,48 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "@/styles/auth.module.scss";
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import Head from "next/head";
+import { login } from "../../../../redux/reducer/authLoginSlice";
 
 const SignIn = () => {
-  const [users, setUsers] = useState();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [users, setUsers] = useState({});
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 1000,
+    pauseOnHover: true,
+    draggable: true,
+  };
+  const loginInfo = useSelector((state) => state.login);
   const handleDataChange = (e) => {
     const { name, value } = e.target;
     setUsers({ ...users, [name]: value });
   };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
     }
   };
 
+  useEffect(() => {
+    if (!loginInfo.data?.success && !loginInfo.loading) {
+      toast.error(loginInfo.data?.message, toastOptions);
+    } else if (loginInfo.data?.success && !loginInfo.loading) {
+      toast.success(loginInfo.data?.message, toastOptions);
+      localStorage.setItem("accessToken", loginInfo.data?.data?.accessToken);
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    }
+  }, [loginInfo]);
+
   const handleSubmit = () => {
-    // router.push("/");
+    dispatch(login({ ...users }));
   };
   return (
     <div>
@@ -51,6 +72,18 @@ const SignIn = () => {
               autoComplete="off"
               required
             />
+            <div
+              style={{
+                display: "flex",
+                margin: 0,
+                padding: "0 30px",
+                gap: 10,
+                alignItems: "center",
+              }}
+            >
+              <input type="checkbox" onChange={() => {}} />
+              Remember Me
+            </div>
             <button
               type="button"
               className={css.signInBtn}
@@ -69,6 +102,11 @@ const SignIn = () => {
           </center>
         </form>
       </div>
+      <ToastContainer
+        style={{
+          width: 230,
+        }}
+      />
     </div>
   );
 };
