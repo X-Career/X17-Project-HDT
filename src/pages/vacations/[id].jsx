@@ -249,7 +249,12 @@ const vacationsDetail = () => {
         <div className={styles["container"]}>
           <div className={styles["header"]}>
             <div className={styles["coverImg"]}>
-              <img src={coverUrl} className={styles["imgcover"]} />
+              <Image
+                src={coverUrl}
+                className={styles["imgcover"]}
+                width={200}
+                height={200}
+              />
 
               <div className={styles["edit"]} onClick={showModalChangeImg}>
                 <FaPencilAlt />
