@@ -1,8 +1,6 @@
 import "@/styles/globals.css";
 import store from "../../redux/store";
 import { Provider } from "react-redux";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import styles from "@/styles/Home.module.css";
 import AuthLayout from "./Layout/AuthLayout";
 import DefaultLayout from "./Layout/DefaultLayout";

@@ -7,6 +7,9 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlineUserAdd, AiOutlineLogin } from "react-icons/ai";
 
 const Header = () => {
+  const handleLogout = () => {
+    localStorage.clear();
+  };
   return (
     <div className={styles.header}>
       <div className={styles.navLogo}>
@@ -50,15 +53,15 @@ const Header = () => {
             />
             <BiSearch className={styles.searchIcon} />
           </div>
-          <div className={styles.auth}>
+          <div className={styles.auth} onClick={() => handleLogout()}>
             <Link className={styles.btns} href="/auth/sign-in">
               <AiOutlineLogin className={styles.icon} />
-              Log In
+              Log Out
             </Link>
-            <Link className={styles.btns} href="/auth/sign-up">
+            {/* <Link className={styles.btns} href="/auth/sign-up">
               <AiOutlineUserAdd className={styles.icon} />
               Sign Up
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
