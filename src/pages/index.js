@@ -5,7 +5,9 @@ import styles from "@/styles/Home.module.css";
 export default function Home() {
   return (
     <main>
-      <div className={styles.main}>Home Page</div>
+      <div className={styles.main}>
+        <div className={styles.container}>Home Page</div>
+      </div>
     </main>
   );
 }

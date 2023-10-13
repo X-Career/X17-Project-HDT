@@ -1,8 +1,13 @@
 .main {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   max-width: 1264px;
+  justify-content: center;
   margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
