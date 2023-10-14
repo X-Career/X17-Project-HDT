@@ -1,18 +1,16 @@
 import { combineReducers } from "redux";
-import testSlice from "./test";
-import authRegisterSlice from "./authRegisterSlice";
-import authLoginSlice from "./authLoginSlice";
-import getInfoSlice from "./getInfoSlice";
-import updateSlice from "./updateUserInfoSlice";
-import updateImageSlice from "./updateImageSlice";
+import authRegisterSlice from "./auth/authRegisterSlice";
+import authLoginSlice from "./auth/authLoginSlice";
+import getInfoSlice from "./user/getInfoSlice";
+import updateSlice from "./user/updateUserInfoSlice";
+import updateImageSlice from "./user/updateImageSlice";
 import refreshTokenSlice from "./refreshTokenSlice";
-import vacationSlice from "./createVacationSlice";
-import infoVacation from "./vacationDetail";
-import updateVacationSlice from "./updateVacationSlice";
+import vacationSlice from "./vacation/createVacationSlice";
+import infoVacation from "./vacation/vacationDetail";
+import updateVacationSlice from "./vacation/updateVacationSlice";
 import infoMileStone from "./milestone/milestoneSlice";
 import updateCoverImgSLice from "./milestone/updateCoverImgSLice";
 const rootReducer = combineReducers({
-  test: testSlice,
   register: authRegisterSlice,
   login: authLoginSlice,
   getInfo: getInfoSlice,

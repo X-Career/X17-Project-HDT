@@ -14,7 +14,6 @@ const restApi = async (
     } else if (listReqParams && endpointKey.includes("$params")) {
       endpointKey = endpointKey.replace("$params", listReqParams);
     }
-    console.log(requestData);
     const requestDataFormat = requestData?.payload?.body;
     let response;
     switch (method) {

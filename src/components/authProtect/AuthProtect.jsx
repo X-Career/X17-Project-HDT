@@ -1,19 +1,36 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import css from "./authProtect.module.scss";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { getInfo } from "../../../redux/reducer/getInfoSlice";
 
 export default function AuthProtect(props) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const dispatch = useDispatch();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!localStorage.accessToken) {
+      router.push("/auth/sign-in");
+    } else if (
+      router.pathname === "/auth/sign-in" ||
+      router.pathname === "/auth/sign-up"
+    ) {
+      router.push("/");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <div className={`${css.authProtect} ${loading ? css.isCheckingAuth : ""}`}>
-      {loading ? <div className={css.loader}> </div> : props.children}
+      {loading ? (
+        <div className={css.loader}>
+          <Head>
+            <title>Loading...</title>
+          </Head>
+        </div>
+      ) : (
+        <div>{props.children}</div>
+      )}
     </div>
   );
 }

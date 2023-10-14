@@ -4,8 +4,8 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserInfo } from "../../../redux/reducer/updateUserInfoSlice";
-import { toastOptions } from "@/utils/toast";
+import { updateUserInfo } from "../../../redux/reducer/user/updateUserInfoSlice";
+import { toastOptions } from "@/utils/index";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
   const dispatch = useDispatch();
@@ -43,17 +43,15 @@ const FormUpdateInfo = ({ users, setUsers }) => {
 
   const handleSubmit = () => {
     inputRef.current.blur();
-    dispatch(updateUserInfo({ ...users }));
-    // .then((response) => {
-    //   if (response.payload?.success) {
-    //     toast.success("Done", toastOptions);
-    //   } else {
-    //     toast.error(response.payload?.message, toastOptions);
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
+    dispatch(
+      updateUserInfo({
+        payload: {
+          body: {
+            ...users,
+          },
+        },
+      })
+    );
   };
 
   return (
