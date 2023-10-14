@@ -7,6 +7,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../../../redux/reducer/auth/authRegisterSlice";
+import { Select, MenuItem } from "@mui/material";
+import {
+  MaleRounded,
+  FemaleRounded,
+  TransgenderRounded,
+} from "@mui/icons-material";
 
 const SignUp = () => {
   const router = useRouter();
@@ -19,6 +25,21 @@ const SignUp = () => {
   };
   const registerInfo = useSelector((state) => state.register);
   const [users, setUsers] = useState({});
+  const [gender, setGender] = useState("");
+
+  const renderOption = (value, label, icon) => (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "0.5rem",
+        fontSize: "14px",
+      }}
+    >
+      {icon} {label}
+    </div>
+  );
 
   const handleInputClick = (event) => {
     event.target.select();
@@ -30,15 +51,17 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUsers((user) => ({
-      ...user,
-      [name]: value,
-    }));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSubmit();
+    if (name === "gender") {
+      setGender(value);
+      setUsers((user) => ({
+        ...user,
+        gender: value,
+      }));
+    } else {
+      setUsers((user) => ({
+        ...user,
+        [name]: value,
+      }));
     }
   };
 
@@ -129,22 +152,44 @@ const SignUp = () => {
               autoComplete="off"
               required
             />
-            <input
-              type="text"
-              id="gender"
-              name="gender"
-              placeholder="*Gender"
-              onKeyDown={handleKeyDown}
-              onChange={handleChange}
-              onClick={handleInputClick}
-              onFocus={handleInputFocus}
-              autoComplete="off"
-              required
-            />
+            <div className={css.gender}>
+              <Select
+                value={gender}
+                name="gender"
+                onChange={handleChange}
+                displayEmpty
+                style={{ color: "#fff" }}
+                sx={{
+                  "& .MuiSelect-select ": {
+                    padding: 0,
+                    all: "unset",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  "& .MuiSelect-iconOutlined": {
+                    color: "#fff",
+                  },
+                }}
+              >
+                <MenuItem value="" disabled>
+                  Select gender
+                </MenuItem>
+                <MenuItem value="male">
+                  {renderOption("male", "Male", <MaleRounded />)}
+                </MenuItem>
+                <MenuItem value="female">
+                  {renderOption("female", "Female", <FemaleRounded />)}
+                </MenuItem>
+                <MenuItem value="other">
+                  {renderOption("other", "Other", <TransgenderRounded />)}
+                </MenuItem>
+              </Select>
+            </div>
             <button
               type="button"
               className={css.signUpBtn}
-              onClick={(e) => handleSubmit(e)}
+              onClick={() => handleSubmit()}
             >
               Sign Up
             </button>

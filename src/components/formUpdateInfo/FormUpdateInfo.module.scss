@@ -35,6 +35,18 @@
             -webkit-appearance: none;
             margin: 0;
         }
+        div.gender {
+            display: flex;
+            justify-content: flex-start;
+            width: calc(100% - 8rem);
+            border: 1px solid #eee;
+            transition: all 0.2s ease-in-out;
+            padding: 5px 3px;
+            border-radius: 5px;
+            &:hover {
+                background-color: #a2a2a26e;
+            }
+        }
         .submitBtn,
         .cancelBtn {
             color: #090909;
@@ -44,17 +56,17 @@
             border: 1px solid #e8e8e8;
             transition: all 0.1s;
             box-shadow:
-                0 15px 25px -4px rgba(0, 0, 0, 0.5),
-                inset 0 -3px 4px -1px rgba(0, 0, 0, 0.2),
-                0 -10px 15px -1px #ffffff99,
+                0 4px 15px -4px #00000080,
+                inset 0 -3px 4px -1px #00000033,
+                inset 0 -8px 15px -1px #ffffff99,
                 inset 0 3px 4px -1px #ffffff33,
                 inset 0 0 5px 1px #ffffffcc,
-                inset 0 20px 30px 0 #ffffff33;
+                inset 0 10px 20px 0 #ffffff33;
             &:active {
                 box-shadow:
-                    0 10px 25px -4px #00000066,
+                    0 6px 15px -4px #00000066,
                     inset 0 -8px 25px -1px #ffffffe6,
-                    0 -10px 15px -1px #ffffff99,
+                    inset 0 -10px 15px -1px #ffffff99,
                     inset 0 8px 20px 0 #00000033,
                     inset 0 0 5px 1px #ffffff99;
             }
