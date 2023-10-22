@@ -105,7 +105,7 @@ const SignIn = () => {
                 <Link href="#">Forgot Password?</Link>
               </span>
               <span>
-                <Link href="/auth/sign-up">Don't have an account?</Link>
+                <Link href="/auth/sign-up">Become a member</Link>
               </span>
             </section>
           </center>

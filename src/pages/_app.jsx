@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import store from "../../redux/store";
 import { Provider } from "react-redux";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Home.module.scss";
 import AuthLayout from "./Layout/AuthLayout";
 import DefaultLayout from "./Layout/DefaultLayout";
 import { useRouter } from "next/router";
