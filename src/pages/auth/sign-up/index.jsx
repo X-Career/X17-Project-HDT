@@ -156,7 +156,9 @@ const SignUp = () => {
               }}
             >
               <span>
-                <Link href="/auth/sign-in">Already Registered?</Link>
+                <Link href="/auth/sign-in">
+                  Already Registered? Log in now!
+                </Link>
               </span>
             </section>
           </center>
