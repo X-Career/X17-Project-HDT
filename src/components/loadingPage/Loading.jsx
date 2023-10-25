@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./loading.module.scss";
 const Loading = () => {
   return (
-    <div class={styles["container"]}>
-      <div class={styles["hourglass"]}></div>
+    <div className={styles["container"]}>
+      <div className={styles["hourglass"]}></div>
     </div>
   );
 };

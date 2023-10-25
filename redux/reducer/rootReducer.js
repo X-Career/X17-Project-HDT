@@ -10,6 +10,13 @@ import infoVacation from "./vacation/vacationDetail";
 import updateVacationSlice from "./vacation/updateVacationSlice";
 import infoMileStone from "./milestone/milestoneSlice";
 import updateCoverImgSLice from "./milestone/updateCoverImgSLice";
+import createAlbumSlice from "./album/albumSlice";
+import getAlbumSlice from "./album/getAlbumSlice";
+import updateAlbumAvatarSlice from "./album/updateAlbumAvatarSlice";
+import createMediaSlice from "./media/createMediaSlice";
+import getMediaSlice from "./media/getMediaSlice";
+import updateMediaSlice from "./media/updateMediaSlice";
+
 const rootReducer = combineReducers({
   register: authRegisterSlice,
   login: authLoginSlice,
@@ -22,6 +29,12 @@ const rootReducer = combineReducers({
   updateVacation: updateVacationSlice,
   infoMileStone: infoMileStone,
   updateCoverImg: updateCoverImgSLice,
+  createAlbum: createAlbumSlice,
+  getAlbum: getAlbumSlice,
+  updateAlbumAvatar: updateAlbumAvatarSlice,
+  createMedia: createMediaSlice,
+  getMedia: getMediaSlice,
+  updateMedia: updateMediaSlice,
 });
 
 export default rootReducer;

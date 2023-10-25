@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noticia+Text&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.animate {
+    -webkit-animation: animateZoom 0.6s;
+    animation: animateZoom 0.6s;
+}
+
+@-webkit-keyframes animateZoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes animateZoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes animatedBackground {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.body {
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        &:after,
+        &:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
+    input,
+    button,
+    ::placeholder,
+    a,
+    form,
+    ::-webkit-input-placeholder {
+        transition: 0.4s;
+    }
+    font-family: "Source Sans 3", sans-serif !important;
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    align-items: space-between;
+    gap: 2rem;
+    margin-top: calc(80px + 2rem);
+    .container_left {
+        height: 82vh;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #333;
+        padding-right: 3rem;
+        justify-content: space-between;
+        input {
+            all: unset;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 5px;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+                background-color: #a2a2a26e;
+            }
+            &:focus {
+                border: 1px solid #333;
+                background-color: unset;
+                cursor: text;
+                &::placeholder,
+                &::-webkit-input-placeholder {
+                    position: relative;
+                    font-size: 12px;
+                    color: #00000080;
+                }
+            }
+            &:active {
+                cursor: text;
+            }
+        }
+        .albumAvatar {
+            display: flex;
+            justify-content: center;
+            .albumAvatarImg {
+                border-radius: 8px;
+                transition: all 0.1s ease-in-out;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+            .btnWithoutAvatar {
+                padding: 4px;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+                background-color: #a2a2a26e;
+                transition: 0.3s;
+                border: unset;
+                &:hover {
+                    background-color: #c7c5c56e;
+                }
+                &:active {
+                    transform: scale(0.96);
+                }
+            }
+            .deleteIcon {
+                border-radius: 50%;
+                transition: all 0.2s ease-in-out;
+                color: #5a5a5a;
+                &:hover {
+                    color: #5a5a5ab2;
+                }
+            }
+        }
+        .btn {
+            padding: 4px;
+            display: flex;
+            justify-content: center;
+            border-radius: 5px;
+            background-color: #a2a2a26e;
+            transition: 0.3s;
+            border: unset;
+            button {
+                all: unset;
+            }
+            &:hover {
+                background-color: #c7c5c56e;
+            }
+            &:active {
+                transform: scale(0.96);
+            }
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .doneBtn {
+            all: unset;
+            padding: 4px;
+            display: flex;
+            justify-content: center;
+            border-radius: 5px;
+            background-color: #a2a2a26e;
+            transition: 0.3s;
+            cursor: pointer;
+            &:hover {
+                background-color: #81818181;
+            }
+            &:active {
+                transform: scale(0.96);
+            }
+        }
+    }
+    .container_right {
+        height: 100%;
+        margin-left: 19rem;
+        .image {
+            width: 200px;
+            position: relative;
+            video {
+                margin-bottom: -6px;
+            }
+            button {
+                all: unset;
+                position: absolute;
+                top: -8px;
+                right: 12px;
+                padding: 0;
+                margin: 0;
+                .deleteIcon {
+                    border-radius: 50%;
+                    transition: all 0.2s ease-in-out;
+                    &:hover {
+                        color: #5a5a5a;
+                    }
+                }
+            }
+        }
+        textarea {
+            all: unset;
+            overflow: hidden;
+            height: max-content;
+            width: 190px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 6px;
+            transition: all 0.2s ease-in-out;
+            background: transparent;
+            &:hover {
+                background-color: #a2a2a26e;
+            }
+            &:focus {
+                border: 1px solid #333;
+                background-color: unset;
+                cursor: text;
+                &::placeholder,
+                &::-webkit-input-placeholder {
+                    position: relative;
+                    font-size: 12px;
+                    color: #00000080;
+                }
+            }
+            &:active {
+                cursor: text;
+            }
+        }
+    }
+    .wait {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 26%;
+        margin-left: 64%;
+    }
+}
