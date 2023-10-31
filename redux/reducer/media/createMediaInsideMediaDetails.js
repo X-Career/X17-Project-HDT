@@ -2,16 +2,16 @@ import { createApiThunk, createAsyncSlice } from "../../reduxToolkit";
 import { METHODS } from "../../../global";
 import { initialState } from "../../../global/initState";
 
-export const createMedia = createApiThunk(
+export const createMediaInsideMediaDetails = createApiThunk(
   METHODS.POST,
-  "/media/createMedia/$params",
+  "/media/createMediaInsideMediaDetails/$params",
   {
     "Content-Type": "multipart/form-data",
   }
 );
-const createMediaSlice = createAsyncSlice(
+const createMediaInsideMediaDetailsSlice = createAsyncSlice(
   "createMedia",
-  createMedia,
+  createMediaInsideMediaDetails,
   initialState
 );
-export default createMediaSlice.reducer;
+export default createMediaInsideMediaDetailsSlice.reducer;

@@ -81,7 +81,7 @@ const User = () => {
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link href="/" className={styles.moreBtn}>
-                Read More
+                View More
                 <AiOutlineArrowRight />
               </Link>
             </div>
@@ -99,29 +99,11 @@ const User = () => {
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link href="/" className={styles.moreBtn}>
-                Read More
+                View More
                 <AiOutlineArrowRight />
               </Link>
             </div>
           </div>
-
-          {/* <div className={styles.tagged}>
-            <h1>Tagged Vacations</h1>
-            <div className={styles.latestPosts}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-            </div>
-            <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/" className={styles.moreBtn}>
-                Read More
-                <AiOutlineArrowRight />
-              </Link>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

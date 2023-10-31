@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useShowFooter } from "../../components/context/FooterContext";
 import { useDispatch, useSelector } from "react-redux";
 import { createAlbum } from "../../../redux/reducer/album/albumSlice";
-import { deleteCreateAlbum } from "../../../redux/reducer/resetState/deletaCreateAlbum";
 import { createMedia } from "../../../redux/reducer/media/createMediaSlice";
 import { useRouter } from "next/router";
 
@@ -120,34 +119,40 @@ const CreateAlbum = () => {
     const dataRequest = {
       albumName: albumName,
       coverUrl: coverUrl,
+      media: mediaUpload,
     };
     if (!dataRequest.albumName) {
       return { error: "Vui lòng nhập tên album!" };
     } else if (!dataRequest.coverUrl) {
-      return { error: "Vui lòng tải lên ảnh bìa album!" };
+      return { error: "Vui lòng tải lên ảnh đại diện album!" };
+    } else if (dataRequest.media.length === 0) {
+      return { error: "Vui lòng tải ảnh hoặc video lên!" };
     } else {
       return dataRequest;
     }
   };
 
   const createAlbumResponse = useSelector((state) => state.createAlbum);
+  const createMediaResponse = useSelector((state) => state.createMedia);
   const router = useRouter();
-  const [albumId, setAlbumId] = useState("");
   useEffect(() => {
     if (!createAlbumResponse?.data?.success && !createAlbumResponse?.loading) {
       toast.error(createAlbumResponse?.data?.message, toastOptions);
+      
     } else if (
       createAlbumResponse?.data?.success &&
       !createAlbumResponse?.loading
     ) {
-      setAlbumId(createAlbumResponse?.data?.data?._id);
       toast.success(createAlbumResponse?.data?.message, toastOptions);
-      // setTimeout(() => {
-      //   dispatch(deleteCreateAlbum());
-      //   router.push("/albums");
-      // }, 1200);
     }
   }, [createAlbumResponse]);
+  useEffect(() => {
+    if (createMediaResponse?.data?.success && !createMediaResponse?.loading) {
+      setTimeout(() => {
+        router.push("/albums");
+      }, 1200);
+    }
+  }, [createMediaResponse]);
 
   const handleSubmit = () => {
     inputNameAlbumRef.current.blur();
@@ -162,22 +167,24 @@ const CreateAlbum = () => {
             body: formData,
           },
         })
-      );
+      ).then((res) => {
+        mediaUpload.map((media) => {
+          const formDataMedia = new FormData();
+          formDataMedia.append("file", media.url);
+          formDataMedia.append("title", JSON.stringify(media.title));
 
-      const formDataMedia = new FormData();
-      const mediaUrlArray = mediaUpload.map((media) => media.url);
-      const mediaTitleArray = mediaUpload.map((media) => media.title);
-      for (const i in mediaUrlArray) {
-        formDataMedia.append("file", mediaUrlArray[i]);
-        formDataMedia.append("titles", mediaTitleArray[i]);
-        dispatch(
-          createMedia({
-            payload: {
-              body: formDataMedia,
-            },
-          })
-        );
-      }
+          return dispatch(
+            createMedia({
+              payload: {
+                query: {
+                  params: res.payload.data?._id,
+                },
+                body: formDataMedia,
+              },
+            })
+          );
+        });
+      });
     } else {
       toast.warning(dataRequest.error, toastOptions);
     }

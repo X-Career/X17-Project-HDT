@@ -10,15 +10,16 @@ export default function AuthProtect(props) {
   useEffect(() => {
     if (!localStorage.accessToken) {
       router.push("/auth/sign-in");
-    } else if (
-      router.pathname === "/auth/sign-in" ||
-      router.pathname === "/auth/sign-up"
-    ) {
-      router.push("/");
     } else {
+      if (
+        router.pathname === "/auth/sign-in" ||
+        router.pathname === "/auth/sign-up"
+      ) {
+        router.push("/");
+      }
       setLoading(false);
     }
-  }, []);
+  }, [router.pathname]);
 
   return (
     <div className={`${css.authProtect} ${loading ? css.isCheckingAuth : ""}`}>

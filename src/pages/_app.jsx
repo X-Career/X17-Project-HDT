@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import store from "../../redux/store";
 import { Provider } from "react-redux";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Home.module.scss";
 import AuthLayout from "../components/Layout/AuthLayout";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import { useRouter } from "next/router";
@@ -20,9 +20,7 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <ShowFooterProvider>
         <Layout>
-          <div className={styles.main}>
-            <Component {...pageProps} />
-          </div>
+          <Component {...pageProps} />
         </Layout>
       </ShowFooterProvider>
     </Provider>

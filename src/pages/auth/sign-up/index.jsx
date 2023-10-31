@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../../../redux/reducer/auth/authRegisterSlice";
 import { Select, MenuItem } from "@mui/material";
+import { deleteLogin } from "../../../../redux/reducer/resetState/deleteLogin";
 import {
   MaleRounded,
   FemaleRounded,
@@ -17,6 +18,9 @@ import {
 const SignUp = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(deleteLogin());
+  }, []);
   const toastOptions = {
     position: "bottom-right",
     autoClose: 1200,
@@ -201,7 +205,9 @@ const SignUp = () => {
               }}
             >
               <span>
-                <Link href="/auth/sign-in">Already Registered?</Link>
+                <Link href="/auth/sign-in">
+                  Already Registered? Log in now!
+                </Link>
               </span>
             </section>
           </center>

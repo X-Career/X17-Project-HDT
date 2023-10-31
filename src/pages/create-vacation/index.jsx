@@ -144,6 +144,7 @@ const vacation = () => {
                   type="text"
                   placeholder=" "
                   className={styles["form-input"]}
+                  autoComplete="off"
                   onKeyDown={handleKeyDown}
                   id="locationInput"
                 />
@@ -157,6 +158,7 @@ const vacation = () => {
                   type="text"
                   placeholder=" "
                   className={styles["form-input"]}
+                  autoComplete="off"
                   onKeyDown={handleKeyDown}
                   id="titleInput"
                 />
@@ -170,6 +172,7 @@ const vacation = () => {
                   type="text"
                   placeholder=" "
                   className={styles["form-input"]}
+                  autoComplete="off"
                   onKeyDown={handleKeyDown}
                   id="descriptionInput"
                 />
@@ -198,6 +201,7 @@ const vacation = () => {
                     type="text"
                     placeholder=" "
                     onChange={handleInputChange}
+                    autoComplete="off"
                     value={inputValueTripmate}
                     className={styles["form-input"]}
                     onKeyDown={handleKeyDown}

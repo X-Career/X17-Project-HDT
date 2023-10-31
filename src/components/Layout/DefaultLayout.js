@@ -1,7 +1,7 @@
-import React, { cloneElement } from "react";
+import React from "react";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Home.module.scss";
 import AuthProtect from "../authProtect/AuthProtect";
 import { useShowFooter } from "../context/FooterContext";
 

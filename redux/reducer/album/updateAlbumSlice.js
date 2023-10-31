@@ -2,13 +2,13 @@ import { createApiThunk, createAsyncSlice } from "../../reduxToolkit";
 import { METHODS } from "../../../global";
 import { initialState } from "../../../global/initState";
 
-export const updateMedia = createApiThunk(
+export const updateAlbum = createApiThunk(
   METHODS.PUT,
-  "/media/updateMedia/$params"
+  "/album/updateAlbum/$params"
 );
-const updateMediaSlice = createAsyncSlice(
-  "createMedia",
-  updateMedia,
+const updateAlbumSlice = createAsyncSlice(
+  "createAlbum",
+  updateAlbum,
   initialState
 );
-export default updateMediaSlice.reducer;
+export default updateAlbumSlice.reducer;

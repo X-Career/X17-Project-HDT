@@ -12,8 +12,10 @@ import infoMileStone from "./milestone/milestoneSlice";
 import updateCoverImgSLice from "./milestone/updateCoverImgSLice";
 import createAlbumSlice from "./album/albumSlice";
 import getAlbumSlice from "./album/getAlbumSlice";
+import updateAlbumSlice from "./album/updateAlbumSlice";
 import updateAlbumAvatarSlice from "./album/updateAlbumAvatarSlice";
 import createMediaSlice from "./media/createMediaSlice";
+import createMediaInsideMediaDetailsSlice from "./media/createMediaInsideMediaDetails";
 import getMediaSlice from "./media/getMediaSlice";
 import updateMediaSlice from "./media/updateMediaSlice";
 
@@ -31,8 +33,10 @@ const rootReducer = combineReducers({
   updateCoverImg: updateCoverImgSLice,
   createAlbum: createAlbumSlice,
   getAlbum: getAlbumSlice,
+  updateAlbum: updateAlbumSlice,
   updateAlbumAvatar: updateAlbumAvatarSlice,
   createMedia: createMediaSlice,
+  createMediaInsideMediaDetails: createMediaInsideMediaDetailsSlice,
   getMedia: getMediaSlice,
   updateMedia: updateMediaSlice,
 });
