@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { deleteLogin } from "../../redux/reducer/resetState/deleteLogin";
+import { deleteUpdateInfo } from "../../redux/reducer/resetState/deleteUpdateInfo";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import Head from "next/head";
 import Link from "next/link";
 import Carousel from "../components/Carousel/Carousel";
 import HomeCard from "../components/card/HomeCard";
@@ -10,11 +12,16 @@ import AlbumCard from "../components/card/AlbumCard";
 
 export default function Home() {
   const dispatch = useDispatch();
+  console.error = () => {};
   useEffect(() => {
     dispatch(deleteLogin());
+    dispatch(deleteUpdateInfo());
   }, []);
   return (
     <main>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className={styles.main}>
         {/* Carosel */}
         {/* <Carousel /> */}
