@@ -86,6 +86,13 @@ const albumDetail = () => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
+      if (file.type.startsWith("image/")) {
+        formData.append("type", "image");
+      } else if (file.type.startsWith("video/")) {
+        formData.append("type", "video");
+      } else {
+        toast.error("Unsupported file format!", toastOptions);
+      }
       dispatch(
         createMediaInsideMediaDetails({
           payload: {
@@ -174,7 +181,7 @@ const albumDetail = () => {
                 margin: "0 auto",
               }}
             >
-              Chưa có ảnh được tải lên. 😥
+              Chưa có ảnh và video nào được tải lên. 😥
             </p>
           ) : (
             media?.map((item, index) => (
@@ -194,17 +201,27 @@ const albumDetail = () => {
                 key={item._id}
               >
                 <div className={css.image}>
-                  <CardMedia
-                    component="img"
-                    alt="Album Image"
-                    height="200"
-                    image={item.mediaUrl}
-                    style={{ borderRadius: 8 }}
-                  />
+                  {item.type === "image" ? (
+                    <CardMedia
+                      component="img"
+                      alt="Album Image"
+                      height="200"
+                      image={item.mediaUrl}
+                      style={{ borderRadius: 8 }}
+                    />
+                  ) : (
+                    <video
+                      src={item.mediaUrl}
+                      controls
+                      width="200"
+                      height="200"
+                      style={{ borderRadius: 8 }}
+                    />
+                  )}
                   <button
                     style={{ width: 0, height: 0 }}
                     onClick={() => handleDeleteMedia(item._id, index)}
-                    data-title="Xoá ảnh"
+                    data-title="Xoá ảnh/Xoá video"
                   >
                     <HighlightOffRoundedIcon className={css.deleteIcon} />
                   </button>

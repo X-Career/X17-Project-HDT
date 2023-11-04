@@ -138,19 +138,25 @@ const CreateAlbum = () => {
   useEffect(() => {
     if (!createAlbumResponse?.data?.success && !createAlbumResponse?.loading) {
       toast.error(createAlbumResponse?.data?.message, toastOptions);
-      
     } else if (
       createAlbumResponse?.data?.success &&
       !createAlbumResponse?.loading
     ) {
-      toast.success(createAlbumResponse?.data?.message, toastOptions);
+      if (createMediaResponse?.data?.success && !createMediaResponse?.loading) {
+        toast.success(createAlbumResponse?.data?.message, toastOptions);
+      }
     }
-  }, [createAlbumResponse]);
+  }, [createAlbumResponse, createMediaResponse]);
   useEffect(() => {
     if (createMediaResponse?.data?.success && !createMediaResponse?.loading) {
       setTimeout(() => {
         router.push("/albums");
       }, 1200);
+    } else if (
+      !createMediaResponse?.data?.success &&
+      !createMediaResponse?.loading
+    ) {
+      toast.error(createMediaResponse?.data?.message, toastOptions);
     }
   }, [createMediaResponse]);
 
@@ -171,8 +177,8 @@ const CreateAlbum = () => {
         mediaUpload.map((media) => {
           const formDataMedia = new FormData();
           formDataMedia.append("file", media.url);
+          formDataMedia.append("type", media.type);
           formDataMedia.append("title", JSON.stringify(media.title));
-
           return dispatch(
             createMedia({
               payload: {
