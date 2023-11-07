@@ -80,7 +80,6 @@ const vacation = () => {
   const handleCreateVacation = (e) => {
     e.preventDefault();
     const dataRequest = buildDataRequest();
-    console.log(dataRequest);
     if (!dataRequest.error) {
       dispatch(
         createVacation({
