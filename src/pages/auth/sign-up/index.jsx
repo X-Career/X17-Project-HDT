@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
 import css from "@/styles/auth.module.scss";
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../../../redux/reducer/auth/authRegisterSlice";
 import { Select, MenuItem } from "@mui/material";
-import { deleteLogin } from "../../../../redux/reducer/resetState/deleteLogin";
 import {
   MaleRounded,
   FemaleRounded,
   TransgenderRounded,
 } from "@mui/icons-material";
+import { host } from "../../../utils/constants";
 
 const SignUp = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(deleteLogin());
-  }, []);
   const toastOptions = {
     position: "bottom-right",
     autoClose: 1200,
@@ -205,9 +199,18 @@ const SignUp = () => {
               }}
             >
               <span>
-                <Link href="/auth/sign-in">
+                <div
+                  style={{
+                    cursor: "pointer",
+                    margin: 0,
+                    padding: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  onClick={() => window.location.assign(`${host}/auth/sign-in`)}
+                >
                   Already Registered? Log in now!
-                </Link>
+                </div>
               </span>
             </section>
           </center>

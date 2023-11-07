@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import css from "./FormUpdateInfo.module.scss";
-import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +11,10 @@ import {
   FemaleRounded,
   TransgenderRounded,
 } from "@mui/icons-material";
-import { useRouter } from "next/router";
+import { host } from "../../utils/constants";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const renderOption = (value, label, icon) => (
     <div
       style={{
@@ -73,8 +71,8 @@ const FormUpdateInfo = ({ users, setUsers }) => {
     if (updateInfo.data?.success && !updateInfo.loading) {
       toast.success("Done", toastOptions);
       setTimeout(() => {
-        router.push("/");
-      }, 1400);
+        window.location.assign(`${host}`);
+      }, 1200);
     } else if (!updateInfo.data?.success && !updateInfo.loading) {
       toast.error(updateInfo.data?.message, toastOptions);
     }
@@ -242,16 +240,19 @@ const FormUpdateInfo = ({ users, setUsers }) => {
       </label>
       <div style={{ display: "flex" }}>
         <label>
-          <Link href="">
+          <div style={{ cursor: "pointer" }}>
             <button onClick={handleSubmit} className={css.submitBtn}>
               Save
             </button>
-          </Link>
+          </div>
         </label>
         <label>
-          <Link href="/">
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => window.location.assign(`${host}`)}
+          >
             <button className={css.cancelBtn}>Cancel</button>
-          </Link>
+          </div>
         </label>
       </div>
       <ToastContainer

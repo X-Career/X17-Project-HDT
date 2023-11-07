@@ -10,16 +10,17 @@ import { deleteMediaFromAlbum } from "../../../redux/reducer/media/deleteMediaFr
 import { updateAlbum } from "../../../redux/reducer/album/updateAlbumSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { deleteUpdateMedia } from "../../../redux/reducer/resetState/deleteUpdateMedia";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { updateAlbumAvatar } from "../../../redux/reducer/album/updateAlbumAvatarSlice";
-import { deleteUpdateAlbumAvatar } from "../../../redux/reducer/resetState/deleteUpdateAlbumAvatar";
+import { useRouter } from "next/router";
+import { host } from "../../utils/constants";
 
 const Albums = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const toastOptions = {
     position: "bottom-right",
     autoClose: 1200,
@@ -30,7 +31,6 @@ const Albums = () => {
 
   useEffect(() => {
     dispatch(getAlbum());
-    dispatch(deleteUpdateMedia());
   }, [resUpdateAlbumAvatar]);
 
   const getAlbumDetails = useSelector((state) => state.getAlbum);
@@ -45,7 +45,10 @@ const Albums = () => {
   }, [getAlbumDetails]);
 
   const avatarAlbumRef = useRef(null);
-  const handleAvatarChange = (e) => {
+
+  const [id, setId] = useState("");
+  const [idx, setIdx] = useState("");
+  const handleAvatarChange = (e, id) => {
     const file = e.target.files[0];
     if (file) {
       const formData = new FormData();
@@ -53,6 +56,9 @@ const Albums = () => {
       dispatch(
         updateAlbumAvatar({
           payload: {
+            query: {
+              params: id,
+            },
             body: formData,
           },
         })
@@ -66,7 +72,6 @@ const Albums = () => {
   useEffect(() => {
     if (resUpdateAlbumAvatar.data?.success && !resUpdateAlbumAvatar.loading) {
       toast.success(resUpdateAlbumAvatar.data?.message, toastOptions);
-      dispatch(deleteUpdateAlbumAvatar());
     } else if (
       !resUpdateAlbumAvatar.data?.success &&
       !resUpdateAlbumAvatar.loading
@@ -151,108 +156,137 @@ const Albums = () => {
             lg={3}
             style={{ display: "flex", flexDirection: "column", gap: 10 }}
           >
-            <Link href="/create-album" className={css.createAlbum}>
+            <div
+              onClick={() => window.location.assign(`${host}/create-album`)}
+              style={{
+                cursor: "pointer",
+              }}
+              className={css.createAlbum}
+            >
               <AddRoundedIcon style={{ fontSize: 40 }} />
-            </Link>
+            </div>
             <div className={css.createAlbumTitle}>Create Album</div>
           </Grid>
-          {albumDetails?.map((item, index) => (
-            <Grid
+          {albumDetails?.length === 0 ? (
+            <p
               style={{
-                marginBottom: "12px",
+                fontSize: 22,
                 display: "flex",
-                flexDirection: "column",
-                gap: 10,
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "0 auto",
               }}
-              item
-              container
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              key={item._id}
             >
-              <div className={`${css.image} globalImage`}>
-                <Link href={`/albums/${item._id}`}>
-                  <CardMedia
-                    component="img"
-                    alt="Album Image"
-                    height="200"
-                    image={item.coverUrl}
-                    style={{ borderRadius: 8 }}
-                  />
-                </Link>
-                <button
-                  style={{ width: 0, height: 0 }}
-                  onClick={() => setShow(true)}
-                  data-title="Chỉnh sửa"
-                >
-                  <EditOutlinedIcon className={css.deleteIcon} />
-                </button>
-                <Modal
-                  open={show}
-                  onClose={() => {
-                    setShow(false);
-                  }}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      background: "#ebebeb",
-                      borderRadius: 3,
-                      boxShadow: 24,
-                      padding: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      top: "30%",
-                      left: "50%",
-                      width: "200px",
-                      transform: "translate(-50%, -50%)",
-                      gap: 0.8,
-                    }}
+              Chưa tải lên album nào. 😥
+            </p>
+          ) : (
+            albumDetails?.map((item, index) => (
+              <Grid
+                style={{
+                  marginBottom: "12px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 10,
+                }}
+                item
+                container
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                key={item._id}
+              >
+                <div className={`${css.image}`}>
+                  <div
+                    style={{ cursor: "pointer", margin: 0, padding: 0 }}
+                    onClick={() =>
+                      window.location.assign(`${host}/albums/${item._id}`)
+                    }
                   >
-                    <button
-                      onClick={() => {
-                        avatarAlbumRef.current.click();
-                      }}
-                      className="btnEditAlbum"
-                    >
-                      Update Avatar
-                    </button>
-                    <button
-                      onClick={() => handleDeleteAlbum(item._id, index)}
-                      className="btnEditAlbum"
-                    >
-                      Delete Album
-                    </button>
-                    <input
-                      style={{
-                        display: "none",
-                      }}
-                      type="file"
-                      accept="image/jpg, image/jpeg, image/png"
-                      ref={avatarAlbumRef}
-                      onChange={handleAvatarChange}
+                    <CardMedia
+                      component="img"
+                      alt="Album Image"
+                      height="200"
+                      image={item.coverUrl}
+                      style={{ borderRadius: 8 }}
                     />
-                  </Box>
-                </Modal>
-              </div>
-              <div className={css.imageTitle}>
-                <span
-                  contentEditable
-                  id="albumName"
-                  onInput={handleContentChange}
-                  onBlur={(e) => handleBlur(e, item._id)}
-                  autoCorrect="off"
-                >
-                  {item.albumName}
-                </span>
-                <p>Owner: {item.owner}</p>
-              </div>
-            </Grid>
-          ))}
+                  </div>
+                  <button
+                    style={{ width: 0, height: 0 }}
+                    onClick={() => {
+                      setShow(true);
+                      setId(item._id);
+                      setIdx(index);
+                    }}
+                    data-title="Chỉnh sửa"
+                  >
+                    <EditOutlinedIcon className={css.deleteIcon} />
+                  </button>
+                  <Modal
+                    open={show}
+                    onClose={() => setShow(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        background: "#ebebeb",
+                        borderRadius: 3,
+                        boxShadow: 24,
+                        padding: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                        top: "30%",
+                        left: "50%",
+                        width: "200px",
+                        transform: "translate(-50%, -50%)",
+                        gap: 0.8,
+                      }}
+                    >
+                      <button
+                        onClick={() => {
+                          avatarAlbumRef.current.click();
+                        }}
+                        className="btnEditAlbum"
+                      >
+                        Update Avatar
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDeleteAlbum(id, idx);
+                        }}
+                        className="btnEditAlbum"
+                      >
+                        Delete Album
+                      </button>
+                      <input
+                        style={{
+                          display: "none",
+                        }}
+                        type="file"
+                        accept="image/jpg, image/jpeg, image/png"
+                        ref={avatarAlbumRef}
+                        onChange={(e) => handleAvatarChange(e, id)}
+                      />
+                    </Box>
+                  </Modal>
+                </div>
+                <div className={css.imageTitle}>
+                  <span
+                    contentEditable
+                    id="albumName"
+                    onInput={handleContentChange}
+                    onBlur={(e) => handleBlur(e, item._id)}
+                    autoCorrect="off"
+                  >
+                    {item.albumName}
+                  </span>
+                  <p>Owner: {item.owner}</p>
+                </div>
+              </Grid>
+            ))
+          )}
         </Grid>
       </Container>
       <ToastContainer

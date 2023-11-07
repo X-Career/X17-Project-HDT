@@ -12,7 +12,6 @@ import { getMedia } from "../../../redux/reducer/media/getMediaSlice";
 import { deleteMedia } from "../../../redux/reducer/media/deleteMediaFromAlbum";
 import { createMediaInsideMediaDetails } from "../../../redux/reducer/media/createMediaInsideMediaDetails";
 import { updateMedia } from "../../../redux/reducer/media/updateMediaSlice";
-import { deleteUpdateAlbum } from "../../../redux/reducer/resetState/deleteUpdateAlbum";
 
 const albumDetail = () => {
   const router = useRouter();
@@ -44,7 +43,6 @@ const albumDetail = () => {
         })
       );
     }
-    dispatch(deleteUpdateAlbum());
   }, [id, createMediaDetails]);
 
   console.error = console.warn = () => {};
@@ -76,6 +74,7 @@ const albumDetail = () => {
         },
       })
     );
+    toast.success("Media deleted", toastOptions);
   };
   const fileInput = useRef(null);
   const handleBtnClick = () => {
