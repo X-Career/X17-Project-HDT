@@ -19,6 +19,7 @@
     "date-fns": "^2.30.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "framer-motion": "^10.16.4",
     "next": "13.4.19",
     "next-auth": "^4.23.2",
     "prop-types": "^15.8.1",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@types/node": "20.8.0",
     "@types/react": "18.2.22",
+    "@types/react-slick": "^0.23.11",
     "typescript": "5.2.2"
   }
 }

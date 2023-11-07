@@ -13,3 +13,18 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.btnEditAlbum {
+  all: unset;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #4e4e4eb2;
+  color: #fff;
+  transition: 0.3s;
+}
+.btnEditAlbum:hover {
+  opacity: .8;
+}

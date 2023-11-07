@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./Post.module.scss";
 import { BiLocationPlus } from "react-icons/bi";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import Link from "next/link";
+import styles from "./Post.module.scss";
 
 const PostCard = () => {
   return (

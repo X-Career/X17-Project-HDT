@@ -12,50 +12,13 @@ import { GrCircleInformation } from "react-icons/gr";
 import { PiNumberCircleSevenBold } from "react-icons/pi";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import PostCard from "../../../components/card/PostCard";
+import UserHeader from "../../../components/userHeader/userHeader";
 
 const User = () => {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={styles.userHeader}>
-        <div className={styles.userAvatar}>
-          <Link href={`/`}>
-            <Image
-              src="/assets/tonton.png"
-              alt="Profile Picture"
-              width={132}
-              height={132}
-              className={styles.userImage}
-            />
-          </Link>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginLeft: 24,
-              gap: 8,
-            }}
-          >
-            <h2>FirstName LastName</h2>
-            <p>@username</p>
-          </div>
-        </div>
-        <div className={styles.userBtns}>
-          <Link href="/" className={styles.button}>
-            <BsPlus style={{ fontSize: "28px" }} />
-            Create Vacation
-          </Link>
-          <Link href="/" className={styles.button}>
-            <BsPlus style={{ fontSize: "28px" }} />
-            Create Album
-          </Link>
-          <Link href="/" className={styles.button}>
-            <BsFillPencilFill style={{ marginRight: 8 }} />
-            Edit Profile
-          </Link>
-        </div>
-      </div>
-
+      <UserHeader />
       <div className={styles.mainContent}>
         {/* Left */}
         <div className={styles.leftContent}>
@@ -118,7 +81,7 @@ const User = () => {
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link href="/" className={styles.moreBtn}>
-                Read More
+                View More
                 <AiOutlineArrowRight />
               </Link>
             </div>
@@ -136,29 +99,11 @@ const User = () => {
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link href="/" className={styles.moreBtn}>
-                Read More
+                View More
                 <AiOutlineArrowRight />
               </Link>
             </div>
           </div>
-
-          {/* <div className={styles.tagged}>
-            <h1>Tagged Vacations</h1>
-            <div className={styles.latestPosts}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-            </div>
-            <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/" className={styles.moreBtn}>
-                Read More
-                <AiOutlineArrowRight />
-              </Link>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

@@ -84,7 +84,9 @@ const Footer = () => {
           className={styles.belowLogo}
           style={{ fontWeight: 700, fontSize: 24 }}
         >
-          <Link href="/">TravelBlog</Link>
+          <Link href="/" className={styles.logoName}>
+            TravelBlog
+          </Link>
         </div>
         <div style={{ fontWeight: 600 }}>© 2023. All Rights Reserved.</div>
       </div>

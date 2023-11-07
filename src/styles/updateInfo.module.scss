@@ -2,10 +2,11 @@
     display: flex;
     -webkit-box-pack: start;
     gap: 50px;
+    margin: calc(80px + 2.4rem) auto;
     min-height: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 160px);
     max-width: 624px;
-    margin: 0px auto;
+    padding: 12px 0;
     border-radius: 8px;
     overflow: hidden;
     .contain_avt {

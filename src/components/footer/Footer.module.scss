@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
 .footer {
   position: relative;
   bottom: 0;
@@ -113,6 +115,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
+}
+
+.logoName {
+  font-family: "Lobster", sans-serif !important;
+  font-size: 28px;
 }
 
 .belowBtns {

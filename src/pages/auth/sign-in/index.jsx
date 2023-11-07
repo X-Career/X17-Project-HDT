@@ -7,10 +7,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../redux/reducer/auth/authLoginSlice";
+import { deleteRegister } from "../../../../redux/reducer/resetState/deleteRegister";
 
 const SignIn = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(deleteRegister());
+  }, []);
+
   const [users, setUsers] = useState({});
   const toastOptions = {
     position: "bottom-right",
@@ -105,7 +111,7 @@ const SignIn = () => {
                 <Link href="#">Forgot Password?</Link>
               </span>
               <span>
-                <Link href="/auth/sign-up">Don't have an account?</Link>
+                <Link href="/auth/sign-up">Become a member</Link>
               </span>
             </section>
           </center>

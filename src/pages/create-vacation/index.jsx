@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastOptions from "@/utils/index.js";
 import { useRouter } from "next/router";
+import Head from "next/head";
 const vacation = () => {
   const router = useRouter();
   const { RangePicker } = DatePicker;
@@ -130,6 +131,9 @@ const vacation = () => {
 
   return (
     <div className={styles["container"]}>
+      <Head>
+        <title>Create Vacation</title>
+      </Head>
       <div className={styles["content"]}>
         <div className={styles["vacation"]}>
           <h1>Create a new vacation</h1>
@@ -140,6 +144,7 @@ const vacation = () => {
                   type="text"
                   placeholder=" "
                   className={styles["form-input"]}
+                  autoComplete="off"
                   onKeyDown={handleKeyDown}
                   id="locationInput"
                 />
@@ -153,6 +158,7 @@ const vacation = () => {
                   type="text"
                   placeholder=" "
                   className={styles["form-input"]}
+                  autoComplete="off"
                   onKeyDown={handleKeyDown}
                   id="titleInput"
                 />
@@ -166,6 +172,7 @@ const vacation = () => {
                   type="text"
                   placeholder=" "
                   className={styles["form-input"]}
+                  autoComplete="off"
                   onKeyDown={handleKeyDown}
                   id="descriptionInput"
                 />
@@ -194,6 +201,7 @@ const vacation = () => {
                     type="text"
                     placeholder=" "
                     onChange={handleInputChange}
+                    autoComplete="off"
                     value={inputValueTripmate}
                     className={styles["form-input"]}
                     onKeyDown={handleKeyDown}

@@ -19,6 +19,15 @@ import deletePostSlice from "./post/deletePostSlice";
 import updatePostSlice from "./post/updatePostSlice";
 import commentSlice from "./comment/getComment";
 import createCommentSLice from "./comment/createComment";
+import createAlbumSlice from "./album/albumSlice";
+import getAlbumSlice from "./album/getAlbumSlice";
+import updateAlbumSlice from "./album/updateAlbumSlice";
+import updateAlbumAvatarSlice from "./album/updateAlbumAvatarSlice";
+import createMediaSlice from "./media/createMediaSlice";
+import createMediaInsideMediaDetailsSlice from "./media/createMediaInsideMediaDetails";
+import getMediaSlice from "./media/getMediaSlice";
+import updateMediaSlice from "./media/updateMediaSlice";
+
 const rootReducer = combineReducers({
   register: authRegisterSlice,
   login: authLoginSlice,
@@ -39,6 +48,14 @@ const rootReducer = combineReducers({
   updatePostSlice: updatePostSlice,
   commentSlice: commentSlice,
   createCommentSLice: createCommentSLice,
+  createAlbum: createAlbumSlice,
+  getAlbum: getAlbumSlice,
+  updateAlbum: updateAlbumSlice,
+  updateAlbumAvatar: updateAlbumAvatarSlice,
+  createMedia: createMediaSlice,
+  createMediaInsideMediaDetails: createMediaInsideMediaDetailsSlice,
+  getMedia: getMediaSlice,
+  updateMedia: updateMediaSlice,
 });
 
 export default rootReducer;
