@@ -142,11 +142,9 @@ const CreateAlbum = () => {
       createAlbumResponse?.data?.success &&
       !createAlbumResponse?.loading
     ) {
-      if (createMediaResponse?.data?.success && !createMediaResponse?.loading) {
-        toast.success(createAlbumResponse?.data?.message, toastOptions);
-      }
+      toast.success(createAlbumResponse?.data?.message, toastOptions);
     }
-  }, [createAlbumResponse, createMediaResponse]);
+  }, [createAlbumResponse]);
   useEffect(() => {
     if (createMediaResponse?.data?.success && !createMediaResponse?.loading) {
       setTimeout(() => {
@@ -174,7 +172,7 @@ const CreateAlbum = () => {
           },
         })
       ).then((res) => {
-        mediaUpload.map((media) => {
+        mediaUpload.forEach((media) => {
           const formDataMedia = new FormData();
           formDataMedia.append("file", media.url);
           formDataMedia.append("type", media.type);

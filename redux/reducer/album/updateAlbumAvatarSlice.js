@@ -4,7 +4,7 @@ import { initialState } from "../../../global/initState";
 
 export const updateAlbumAvatar = createApiThunk(
   METHODS.POST,
-  "/album/updateAlbumAvatar",
+  "/album/updateAlbumAvatar/$params",
   {
     "Content-Type": "multipart/form-data",
   }
