@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMilestones } from "../../../redux/reducer/milestone/milestoneSlice.js";
 import { Collapse } from "antd";
-import Posts from "../post/Posts.jsx";
+import Post from "../post-detail/index.jsx";
 import { formatCustomDate } from "@/utils/index.js";
-import styles from "./milestone.module.scss";
+import styles from "../Milestone/milestone.module.scss";
 
-const Milestone = ({ vacationId }) => {
+const MilestoneReadOnly = ({ vacationId }) => {
   const dispatch = useDispatch();
   const milestoneData = useSelector((state) => state.infoMileStone.data);
 
@@ -59,7 +59,7 @@ const Milestone = ({ vacationId }) => {
                     </h1>
                   </>
                 ),
-                children: <Posts milestoneId={milestone._id} />,
+                children: <Post milestoneId={milestone._id} />,
               },
             ]}
           />
@@ -71,4 +71,4 @@ const Milestone = ({ vacationId }) => {
   );
 };
 
-export default Milestone;
+export default MilestoneReadOnly;

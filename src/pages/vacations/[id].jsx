@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import paris from "@/assets/img/paris.jpg";
 import upload from "@/assets/img/upload.png";
 import Image from "next/image";
 import styles from "./vacationDetail.module.scss";
@@ -11,7 +10,10 @@ import { FaLocationCrosshairs } from "react-icons/fa6";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoMdPersonAdd } from "react-icons/io";
+import { isValidEmail } from "../../utils/index.js";
 const { RangePicker } = DatePicker;
+import { addTripmate } from "../../../redux/reducer/vacation/addTripmate";
+import { removeTripmate } from "../../../redux/reducer/vacation/removeTripmate";
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getVacation } from "../../../redux/reducer/vacation/vacationDetail";
@@ -25,7 +27,6 @@ import toastOptions from "@/utils/index.js";
 import Milestone from "../../components/Milestone/Milestone";
 import { AiFillSave } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
-import { set } from "date-fns";
 import Loading from "../../components/loadingPage/Loading";
 const vacationsDetail = () => {
   const antIcon = (
@@ -38,10 +39,14 @@ const vacationsDetail = () => {
   );
   const dispatch = useDispatch();
   const router = useRouter();
+
   const [coverUrl, setCoverUrl] = useState();
   const inputRef = useRef();
+  const [saveCount, setSaveCount] = useState(0);
   const [fileImgUpload, setFileImgUpload] = useState("");
   const uploadLoading = useSelector((state) => state.updateCoverImg);
+  const removeTripmateStt = useSelector((state) => state.removeTripmate.data);
+  const addTripmateStt = useSelector((state) => state.addTripmate.data);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = router.query;
   const vacationData = useSelector((state) => state.vacationDetail.data);
@@ -57,22 +62,91 @@ const vacationsDetail = () => {
   const [isModalChangeImgOpen, setIsModalChangeImgOpen] = useState(false);
   const [isModalAddTripmate, setIsModalAddTripmate] = useState(false);
   const [isDateChanged, setIsDateChanged] = useState(false);
-  const [newDates, setNewDates] = useState(null);
   const [newValue, setNewValue] = useState(null);
+  const [participants, setParticipants] = useState(null);
+  const [listAdd, setListAdd] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    if (removeTripmateStt) {
+      if (removeTripmateStt.message === "Participant removed successfully") {
+        setParticipants(removeTripmateStt.data.participants);
+        toast.success(removeTripmateStt.message, toastOptions);
+      }
+    }
+  }, [removeTripmateStt]);
+  useEffect(() => {
+    if (addTripmateStt) {
+      if (addTripmateStt.message === "Participants added successfully") {
+        setParticipants(addTripmateStt.data.participants);
+        toast.success(addTripmateStt.message, toastOptions);
+        setListAdd([]);
+      }
+    }
+  }, [addTripmateStt]);
+
+  const handleAddClick = () => {
+    if (isValidEmail(inputValue)) {
+      setListAdd([...listAdd, inputValue]);
+      setInputValue("");
+    } else {
+      toast.warning("Không đúng định dạng email", toastOptions);
+    }
+  };
+  const handleRemoveClick = (index) => {
+    const updatedList = [...listAdd];
+    updatedList.splice(index, 1);
+    setListAdd(updatedList);
+  };
+  const handleRemoveTripmate = (tripmate) => {
+    dispatch(
+      removeTripmate({
+        payload: {
+          query: {
+            params: id,
+          },
+          body: {
+            email: tripmate,
+          },
+        },
+      })
+    );
+  };
+  const handleAddTripmate = () => {
+    dispatch(
+      addTripmate({
+        payload: {
+          query: {
+            params: id,
+          },
+          body: {
+            tripmates: listAdd,
+          },
+        },
+      })
+    );
+  };
   const handleDateChange = (val) => {
     setNewValue(val);
     setRequestData(newValue);
     setIsDateChanged(true);
   };
   const handleUnSave = () => {
-    if (vacationData) {
+    if (updateCheck) {
       setValue([
-        dayjs(vacationData.data?.startDay),
-        dayjs(vacationData.data?.endDay),
+        dayjs(updateCheck.data?.startDay),
+        dayjs(updateCheck.data?.endDay),
       ]);
       setNewValue(null);
       setIsDateChanged(false);
       setRequestData(null);
+    } else {
+      if (vacationData) {
+        setValue([
+          dayjs(vacationData.data?.startDay),
+          dayjs(vacationData.data?.endDay),
+        ]);
+      }
     }
   };
   const handleSaveDate = () => {
@@ -142,6 +216,7 @@ const vacationsDetail = () => {
       setSelectedOption(vacationData.data?.privacy);
       setCoverUrl(vacationData.data?.avatarUrl);
       setDescription(vacationData.data?.description);
+      setParticipants(vacationData.data?.participants);
     }
   }, [vacationData]);
   const onOpenChange = (open) => {
@@ -162,7 +237,12 @@ const vacationsDetail = () => {
   };
   useEffect(() => {
     if (updateCheck) {
+      setValue([
+        dayjs(updateCheck.data?.startDay),
+        dayjs(updateCheck.data?.endDay),
+      ]);
       toast.success(updateCheck.message, toastOptions);
+      setSaveCount(saveCount + 1);
     }
   }, [updateCheck]);
   const handleBlur = () => {
@@ -405,11 +485,15 @@ const vacationsDetail = () => {
               <details open>
                 <summary>Tripmates</summary>
                 <div className={styles["tripmate-content"]}>
-                  {vacationData.data?.participants?.length > 0 ? (
-                    vacationData.data?.participants?.map((tripmate, index) => (
+                  {participants &&
+                  participants !== null &&
+                  participants.length > 0 ? (
+                    participants.map((tripmate, index) => (
                       <div className={styles["tripmate-item"]} key={index}>
                         <span>{tripmate}</span>
-                        <AiOutlineClose />
+                        <AiOutlineClose
+                          onClick={() => handleRemoveTripmate(tripmate)}
+                        />
                       </div>
                     ))
                   ) : (
@@ -420,6 +504,7 @@ const vacationsDetail = () => {
                       Dùng add tripmate để thêm bạn đồng hành
                     </div>
                   )}
+
                   <div
                     className={styles["tripmate-add"]}
                     onClick={showModalAddTripmate}
@@ -432,9 +517,67 @@ const vacationsDetail = () => {
               <Modal
                 title="Add Tripmates"
                 open={isModalAddTripmate}
+                onOk={handleAddTripmate}
                 onCancel={handleCancelAddTripmate}
+                className={styles["addTripmate"]}
               >
-                <input type="text" placeholder="Username or Email..." />
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "0.5rem",
+                    alignItems: "center",
+                  }}
+                >
+                  <input
+                    type="text"
+                    placeholder="Username or Email..."
+                    style={{
+                      padding: "5px 10px",
+                      width: "100%",
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                    }}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                  <button
+                    style={{
+                      padding: "5px 10px",
+                      borderRadius: "100px",
+                      backgroundColor: "#5491f5",
+                      cursor: "pointer",
+                      border: "none",
+                    }}
+                    onClick={handleAddClick}
+                  >
+                    Add
+                  </button>
+                </div>
+                <div style={{ display: "flex", gap: "5px", marginTop: "10px" }}>
+                  {listAdd.map((item, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        border: "1px solid #ccc",
+                        borderRadius: "100px",
+                        maxWidth: "fit-content",
+                        padding: "5px 10px",
+                      }}
+                    >
+                      {item}
+                      <AiOutlineClose
+                        style={{
+                          marginLeft: "0.5rem",
+                          cursor: "pointer",
+                          color: "red",
+                        }}
+                        onClick={() => handleRemoveClick(index)}
+                      />
+                    </div>
+                  ))}
+                </div>
               </Modal>
             </div>
           </div>
@@ -466,7 +609,7 @@ const vacationsDetail = () => {
               </div>
             </div>
             <div className={styles["milestoneContent"]}>
-              <Milestone vacationId={id} />
+              <Milestone vacationId={id} saveCount={saveCount} />
             </div>
           </div>
           <ToastContainer
