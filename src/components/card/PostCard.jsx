@@ -7,7 +7,7 @@ import styles from "./Post.module.scss";
 
 const PostCard = () => {
   return (
-    <article>
+    <article className={styles.wrapper}>
       <Link href="/">
         <Image
           src="/assets/paris.jpg"
@@ -19,7 +19,7 @@ const PostCard = () => {
         />
       </Link>
       <Link href="/">
-        <h2>Title</h2>
+        <h2 style={{ marginLeft: 8 }}>Title</h2>
       </Link>
       <span className={styles.location}>
         <BiLocationPlus />

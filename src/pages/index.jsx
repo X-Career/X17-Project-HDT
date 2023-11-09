@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { deleteLogin } from "../../redux/reducer/resetState/deleteLogin";
+import { AiOutlineArrowRight, AiFillPicture } from "react-icons/ai";
+import { BsFillPencilFill } from "react-icons/bs";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Head from "next/head";
 import Link from "next/link";
-import Carousel from "../components/Carousel/Carousel";
 import HomeCard from "../components/card/HomeCard";
 import styles from "@/styles/Home.module.scss";
 import AlbumCard from "../components/card/AlbumCard";
+import HeroCarosel from "../components/carosel/Carosel";
 
 export default function Home() {
   console.error = () => {};
@@ -16,10 +19,24 @@ export default function Home() {
         <title>Home</title>
       </Head>
       <div className={styles.main}>
-        {/* Carosel */}
-        {/* <Carousel /> */}
+        <HeroCarosel />
 
-        {/* Vacations  */}
+        <div className={styles.heroBtn}>
+          <Link href={`/create-vacation`}>
+            <button className={styles.moreBtn}>
+              Create Vacation
+              <BsFillPencilFill />
+            </button>
+          </Link>
+          <Link href={`/create-album`}>
+            <button className={styles.moreBtn}>
+              Create Album
+              <AiFillPicture />
+            </button>
+          </Link>
+        </div>
+
+        {/* Vacations */}
         <div className={styles.container}>
           <div className={styles.miniHeader}>
             <h1 className={styles.title}>Vacations</h1>
@@ -31,14 +48,14 @@ export default function Home() {
             <HomeCard />
           </div>
           <div className={styles.btn}>
-            <Link href="/" className={styles.moreBtn}>
+            <Link href="/vacations" className={styles.moreBtn}>
               View More
               <AiOutlineArrowRight />
             </Link>
           </div>
         </div>
 
-        {/* Albums  */}
+        {/* Albums */}
         <div className={styles.albumContainer}>
           <div className={styles.miniHeader}>
             <h1 className={styles.title}>Albums</h1>
@@ -50,7 +67,7 @@ export default function Home() {
             <AlbumCard />
           </div>
           <div className={styles.btn}>
-            <Link href="/" className={styles.moreBtn}>
+            <Link href="/albums" className={styles.moreBtn}>
               View More
               <AiOutlineArrowRight />
             </Link>

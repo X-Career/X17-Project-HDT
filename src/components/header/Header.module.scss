@@ -51,6 +51,12 @@
 .auth {
   display: flex;
   gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 9999px;
 }
 
 .searchBar {

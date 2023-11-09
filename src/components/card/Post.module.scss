@@ -1,8 +1,14 @@
+.wrapper {
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
 .details {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
+  padding: 0 8px 8px 8px;
 
   span {
     display: flex;
@@ -16,4 +22,5 @@
   align-items: center;
   gap: 4px;
   font-weight: 600;
+  margin-left: 8px;
 }

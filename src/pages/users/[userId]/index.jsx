@@ -12,6 +12,7 @@ import { GrCircleInformation } from "react-icons/gr";
 import { PiNumberCircleSevenBold } from "react-icons/pi";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import PostCard from "../../../components/card/PostCard";
+import Ad from "../../../components/card/Ad";
 import UserHeader from "../../../components/userHeader/userHeader";
 
 const User = () => {
@@ -64,6 +65,9 @@ const User = () => {
               &nbsp; &nbsp;
               <p>User Bio</p>
             </div>
+          </div>
+          <div>
+            <Ad />
           </div>
         </div>
 
