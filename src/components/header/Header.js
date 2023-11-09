@@ -6,6 +6,7 @@ import styles from "./Header.module.scss";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { BiSearch } from "react-icons/bi";
+import avatar from "../../../public/assets/tonton.png";
 import { AiOutlineUserAdd, AiOutlineLogin } from "react-icons/ai";
 
 const Header = () => {
@@ -33,14 +34,6 @@ const Header = () => {
             <Link href="/albums" className={styles.navItem}>
               Albums
             </Link>
-            {/* Chỉ render khi người dùng đăng nhập hoặc có thể render trong Home
-            Page */}
-            {/* <Link href="/create-vacation" className={styles.navItem}>
-              Create vacation
-            </Link>
-            <Link href="/create-album" className={styles.navItem}>
-              Create album
-            </Link> */}
           </div>
         </div>
 
@@ -53,6 +46,14 @@ const Header = () => {
             />
             <BiSearch className={styles.searchIcon} />
           </div>
+          <Link href={`/users/1`}>
+            <Image
+              src={avatar}
+              width={40}
+              height={40}
+              className={styles.avatar}
+            />
+          </Link>
           <div
             className={styles.auth}
             onClick={() => {
