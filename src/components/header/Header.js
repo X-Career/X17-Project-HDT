@@ -3,14 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.scss";
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { BiSearch } from "react-icons/bi";
 import avatar from "../../../public/assets/tonton.png";
 import { AiOutlineUserAdd, AiOutlineLogin } from "react-icons/ai";
+import { host } from "../../utils/constants";
 
 const Header = () => {
-  const router = useRouter();
   return (
     <div className={styles.header}>
       <div className={styles.navLogo}>
@@ -58,13 +57,13 @@ const Header = () => {
             className={styles.auth}
             onClick={() => {
               localStorage.clear();
-              router.push("/auth/sign-in");
+              window.location.assign(`${host}/auth/sign-in`);
             }}
           >
-            <Link className={styles.btns} href="/auth/sign-in">
+            <div className={styles.btns}>
               <AiOutlineLogin className={styles.icon} />
               Log Out
-            </Link>
+            </div>
           </div>
         </div>
       </div>

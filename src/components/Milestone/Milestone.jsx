@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getMilestones } from "../../../redux/reducer/milestone/milestoneSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import { Collapse, Divider } from "antd";
+import { getMilestones } from "../../../redux/reducer/milestone/milestoneSlice.js";
+import { Collapse } from "antd";
 import Posts from "../post/Posts.jsx";
 import { formatCustomDate } from "@/utils/index.js";
 import styles from "./milestone.module.scss";
+
 const Milestone = ({ vacationId }) => {
   const dispatch = useDispatch();
   const milestoneData = useSelector((state) => state.infoMileStone.data);
-  const [milestoneDay, setMilestoneDay] = useState("");
-  const [milestoneTitle, setMilestoneTitle] = useState("");
+
   useEffect(() => {
     dispatch(
       getMilestones({
@@ -20,24 +20,21 @@ const Milestone = ({ vacationId }) => {
         },
       })
     );
-  }, []);
-  useEffect(() => {
-    if (milestoneData) {
-      setMilestoneTitle(milestoneData.data?.title);
-      setMilestoneTitle(formatCustomDate(milestoneData.data?.date));
-    }
-  }, [milestoneData]);
+  }, [dispatch, vacationId]);
+
   return (
     <div className={styles["mainContent"]}>
       {milestoneData && milestoneData.data?.length > 0 ? (
         milestoneData.data.map((milestone, index) => (
           <Collapse
-            key={index}
+            key={milestone._id}
             size="large"
+            defaultActiveKey={milestone._id}
+            bordered={false}
             style={{ marginBottom: "1rem" }}
             items={[
               {
-                key: `${index}`,
+                key: `${milestone._id}`,
                 label: (
                   <>
                     <span
@@ -62,7 +59,7 @@ const Milestone = ({ vacationId }) => {
                     </h1>
                   </>
                 ),
-                children: <Posts />,
+                children: <Posts milestoneId={milestone._id} />,
               },
             ]}
           />

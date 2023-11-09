@@ -7,10 +7,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../redux/reducer/auth/authLoginSlice";
+import { host } from "../../../utils/constants";
 
 const SignIn = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+
   const [users, setUsers] = useState({});
   const toastOptions = {
     position: "bottom-right",
@@ -38,7 +40,7 @@ const SignIn = () => {
       localStorage.setItem("refreshToken", loginInfo.data?.data?.refreshToken);
       setTimeout(() => {
         router.push("/");
-      }, 1500);
+      }, 1200);
     }
   }, [loginInfo]);
 
@@ -105,7 +107,18 @@ const SignIn = () => {
                 <Link href="#">Forgot Password?</Link>
               </span>
               <span>
-                <Link href="/auth/sign-up">Become a member</Link>
+                <div
+                  style={{
+                    cursor: "pointer",
+                    margin: 0,
+                    padding: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  onClick={() => window.location.assign(`${host}/auth/sign-up`)}
+                >
+                  Become a member
+                </div>
               </span>
             </section>
           </center>

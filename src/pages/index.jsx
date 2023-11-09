@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { deleteLogin } from "../../redux/reducer/resetState/deleteLogin";
 import { AiOutlineArrowRight, AiFillPicture } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import Head from "next/head";
 import Link from "next/link";
 import HomeCard from "../components/card/HomeCard";
 import styles from "@/styles/Home.module.scss";
@@ -10,12 +12,12 @@ import AlbumCard from "../components/card/AlbumCard";
 import HeroCarosel from "../components/carosel/Carosel";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(deleteLogin());
-  }, []);
+  console.error = () => {};
   return (
     <main>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className={styles.main}>
         <HeroCarosel />
 

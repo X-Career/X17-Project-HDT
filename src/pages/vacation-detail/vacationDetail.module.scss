@@ -1,0 +1,133 @@
+.container {
+  margin-top: 10%;
+  width: 100%;
+  margin-bottom: 50px;
+  .header {
+    .coverImg {
+      width: 100%;
+      img {
+        width: 100%;
+        object-fit: cover;
+        max-height: 300px;
+        border-radius: 1rem;
+        min-height: 300px;
+      }
+    }
+    .userinfo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .userinfo-leftSide {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 2rem;
+        img {
+          border-radius: 50%;
+          &:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            cursor: pointer;
+          }
+        }
+        .textInfo {
+          p {
+            &:first-child {
+              font-size: 18px;
+              text-transform: capitalize;
+              cursor: pointer;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+      .userinfo-rightSide {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        svg {
+          font-size: 1.5rem;
+        }
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+    .description {
+      margin-top: 2rem;
+      h1 {
+        font-size: 2rem;
+        text-transform: capitalize;
+        text-align: center;
+      }
+      p {
+        font-size: 1rem;
+        font-style: italic;
+        line-height: 1.5rem;
+        text-align: center;
+      }
+    }
+  }
+  .comment {
+    .form-comment {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      input {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+      }
+      button {
+        padding: 0.5rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #c996cc;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+
+        svg {
+          color: #1c0c5b;
+        }
+        &:hover {
+          background-color: #1c0c5b;
+          svg {
+            color: #c996cc;
+          }
+        }
+      }
+    }
+    .commentZone {
+      .commentItem {
+        display: flex;
+        gap: 1rem;
+        img {
+          border-radius: 50%;
+        }
+        .comment-info {
+          display: flex;
+          flex-direction: column;
+          background-color: #f0f2f5;
+          padding-right: 12px;
+          padding-left: 12px;
+          padding-bottom: 8px;
+          padding-top: 4px;
+          width: fit-content;
+          border-radius: 1rem;
+          span {
+            &:first-child {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}
