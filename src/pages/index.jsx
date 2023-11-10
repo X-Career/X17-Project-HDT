@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { deleteLogin } from "../../redux/reducer/resetState/deleteLogin";
 import { AiOutlineArrowRight, AiFillPicture } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import Head from "next/head";
 import Link from "next/link";
 import HomeCard from "../components/card/HomeCard";

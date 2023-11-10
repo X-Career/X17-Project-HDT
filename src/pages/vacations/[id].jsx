@@ -75,6 +75,7 @@ const vacationsDetail = () => {
       }
     }
   }, [removeTripmateStt]);
+
   useEffect(() => {
     if (addTripmateStt) {
       if (addTripmateStt.message === "Participants added successfully") {
