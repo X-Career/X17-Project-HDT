@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createVacation } from "../../../redux/reducer/vacation/createVacationSlice";
+import {
+  clean,
+  createVacation,
+} from "../../../redux/reducer/vacation/createVacationSlice";
 import { FaPlus, FaUserFriends, FaLock } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import Select from "@mui/material/Select";
@@ -16,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import toastOptions from "@/utils/index.js";
 import { useRouter } from "next/router";
 import Head from "next/head";
+
 const vacation = () => {
   const router = useRouter();
   const { RangePicker } = DatePicker;
@@ -96,6 +100,7 @@ const vacation = () => {
   useEffect(() => {
     if (vacationData) {
       if (vacationData.success) {
+        dispatch(clean());
         router.push(`/vacations/${vacationData.data._id}`);
       } else {
         toast.error(vacationData.message, toastOptions);

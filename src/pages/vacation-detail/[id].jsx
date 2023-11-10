@@ -16,6 +16,7 @@ const VacationDetail = () => {
   const dispatch = useDispatch();
   const [success, setSucsses] = useState(false);
   const router = useRouter();
+
   const { id } = router.query;
   useEffect(() => {
     if (id) {
@@ -30,6 +31,7 @@ const VacationDetail = () => {
       );
     }
   }, [id, dispatch]);
+
   const vacationData = useSelector((state) => state.vacationDetail.data);
   useEffect(() => {
     if (vacationData) {
@@ -38,6 +40,7 @@ const VacationDetail = () => {
       }
     }
   }, [vacationData]);
+
   return (
     <>
       {success ? (
