@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../redux/reducer/auth/authLoginSlice";
-import { host } from "../../../utils/constants";
+import { clean } from "../../../../redux/reducer/auth/authLoginSlice";
 
 const SignIn = () => {
   const router = useRouter();
@@ -38,6 +38,7 @@ const SignIn = () => {
       toast.success(loginInfo.data?.message, toastOptions);
       localStorage.setItem("accessToken", loginInfo.data?.data?.accessToken);
       localStorage.setItem("refreshToken", loginInfo.data?.data?.refreshToken);
+      dispatch(clean());
       setTimeout(() => {
         router.push("/");
       }, 1200);
@@ -115,7 +116,10 @@ const SignIn = () => {
                     display: "flex",
                     justifyContent: "center",
                   }}
-                  onClick={() => window.location.assign(`${host}/auth/sign-up`)}
+                  onClick={() => {
+                    dispatch(clean());
+                    router.push("/auth/sign-up");
+                  }}
                 >
                   Become a member
                 </div>

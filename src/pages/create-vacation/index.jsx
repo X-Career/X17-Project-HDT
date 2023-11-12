@@ -19,8 +19,11 @@ import "react-toastify/dist/ReactToastify.css";
 import toastOptions from "@/utils/index.js";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useShowFooter } from "../../components/context/FooterContext";
 
 const vacation = () => {
+  const { setShowFooter } = useShowFooter();
+  setShowFooter(false);
   const router = useRouter();
   const { RangePicker } = DatePicker;
   const vacationData = useSelector((state) => state.createVacation.data);

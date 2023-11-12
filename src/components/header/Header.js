@@ -7,11 +7,12 @@ import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import avatar from "../../../public/assets/tonton.png";
 import { AiOutlineUserAdd, AiOutlineLogin } from "react-icons/ai";
-import { host } from "../../utils/constants";
 // import { getInfo } from "../../../redux/reducer/user/getInfoSlice.js";
 import styles from "./Header.module.scss";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
   // const dispatch = useDispatch();
   // const [user, setUser] = useState({});
   // const getUserInfo = useSelector((state) => state.getInfo);
@@ -67,7 +68,7 @@ const Header = () => {
             className={styles.auth}
             onClick={() => {
               localStorage.clear();
-              window.location.assign(`${host}/auth/sign-in`);
+              router.push(`/auth/sign-in`);
             }}
           >
             <div className={styles.btns}>

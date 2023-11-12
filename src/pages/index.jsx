@@ -8,8 +8,12 @@ import HomeCard from "../components/card/HomeCard";
 import styles from "@/styles/Home.module.scss";
 import AlbumCard from "../components/card/AlbumCard";
 import HeroCarosel from "../components/carosel/Carosel";
+import { useShowFooter } from "../components/context/FooterContext";
 
 export default function Home() {
+  const { setShowHeader } = useShowFooter();
+  setShowHeader(true);
+  
   console.error = () => {};
   return (
     <main>

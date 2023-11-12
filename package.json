@@ -19,6 +19,7 @@
     "date-fns": "^2.30.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "eslint-plugin-prettier": "^5.0.1",
     "framer-motion": "^10.16.4",
     "keen-slider": "^6.8.6",
     "next": "13.4.19",
