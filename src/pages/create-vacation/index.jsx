@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastOptions from "@/utils/index.js";
 import { useRouter } from "next/router";
+import { clean } from "../../../redux/reducer/vacation/createVacationSlice";
 import Head from "next/head";
 const vacation = () => {
   const router = useRouter();
@@ -96,6 +97,7 @@ const vacation = () => {
   useEffect(() => {
     if (vacationData) {
       if (vacationData.success) {
+        dispatch(clean());
         router.push(`/vacations/${vacationData.data._id}`);
       } else {
         toast.error(vacationData.message, toastOptions);
