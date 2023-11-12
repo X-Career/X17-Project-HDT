@@ -12,7 +12,7 @@ const HomeCard = () => {
       <div className={styles.background}>
         <div className={styles.leftBg}>
           <Link href={`/`}>
-            <Image src={banner2} className={styles.image} />
+            <Image src={banner2} className={styles.image} alt="Image" />
           </Link>
         </div>
         <div className={styles.rightBg}></div>

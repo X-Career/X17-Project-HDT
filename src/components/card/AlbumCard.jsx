@@ -10,7 +10,7 @@ const AlbumCard = () => {
       <div className={styles.background}>
         <div className={styles.leftBg}>
           <Link href={`/`}>
-            <Image src={banner3} className={styles.image} />
+            <Image src={banner3} className={styles.image} alt="Image" />
           </Link>
         </div>
         <div className={styles.rightBg}></div>

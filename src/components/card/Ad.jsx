@@ -15,6 +15,7 @@ const Ad = () => {
             height={0}
             sizes="100vw"
             style={{ width: "100%", height: "auto" }}
+            alt="Image"
           />
         </div>
         <div className={styles.adDetails}>
@@ -30,6 +31,7 @@ const Ad = () => {
             height={0}
             sizes="100vw"
             style={{ width: "100%", height: "auto" }}
+            alt="Image"
           />
         </div>
         <div className={styles.adDetails}>
