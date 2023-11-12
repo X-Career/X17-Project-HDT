@@ -50,8 +50,8 @@ const VacationDetail = () => {
               <Image
                 src={vacationData?.data?.avatarUrl}
                 alt="coverImg"
-                width={200}
-                height={200}
+                width={2000}
+                height={2000}
               />
             </div>
             <div className={styles["userinfo"]}>
@@ -70,7 +70,7 @@ const VacationDetail = () => {
                   <p>{vacationData?.data?.host?.username}</p>
                   <p>
                     {formatCustomDate(vacationData?.data?.createdAt)} •
-                    {vacationData?.data?.views} views
+                    {vacationData?.data?.views / 2} views
                   </p>
                 </div>
               </div>

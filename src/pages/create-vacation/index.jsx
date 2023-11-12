@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastOptions from "@/utils/index.js";
 import { useRouter } from "next/router";
+import { clean } from "../../../redux/reducer/vacation/createVacationSlice";
 import Head from "next/head";
 import { useShowFooter } from "../../components/context/FooterContext";
 
