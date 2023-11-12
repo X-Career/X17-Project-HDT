@@ -16,7 +16,6 @@ const vacationSlice = createAsyncSlice(
     },
   }
 );
-
 export const clean = createAction(`createVacation/clean`);
 
 export default vacationSlice.reducer;

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { AiOutlineArrowRight, AiFillPicture } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
 import Head from "next/head";
@@ -13,7 +11,7 @@ import { useShowFooter } from "../components/context/FooterContext";
 export default function Home() {
   const { setShowHeader } = useShowFooter();
   setShowHeader(true);
-  
+
   console.error = () => {};
   return (
     <main>

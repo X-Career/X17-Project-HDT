@@ -8,13 +8,11 @@ const initialState = {
   error: null,
 };
 
-// Tạo action để gửi yêu cầu API và nhận dữ liệu milestone posts
 export const getMilestonePosts = createApiThunk(
   METHODS.GET,
   "/post/getPost/$params"
 );
 
-// Tạo slice sử dụng createSlice từ Redux Toolkit
 const milestonePostsSlice = createSlice({
   name: "milestonePosts",
   initialState,
