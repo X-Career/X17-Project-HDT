@@ -17,7 +17,7 @@ import { cleanUpdateMedia } from "../../../redux/reducer/media/updateMediaSlice"
 import { cleanCreateMediaInsideMediaDetails } from "../../../redux/reducer/media/createMediaInsideMediaDetails";
 import { useShowFooter } from "../../components/context/FooterContext";
 
-const albumDetail = () => {
+const AlbumDetail = () => {
   const { setShowFooter, setShowHeader } = useShowFooter();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -271,9 +271,11 @@ const albumDetail = () => {
           <Head>
             <title>404 - Page not found</title>
           </Head>
-          <img
+          <Image
             src="https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/386863919_154438431059761_8650493410429411168_n.png?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=yU8ybZR69jkAX9WOzd2&_nc_ht=scontent.fhan18-1.fna&oh=03_AdRoT_vRgBKcG3Jjbn0yb-p5Mz28LFNTmJK3q3tRxxWDIw&oe=6577E59A"
             alt="404 Page not found"
+            width={800}
+            height={500}
           />
           <button
             className={css.redirectBtn}
@@ -288,4 +290,4 @@ const albumDetail = () => {
   );
 };
 
-export default albumDetail;
+export default AlbumDetail;
