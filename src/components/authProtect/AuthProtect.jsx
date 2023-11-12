@@ -19,7 +19,7 @@ export default function AuthProtect(props) {
       }
       setLoading(false);
     }
-  }, [router.pathname]);
+  }, [router]);
 
   return (
     <div className={`${css.authProtect} ${loading ? css.isCheckingAuth : ""}`}>
