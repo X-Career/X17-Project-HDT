@@ -1,6 +1,7 @@
 import { createApiThunk, createAsyncSlice } from "../../reduxToolkit";
 import { METHODS } from "../../../global";
 import { initialState } from "../../../global/initState";
+import { createAction } from "@reduxjs/toolkit";
 
 export const updateAlbumAvatar = createApiThunk(
   METHODS.POST,
@@ -10,8 +11,14 @@ export const updateAlbumAvatar = createApiThunk(
   }
 );
 const updateAlbumAvatarSlice = createAsyncSlice(
-  "createAlbum",
+  "updateAlbumAvatar",
   updateAlbumAvatar,
-  initialState
+  initialState,
+  {
+    cleanUpdateAlbumAvatar: (state) => {
+      state.data = initialState.data;
+    },
+  }
 );
+export const cleanUpdateAlbumAvatar = createAction(`updateAlbumAvatar/clean`);
 export default updateAlbumAvatarSlice.reducer;

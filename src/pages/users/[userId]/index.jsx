@@ -17,6 +17,7 @@ import UserHeader from "../../../components/userHeader/userHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
+import Head from "next/head";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -28,15 +29,16 @@ const User = () => {
   }, []);
 
   useEffect(() => {
-    if (getUserInfo.data?.data) {
+    if (getUserInfo.data?.success && !getUserInfo.loading) {
       setUser(getUserInfo?.data?.data);
     }
   }, [getUserInfo]);
 
-  // console.log(user);
-
   return (
     <div className={styles.container}>
+      <Head>
+        <title>{user.firstName + " " + user.lastName}</title>
+      </Head>
       {/* Header */}
       <UserHeader />
       <div className={styles.mainContent}>
@@ -113,7 +115,7 @@ const User = () => {
               <PostCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/" className={styles.moreBtn}>
+              <Link href="/vacations" className={styles.moreBtn}>
                 View More
                 <AiOutlineArrowRight />
               </Link>
@@ -131,7 +133,7 @@ const User = () => {
               <PostCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/" className={styles.moreBtn}>
+              <Link href="/albums" className={styles.moreBtn}>
                 View More
                 <AiOutlineArrowRight />
               </Link>
