@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getInfo } from "../../../redux/reducer/user/getInfoSlice";
 
-const userHeader = () => {
+const UserHeader = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const getUserInfo = useSelector((state) => state.getInfo);
@@ -78,4 +78,4 @@ const userHeader = () => {
   );
 };
 
-export default userHeader;
+export default UserHeader;

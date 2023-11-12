@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useShowFooter } from "../../components/context/FooterContext";
 
-const vacation = () => {
+const Vacation = () => {
   const { setShowFooter } = useShowFooter();
   setShowFooter(false);
   const router = useRouter();
@@ -303,4 +303,4 @@ const vacation = () => {
   );
 };
 
-export default vacation;
+export default Vacation;
