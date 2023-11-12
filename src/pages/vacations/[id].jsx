@@ -29,7 +29,7 @@ import Milestone from "../../components/Milestone/Milestone";
 import { AiFillSave } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 import Loading from "../../components/loadingPage/Loading";
-const vacationsDetail = () => {
+const VacationsDetail = () => {
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -77,6 +77,7 @@ const vacationsDetail = () => {
       }
     }
   }, [removeTripmateStt]);
+
   useEffect(() => {
     if (addTripmateStt) {
       if (addTripmateStt.message === "Participants added successfully") {
@@ -634,4 +635,4 @@ const vacationsDetail = () => {
   );
 };
 
-export default vacationsDetail;
+export default VacationsDetail;

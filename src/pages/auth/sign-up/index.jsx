@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import css from "@/styles/auth.module.scss";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,10 +12,11 @@ import {
   FemaleRounded,
   TransgenderRounded,
 } from "@mui/icons-material";
-import { host } from "../../../utils/constants";
+import { clean } from "../../../../redux/reducer/auth/authRegisterSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const toastOptions = {
     position: "bottom-right",
     autoClose: 1200,
@@ -68,6 +70,7 @@ const SignUp = () => {
       toast.error(registerInfo.data?.message, toastOptions);
     } else if (registerInfo.data?.success && !registerInfo.loading) {
       toast.success(registerInfo.data?.message, toastOptions);
+      dispatch(clean());
       setTimeout(() => {
         router.push("/auth/sign-in");
       }, 2000);
@@ -207,7 +210,10 @@ const SignUp = () => {
                     display: "flex",
                     justifyContent: "center",
                   }}
-                  onClick={() => window.location.assign(`${host}/auth/sign-in`)}
+                  onClick={() => {
+                    dispatch(clean());
+                    router.push("/auth/sign-in");
+                  }}
                 >
                   Already Registered? Log in now!
                 </div>

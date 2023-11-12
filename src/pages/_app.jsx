@@ -6,6 +6,7 @@ import AuthLayout from "../components/Layout/AuthLayout";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import { useRouter } from "next/router";
 import { ShowFooterProvider } from "../components/context/FooterContext";
+
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   console.error = () => {};

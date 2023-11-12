@@ -14,10 +14,31 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import PostCard from "../../../components/card/PostCard";
 import Ad from "../../../components/card/Ad";
 import UserHeader from "../../../components/userHeader/userHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
+import Head from "next/head";
 
 const User = () => {
+  const dispatch = useDispatch();
+  const [user, setUser] = useState({});
+  const getUserInfo = useSelector((state) => state.getInfo);
+
+  useEffect(() => {
+    dispatch(getInfo());
+  }, []);
+
+  useEffect(() => {
+    if (getUserInfo.data?.success && !getUserInfo.loading) {
+      setUser(getUserInfo?.data?.data);
+    }
+  }, [getUserInfo]);
+
   return (
     <div className={styles.container}>
+      <Head>
+        <title>{user.firstName + " " + user.lastName}</title>
+      </Head>
       {/* Header */}
       <UserHeader />
       <div className={styles.mainContent}>
@@ -28,42 +49,52 @@ const User = () => {
             <div>
               <span>
                 <HiOutlineMail />
-                <p>Email:</p>
+                <p>
+                  <strong>Email:</strong>
+                </p>
               </span>
               &nbsp; &nbsp;
-              <p>User Email</p>
+              <p>{user.email}</p>
             </div>
             <div>
               <span>
                 <BsCalendarHeart />
-                <p>Date of Birth:</p>
+                <p>
+                  <strong>Date of Birth:</strong>
+                </p>
               </span>
               &nbsp; &nbsp;
-              <p>User Date</p>
+              <p>{user.dateOfBirth ? user.dateOfBirth : "<No information>"}</p>
             </div>
             <div>
               <span>
                 <PiNumberCircleSevenBold />
-                <p>Age:</p>
+                <p>
+                  <strong>Age:</strong>
+                </p>
               </span>
               &nbsp; &nbsp;
-              <p>User Age</p>
+              <p>{user.age ? user.age : "<No information>"}</p>
             </div>
             <div>
               <span>
                 <BsGenderAmbiguous />
-                <p>Gender:</p>
+                <p>
+                  <strong>Gender:</strong>
+                </p>
               </span>
               &nbsp; &nbsp;
-              <p>User Gender</p>
+              <p>{user.gender ? user.gender : "<No information>"}</p>
             </div>
             <div>
               <span>
                 <GrCircleInformation />
-                <p>Bio:</p>
+                <p>
+                  <strong>Bio:</strong>
+                </p>
               </span>
               &nbsp; &nbsp;
-              <p>User Bio</p>
+              <p>{user.bio ? user.bio : "Nothing to show here...yet!"}</p>
             </div>
           </div>
           <div>
@@ -84,7 +115,7 @@ const User = () => {
               <PostCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/" className={styles.moreBtn}>
+              <Link href="/vacations" className={styles.moreBtn}>
                 View More
                 <AiOutlineArrowRight />
               </Link>
@@ -102,7 +133,7 @@ const User = () => {
               <PostCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/" className={styles.moreBtn}>
+              <Link href="/albums" className={styles.moreBtn}>
                 View More
                 <AiOutlineArrowRight />
               </Link>

@@ -1,26 +1,37 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./Header.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { BiSearch } from "react-icons/bi";
 import avatar from "../../../public/assets/tonton.png";
 import { AiOutlineUserAdd, AiOutlineLogin } from "react-icons/ai";
-import { host } from "../../utils/constants";
+// import { getInfo } from "../../../redux/reducer/user/getInfoSlice.js";
+import styles from "./Header.module.scss";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+  // const dispatch = useDispatch();
+  // const [user, setUser] = useState({});
+  // const getUserInfo = useSelector((state) => state.getInfo);
+
+  // useEffect(() => {
+  //   dispatch(getInfo());
+  // }, []);
+
+  // useEffect(() => {
+  //   if (getUserInfo.data?.data) {
+  //     setUser(getUserInfo?.data?.data);
+  //   }
+  // }, [getUserInfo]);
+
   return (
     <div className={styles.header}>
       <div className={styles.navLogo}>
         <div className={styles.nav}>
           <Link href="/" className={styles.logoImage}>
-            {/* <Image
-            src="/assets/travel-logo.png"
-            alt="logo"
-            width={28}
-            height={28}
-          /> */}
             <p className={styles.logoName}>TravelBlog</p>
           </Link>
           <div className={styles.navBar}>
@@ -45,7 +56,7 @@ const Header = () => {
             />
             <BiSearch className={styles.searchIcon} />
           </div>
-          <Link href={`/users/1`}>
+          <Link href={`/`}>
             <Image
               src={avatar}
               width={40}
@@ -57,7 +68,7 @@ const Header = () => {
             className={styles.auth}
             onClick={() => {
               localStorage.clear();
-              window.location.assign(`${host}/auth/sign-in`);
+              router.push(`/auth/sign-in`);
             }}
           >
             <div className={styles.btns}>

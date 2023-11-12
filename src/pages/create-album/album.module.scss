@@ -60,7 +60,7 @@
     display: flex;
     align-items: space-between;
     gap: 2rem;
-    margin-top: calc(80px + 2rem);
+    margin-top: calc(80px + 3.2rem);
     .container_left {
         height: 82vh;
         position: fixed;
@@ -101,6 +101,28 @@
                 transition: all 0.1s ease-in-out;
                 &:hover {
                     opacity: 0.8;
+                }
+            }
+            .btnWithAvatar {
+                &::before {
+                    content: attr(data-title);
+                    position: absolute;
+                    top: 1.35rem;
+                    right: -2rem;
+                    background-color: #000;
+                    color: #fff;
+                    padding: 4px;
+                    border-radius: 4px;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.2s;
+                    white-space: nowrap;
+                    z-index: 10000;
+                }
+                &:hover::before {
+                    width: fit-content;
+                    visibility: visible;
+                    opacity: 1;
                 }
             }
             .btnWithoutAvatar {
@@ -187,6 +209,26 @@
                     &:hover {
                         color: #5a5a5a;
                     }
+                }
+                &::before {
+                    content: attr(data-title);
+                    position: absolute;
+                    top: 1.35rem;
+                    right: -2rem;
+                    background-color: #000;
+                    color: #fff;
+                    padding: 4px;
+                    border-radius: 4px;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.2s;
+                    white-space: nowrap;
+                    z-index: 10000;
+                }
+                &:hover::before {
+                    width: fit-content;
+                    visibility: visible;
+                    opacity: 1;
                 }
             }
         }
