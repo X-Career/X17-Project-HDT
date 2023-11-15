@@ -39,6 +39,7 @@ const Posts = ({ milestoneId }) => {
     const file = e.target.files[0];
     setNewImage(file);
   };
+
   const handleEditClick = (content, image, postId) => {
     setEditModalContent(content);
     setEditModalImage(image);
