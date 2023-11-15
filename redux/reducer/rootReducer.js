@@ -26,7 +26,9 @@ import createMediaSlice from "./media/createMediaSlice";
 import createMediaInsideMediaDetailsSlice from "./media/createMediaInsideMediaDetails";
 import getMediaSlice from "./media/getMediaSlice";
 import updateMediaSlice from "./media/updateMediaSlice";
-import getAllVacations from "./vacation/getAllVacations";
+import infoAllVacations from "./vacation/getAllVacations";
+import infoHomeVacations from "./vacation/getHomeVacations";
+import infoAllAlbums from "./album/getAllAlbumsSlice";
 
 const rootReducer = combineReducers({
   register: authRegisterSlice,
@@ -56,7 +58,9 @@ const rootReducer = combineReducers({
   createMediaInsideMediaDetails: createMediaInsideMediaDetailsSlice,
   getMedia: getMediaSlice,
   updateMedia: updateMediaSlice,
-  getAllVacations: getAllVacations,
+  getAllVacations: infoAllVacations,
+  getAllAlbums: infoAllAlbums,
+  getHomeVacations: infoHomeVacations,
 });
 
 export default rootReducer;

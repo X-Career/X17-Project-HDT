@@ -2,6 +2,7 @@ import { createApiThunk, createAsyncSlice } from "../../reduxToolkit";
 import { METHODS } from "../../../global";
 import { initialState } from "../../../global/initState";
 import { createAction } from "@reduxjs/toolkit";
+
 export const createVacation = createApiThunk(
   METHODS.POST,
   "/vacation/createVacation"
