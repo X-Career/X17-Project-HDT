@@ -16,7 +16,8 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { updateAlbumAvatar } from "../../../redux/reducer/album/updateAlbumAvatarSlice";
 import { useRouter } from "next/router";
-import { host } from "../../utils/constants";
+import { cleanUpdateAlbum } from "../../../redux/reducer/album/updateAlbumSlice";
+import { cleanUpdateAlbumAvatar } from "../../../redux/reducer/album/updateAlbumAvatarSlice";
 
 const Albums = () => {
   const dispatch = useDispatch();
@@ -157,7 +158,11 @@ const Albums = () => {
             style={{ display: "flex", flexDirection: "column", gap: 10 }}
           >
             <div
-              onClick={() => window.location.assign(`${host}/create-album`)}
+              onClick={() => {
+                dispatch(cleanUpdateAlbum());
+                dispatch(cleanUpdateAlbumAvatar());
+                router.push("/create-album");
+              }}
               style={{
                 cursor: "pointer",
               }}
@@ -199,9 +204,11 @@ const Albums = () => {
                 <div className={`${css.image}`}>
                   <div
                     style={{ cursor: "pointer", margin: 0, padding: 0 }}
-                    onClick={() =>
-                      window.location.assign(`${host}/albums/${item._id}`)
-                    }
+                    onClick={() => {
+                      dispatch(cleanUpdateAlbum());
+                      dispatch(cleanUpdateAlbumAvatar());
+                      router.push(`/albums/${item._id}`);
+                    }}
                   >
                     <CardMedia
                       component="img"

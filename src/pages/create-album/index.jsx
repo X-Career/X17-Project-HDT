@@ -223,6 +223,7 @@ const CreateAlbum = () => {
                   }}
                 />
                 <button
+                  className={css.btnWithAvatar}
                   style={{
                     width: 0,
                     height: 0,
@@ -232,8 +233,10 @@ const CreateAlbum = () => {
                     right: "-10px",
                     margin: 0,
                     padding: 0,
+                    cursor: "pointer",
                   }}
                   onClick={() => handleDeleteAvatar()}
+                  data-title="Xoá ảnh"
                 >
                   <HighlightOffRoundedIcon className={css.deleteIcon} />
                 </button>
@@ -331,8 +334,9 @@ const CreateAlbum = () => {
                       />
                     )}
                     <button
-                      style={{ width: 0, height: 0 }}
+                      style={{ width: 0, height: 0, cursor: "pointer" }}
                       onClick={() => handleDeleteMedia(index)}
+                      data-title="Xoá ảnh/Xoá video"
                     >
                       <HighlightOffRoundedIcon className={css.deleteIcon} />
                     </button>

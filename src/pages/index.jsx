@@ -11,8 +11,12 @@ import HeroCarosel from "../components/carosel/Carosel";
 import { getAllAlbums } from "../../redux/reducer/album/getAllAlbumsSlice";
 import { getInfo } from "../../redux/reducer/user/getInfoSlice";
 import { getHomeVacations } from "../../redux/reducer/vacation/getHomeVacations";
+import { useShowFooter } from "../components/context/FooterContext";
 
 export default function Home() {
+  const { setShowHeader } = useShowFooter();
+  setShowHeader(true);
+
   const dispatch = useDispatch();
 
   const vacationData = useSelector((state) => state.getHomeVacations);

@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVacation } from "../../../redux/reducer/vacation/vacationDetail";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
+import { RESET_CREATE_POST } from "../../../redux/reducer/resetReducer/index.js";
 import { updateVacation } from "../../../redux/reducer/vacation/updateVacationSlice";
 import { updateImageCover } from "../../../redux/reducer/milestone/updateCoverImgSLice";
 import { ToastContainer, toast } from "react-toastify";
@@ -28,7 +29,7 @@ import Milestone from "../../components/Milestone/Milestone";
 import { AiFillSave } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 import Loading from "../../components/loadingPage/Loading";
-const vacationsDetail = () => {
+const VacationsDetail = () => {
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -46,6 +47,7 @@ const vacationsDetail = () => {
   const [fileImgUpload, setFileImgUpload] = useState("");
   const uploadLoading = useSelector((state) => state.updateCoverImg);
   const removeTripmateStt = useSelector((state) => state.removeTripmate.data);
+  const vacationDataRs = useSelector((state) => state.createVacation.data);
   const addTripmateStt = useSelector((state) => state.addTripmate.data);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = router.query;
@@ -193,6 +195,9 @@ const vacationsDetail = () => {
       );
     }
   }, [id, dispatch]);
+  useEffect(() => {
+    console.log(vacationDataRs);
+  }, []);
 
   const updateVacationHandle = () => {
     dispatch(
@@ -227,6 +232,7 @@ const vacationsDetail = () => {
       setDates(null);
     }
   };
+
   const handleContentChange = (event) => {
     setRequestData("");
     const newContent = event.target.textContent;
@@ -326,8 +332,8 @@ const vacationsDetail = () => {
               <Image
                 src={coverUrl}
                 className={styles["imgcover"]}
-                width={200}
-                height={200}
+                width={1000}
+                height={1000}
               />
 
               <div className={styles["edit"]} onClick={showModalChangeImg}>
@@ -629,4 +635,4 @@ const vacationsDetail = () => {
   );
 };
 
-export default vacationsDetail;
+export default VacationsDetail;

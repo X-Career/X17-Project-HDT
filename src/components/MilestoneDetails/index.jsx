@@ -9,7 +9,6 @@ import styles from "../Milestone/milestone.module.scss";
 const MilestoneReadOnly = ({ vacationId }) => {
   const dispatch = useDispatch();
   const milestoneData = useSelector((state) => state.infoMileStone.data);
-
   useEffect(() => {
     dispatch(
       getMilestones({

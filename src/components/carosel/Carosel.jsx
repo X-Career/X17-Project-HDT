@@ -26,6 +26,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -37,6 +38,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -48,6 +50,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -59,6 +62,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -70,6 +74,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -81,6 +86,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -92,6 +98,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>
@@ -103,6 +110,7 @@ const HeroCarosel = () => (
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          alt="Image"
         />
       </div>
     </div>

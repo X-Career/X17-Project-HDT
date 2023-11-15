@@ -3,7 +3,10 @@ import css from "./FormUpdateInfo.module.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserInfo } from "../../../redux/reducer/user/updateUserInfoSlice";
+import {
+  clean,
+  updateUserInfo,
+} from "../../../redux/reducer/user/updateUserInfoSlice";
 import { toastOptions } from "@/utils/index";
 import { Select, MenuItem } from "@mui/material";
 import {
@@ -11,10 +14,11 @@ import {
   FemaleRounded,
   TransgenderRounded,
 } from "@mui/icons-material";
-import { host } from "../../utils/constants";
+import { useRouter } from "next/router";
 
 const FormUpdateInfo = ({ users, setUsers }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const renderOption = (value, label, icon) => (
     <div
       style={{
@@ -70,9 +74,8 @@ const FormUpdateInfo = ({ users, setUsers }) => {
   useEffect(() => {
     if (updateInfo.data?.success && !updateInfo.loading) {
       toast.success("Done", toastOptions);
-      setTimeout(() => {
-        window.location.assign(`${host}`);
-      }, 1200);
+      dispatch(clean());
+      router.push(`/users/${users._id}`);
     } else if (!updateInfo.data?.success && !updateInfo.loading) {
       toast.error(updateInfo.data?.message, toastOptions);
     }
@@ -240,17 +243,14 @@ const FormUpdateInfo = ({ users, setUsers }) => {
       </label>
       <div style={{ display: "flex" }}>
         <label>
-          <div style={{ cursor: "pointer" }}>
+          <div>
             <button onClick={handleSubmit} className={css.submitBtn}>
               Save
             </button>
           </div>
         </label>
         <label>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => window.location.assign(`${host}`)}
-          >
+          <div onClick={() => router.push(`/users/${users._id}`)}>
             <button className={css.cancelBtn}>Cancel</button>
           </div>
         </label>

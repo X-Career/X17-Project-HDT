@@ -225,7 +225,13 @@ const Posts = ({ milestoneId }) => {
                     handleEditClick(post.content, post.images, post._id)
                   }
                 />
-                <button>Details</button>
+                <button
+                  onClick={() =>
+                    handleEditClick(post.content, post.images, post._id)
+                  }
+                >
+                  Details
+                </button>
               </div>
             </div>
             <img

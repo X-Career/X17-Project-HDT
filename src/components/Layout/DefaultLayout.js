@@ -7,10 +7,10 @@ import { useShowFooter } from "../context/FooterContext";
 import NewHeader from "../header/NewHeader";
 
 const DefaultLayout = ({ children }) => {
-  const { showFooter } = useShowFooter();
+  const { showFooter, showHeader } = useShowFooter();
   return (
     <AuthProtect>
-      <NewHeader />
+      {showHeader && <NewHeader />}
       <div className={styles.main}>{children}</div>
       {showFooter && <Footer />}
     </AuthProtect>
