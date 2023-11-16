@@ -29,6 +29,8 @@ import Milestone from "../../components/Milestone/Milestone";
 import { AiFillSave } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 import Loading from "../../components/loadingPage/Loading";
+import Head from "next/head";
+
 const VacationsDetail = () => {
   const antIcon = (
     <LoadingOutlined
@@ -327,6 +329,9 @@ const VacationsDetail = () => {
     <>
       {vacationData ? (
         <div className={styles["container"]}>
+          <Head>
+            <title>Vacations</title>
+          </Head>
           <div className={styles["header"]}>
             <div className={styles["coverImg"]}>
               <Image

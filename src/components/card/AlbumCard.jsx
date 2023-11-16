@@ -3,15 +3,30 @@ import Image from "next/image";
 import banner3 from "../../../public/assets/banner3.jpg";
 import { BiSolidUser } from "react-icons/bi";
 import styles from "./Card.module.scss";
+import { useEffect, useState } from "react";
 
 const AlbumCard = ({ album, user }) => {
-  // console.log(album);
+  const [check, setCheck] = useState(null);
+
+  useEffect(() => {
+    if (user._id === album.userId._id) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  }, [user, album]);
 
   return (
     <div className={styles.container}>
       <div className={styles.background}>
         <div className={styles.leftBg}>
-          <Link href={`/albums/${album._id}`}>
+          <Link
+            href={
+              check
+                ? `/albums/${album._id}`
+                : `/albums/view-person/${album._id}`
+            }
+          >
             <Image
               src={album.coverUrl}
               width={0}
@@ -25,10 +40,14 @@ const AlbumCard = ({ album, user }) => {
         <div className={styles.rightBg}></div>
       </div>
       <div className={styles.content}>
-        <Link href={`/albums/${album._id}`}>
+        <Link
+          href={
+            check ? `/albums/${album._id}` : `/albums/view-person/${album._id}`
+          }
+        >
           <h2>{album.albumName}</h2>
         </Link>
-        <Link href={`/users/${user._id}`} className={styles.detailsBox}>
+        <Link href={`/users/${album.userId._id}`} className={styles.detailsBox}>
           <BiSolidUser />
           <p style={{ fontWeight: 700 }}>From: {album.owner}</p>
         </Link>

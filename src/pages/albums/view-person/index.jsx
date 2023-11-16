@@ -1,37 +1,43 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import css from "@/styles/album.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllAlbums } from "../../../../redux/reducer/album/getAllAlbumsSlice";
 import { Container, Grid, CardMedia } from "@mui/material";
+import { getAlbum } from "../../../../redux/reducer/album/getAlbumSlice";
+import { getOtherUserAlbum } from "../../../../redux/reducer/album/getOtherUserAlbumSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
-function AlbumsOnlyView() {
+function OnlyViewPersonAlbums() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [albums, setAlbums] = useState([]);
 
-  const resGetAllAlbums = useSelector((state) => state.getAllAlbums);
+  const [albumDetails, setAlbumDetails] = useState([]);
+  const getAlbumDetails = useSelector((state) => state.getOtherUserAlbum);
 
   useEffect(() => {
-    dispatch(getAllAlbums());
+    dispatch(
+      getOtherUserAlbum({
+        payload: {
+          query: {
+            params: localStorage.getItem("otherUserId"),
+          },
+        },
+      })
+    );
   }, []);
 
   useEffect(() => {
-    if (resGetAllAlbums.data?.success && !resGetAllAlbums?.loading) {
-      setAlbums(resGetAllAlbums.data?.data);
+    if (getAlbumDetails.data?.success && !getAlbumDetails?.loading) {
+      setAlbumDetails(getAlbumDetails.data?.data);
     }
-  }, [resGetAllAlbums]);
+  }, [getAlbumDetails]);
 
   return (
     <div className={css.album}>
-      <Head>
-        <title>Albums</title>
-      </Head>
       <Container maxWidth="lg">
         <Grid container spacing={0}>
-          {albums?.length === 0 ? (
+          {albumDetails?.length === 0 ? (
             <p
               style={{
                 fontSize: 22,
@@ -44,7 +50,7 @@ function AlbumsOnlyView() {
               Chưa tải lên album nào. 😥
             </p>
           ) : (
-            albums?.map((item, index) => (
+            albumDetails?.map((item, index) => (
               <Grid
                 style={{
                   marginBottom: "12px",
@@ -60,11 +66,14 @@ function AlbumsOnlyView() {
                 lg={3}
                 key={item._id}
               >
+                <Head>
+                  <title>Albums of {item.owner} </title>
+                </Head>
                 <div className={`${css.image}`}>
                   <div
                     style={{ cursor: "pointer", margin: 0, padding: 0 }}
                     onClick={() => {
-                      router.push(`/albums/view/${item._id}`);
+                      router.push(`/albums/view-person/${item._id}`);
                     }}
                   >
                     <CardMedia
@@ -113,4 +122,4 @@ function AlbumsOnlyView() {
   );
 }
 
-export default AlbumsOnlyView;
+export default OnlyViewPersonAlbums;
