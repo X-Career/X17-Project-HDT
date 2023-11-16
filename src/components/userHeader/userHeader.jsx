@@ -8,35 +8,10 @@ import {
   BsCalendarHeart,
   BsGenderAmbiguous,
 } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { getInfo } from "../../../redux/reducer/user/getInfoSlice";
 import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
-const UserHeader = ({ user }) => {
-  const dispatch = useDispatch();
-  const [crrUser, setCrrUser] = useState({});
-  const getUserInfo = useSelector((state) => state.getInfo);
-
-  useEffect(() => {
-    dispatch(getInfo());
-  }, []);
-
-  useEffect(() => {
-    if (getUserInfo.data?.data) {
-      setCrrUser(getUserInfo?.data?.data);
-    }
-  }, [getUserInfo]);
-
-  const [check, setCheck] = useState(null);
-  useEffect(() => {
-    if (user._id === crrUser._id) {
-      setCheck(true);
-    } else {
-      setCheck(false);
-    }
-  }, [user, crrUser]);
-
+const UserHeader = ({ user, check }) => {
   return (
     <div className={styles.userHeader}>
       <div className={styles.userAvatar}>
