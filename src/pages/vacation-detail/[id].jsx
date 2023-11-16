@@ -10,18 +10,54 @@ import { useRouter } from "next/router";
 import Loading from "../../components/loadingPage/Loading";
 import { getVacation } from "../../../redux/reducer/vacation/vacationDetail";
 import MilestoneReadOnly from "../../components/MilestoneDetails";
+import { FaHeart } from "react-icons/fa";
+import { checkReaction } from "../../../redux/reducer/reaction/checkReactionSlice";
+import { createReaction } from "../../../redux/reducer/reaction/createReactionSlice";
 
 import Comment from "../../components/comment";
 const VacationDetail = () => {
   const dispatch = useDispatch();
   const [success, setSucsses] = useState(false);
   const router = useRouter();
-
+  const [check, setcheck] = useState(false);
+  const [count, setCount] = useState(0);
+  const checkReactionData = useSelector(
+    (state) => state.checkReactionSlice.data
+  );
+  const createReactionData = useSelector((state) => state.createReaction.data);
   const { id } = router.query;
+  useEffect(() => {
+    if (checkReactionData?.data && checkReactionData.message === "success") {
+      setcheck(checkReactionData.data?.like);
+      setCount(checkReactionData.data?.total);
+    }
+  }, [checkReactionData]);
+  useEffect(() => {
+    if (createReactionData?.data && createReactionData.success) {
+      dispatch(
+        checkReaction({
+          payload: {
+            query: {
+              params: id,
+            },
+          },
+        })
+      );
+    }
+  }, [createReactionData]);
   useEffect(() => {
     if (id) {
       dispatch(
         getVacation({
+          payload: {
+            query: {
+              params: id,
+            },
+          },
+        })
+      );
+      dispatch(
+        checkReaction({
           payload: {
             query: {
               params: id,
@@ -40,6 +76,18 @@ const VacationDetail = () => {
       }
     }
   }, [vacationData]);
+  const handleLike = () => {
+    setcheck(!check);
+    dispatch(
+      createReaction({
+        payload: {
+          query: {
+            params: id,
+          },
+        },
+      })
+    );
+  };
 
   return (
     <>
@@ -75,8 +123,12 @@ const VacationDetail = () => {
                 </div>
               </div>
               <div className={styles["userinfo-rightSide"]}>
-                <AiOutlineHeart />
-                <span>30</span>
+                {check ? (
+                  <FaHeart style={{ color: "red" }} onClick={handleLike} />
+                ) : (
+                  <AiOutlineHeart onClick={handleLike} />
+                )}
+                <span>{count}</span>
               </div>
             </div>
             <div className={styles["description"]}>
