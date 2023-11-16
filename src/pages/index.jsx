@@ -120,7 +120,7 @@ export default function Home() {
             ))}
           </div>
           <div className={styles.btn}>
-            <Link href="/albums" className={styles.moreBtn}>
+            <Link href="/albums/view" className={styles.moreBtn}>
               View More
               <AiOutlineArrowRight />
             </Link>

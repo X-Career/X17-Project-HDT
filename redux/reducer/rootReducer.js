@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import authRegisterSlice from "./auth/authRegisterSlice";
 import authLoginSlice from "./auth/authLoginSlice";
 import getInfoSlice from "./user/getInfoSlice";
+import getUsersInfoSlice from "./user/getUsersInfoSlice";
 import updateSlice from "./user/updateUserInfoSlice";
 import updateImageSlice from "./user/updateImageSlice";
 import refreshTokenSlice from "./refreshTokenSlice";
@@ -25,6 +26,7 @@ import updateAlbumAvatarSlice from "./album/updateAlbumAvatarSlice";
 import createMediaSlice from "./media/createMediaSlice";
 import createMediaInsideMediaDetailsSlice from "./media/createMediaInsideMediaDetails";
 import getMediaSlice from "./media/getMediaSlice";
+import getMediaWithoutEditSlice from "./media/getMediaWithoutEditSlice";
 import updateMediaSlice from "./media/updateMediaSlice";
 import infoAllVacations from "./vacation/getAllVacations";
 import infoHomeVacations from "./vacation/getHomeVacations";
@@ -34,6 +36,7 @@ const rootReducer = combineReducers({
   register: authRegisterSlice,
   login: authLoginSlice,
   getInfo: getInfoSlice,
+  getUsersInfo: getUsersInfoSlice,
   update: updateSlice,
   updateImage: updateImageSlice,
   token: refreshTokenSlice,
@@ -57,6 +60,7 @@ const rootReducer = combineReducers({
   createMedia: createMediaSlice,
   createMediaInsideMediaDetails: createMediaInsideMediaDetailsSlice,
   getMedia: getMediaSlice,
+  getMediaWithoutEdit: getMediaWithoutEditSlice,
   updateMedia: updateMediaSlice,
   getAllVacations: infoAllVacations,
   getAllAlbums: infoAllAlbums,

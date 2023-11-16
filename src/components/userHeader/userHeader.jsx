@@ -10,10 +10,12 @@ import {
 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getInfo } from "../../../redux/reducer/user/getInfoSlice";
+import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
-const UserHeader = () => {
+const UserHeader = ({ user }) => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState({});
+  const [crrUser, setCrrUser] = useState({});
   const getUserInfo = useSelector((state) => state.getInfo);
 
   useEffect(() => {
@@ -22,9 +24,18 @@ const UserHeader = () => {
 
   useEffect(() => {
     if (getUserInfo.data?.data) {
-      setUser(getUserInfo?.data?.data);
+      setCrrUser(getUserInfo?.data?.data);
     }
   }, [getUserInfo]);
+
+  const [check, setCheck] = useState(null);
+  useEffect(() => {
+    if (user._id === crrUser._id) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  }, [user, crrUser]);
 
   return (
     <div className={styles.userHeader}>
@@ -39,6 +50,7 @@ const UserHeader = () => {
             alt="Profile Picture"
             width={120}
             height={120}
+            priority={true}
             style={{
               border: "1px solid #333",
               marginTop: 10,
@@ -60,20 +72,33 @@ const UserHeader = () => {
           <p>@{user.username}</p>
         </div>
       </div>
-      <div className={styles.userBtns}>
-        <Link href="/create-vacation" className={styles.button}>
-          <BsPlus style={{ fontSize: "28px" }} />
-          Create Vacation
-        </Link>
-        <Link href="/create-album" className={styles.button}>
-          <BsPlus style={{ fontSize: "28px" }} />
-          Create Album
-        </Link>
-        <Link href="/users/update-info" className={styles.button}>
-          <BsFillPencilFill style={{ marginRight: 8 }} />
-          Edit Profile
-        </Link>
-      </div>
+      {check ? (
+        <div className={styles.userBtns}>
+          <Link href="/create-vacation" className={styles.button}>
+            <BsPlus style={{ fontSize: "28px" }} />
+            Create Vacation
+          </Link>
+          <Link href="/create-album" className={styles.button}>
+            <BsPlus style={{ fontSize: "28px" }} />
+            Create Album
+          </Link>
+          <Link href="/users/update-info" className={styles.button}>
+            <BsFillPencilFill style={{ marginRight: 8 }} />
+            Edit Profile
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.userBtns}>
+          <Link href={"/"} className={styles.button}>
+            <PersonAddRoundedIcon />
+            Add friend
+          </Link>
+          <Link href={"/"} className={styles.button}>
+            <SendRoundedIcon />
+            Messages
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

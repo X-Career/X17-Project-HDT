@@ -16,23 +16,36 @@ import Ad from "../../../components/card/Ad";
 import UserHeader from "../../../components/userHeader/userHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
 import Head from "next/head";
+import { getUsersInfo } from "../../../../redux/reducer/user/getUsersInfoSlice";
+import { useRouter } from "next/router";
 
 const User = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [user, setUser] = useState({});
-  const getUserInfo = useSelector((state) => state.getInfo);
+  const { userId } = router.query;
+  const resGetUsersInfo = useSelector((state) => state.getUsersInfo);
 
   useEffect(() => {
-    dispatch(getInfo());
-  }, []);
-
-  useEffect(() => {
-    if (getUserInfo.data?.success && !getUserInfo.loading) {
-      setUser(getUserInfo?.data?.data);
+    if (userId) {
+      dispatch(
+        getUsersInfo({
+          payload: {
+            query: {
+              params: userId,
+            },
+          },
+        })
+      );
     }
-  }, [getUserInfo]);
+  }, [userId]);
+
+  useEffect(() => {
+    if (resGetUsersInfo.data?.success && !resGetUsersInfo.loading) {
+      setUser(resGetUsersInfo?.data?.data);
+    }
+  }, [resGetUsersInfo]);
 
   return (
     <div className={styles.container}>
@@ -40,7 +53,7 @@ const User = () => {
         <title>{user.firstName + " " + user.lastName}</title>
       </Head>
       {/* Header */}
-      <UserHeader />
+      <UserHeader user={user} />
       <div className={styles.mainContent}>
         {/* Left */}
         <div className={styles.leftContent}>
