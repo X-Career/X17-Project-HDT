@@ -197,9 +197,6 @@ const VacationsDetail = () => {
       );
     }
   }, [id, dispatch]);
-  useEffect(() => {
-    console.log(vacationDataRs);
-  }, []);
 
   const updateVacationHandle = () => {
     dispatch(

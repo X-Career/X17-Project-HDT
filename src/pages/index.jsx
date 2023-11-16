@@ -8,7 +8,7 @@ import HomeCard from "../components/card/HomeCard";
 import styles from "@/styles/Home.module.scss";
 import AlbumCard from "../components/card/AlbumCard";
 import HeroCarosel from "../components/carosel/Carosel";
-import { getAllAlbums } from "../../redux/reducer/album/getAllAlbumsSlice";
+import { getHomeAlbum } from "../../redux/reducer/album/getHomeAlbumSlice";
 import { getInfo } from "../../redux/reducer/user/getInfoSlice";
 import { getHomeVacations } from "../../redux/reducer/vacation/getHomeVacations";
 import { useShowFooter } from "../components/context/FooterContext";
@@ -16,11 +16,9 @@ import { useShowFooter } from "../components/context/FooterContext";
 export default function Home() {
   const { setShowHeader } = useShowFooter();
   setShowHeader(true);
-
   const dispatch = useDispatch();
-
   const vacationData = useSelector((state) => state.getHomeVacations);
-  const albumData = useSelector((state) => state.getAllAlbums);
+  const albumData = useSelector((state) => state.getHomeAlbum);
   const [user, setUser] = useState({});
   const getUserInfo = useSelector((state) => state.getInfo);
 
@@ -47,11 +45,16 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    dispatch(getAllAlbums());
+    dispatch(
+      getHomeAlbum({
+        payload: {
+          query: {
+            params: "1/6",
+          },
+        },
+      })
+    );
   }, []);
-
-  // console.log(vacationData);
-  // console.log(albumData);
 
   const [vacations, setVacations] = useState([]);
   const [albums, setAlbums] = useState([]);

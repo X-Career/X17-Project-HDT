@@ -21,6 +21,7 @@ import commentSlice from "./comment/getComment";
 import createCommentSLice from "./comment/createComment";
 import createAlbumSlice from "./album/albumSlice";
 import getAlbumSlice from "./album/getAlbumSlice";
+import getHomeAlbumSlice from "./album/getHomeAlbumSlice";
 import getOtherUserAlbumSlice from "./album/getOtherUserAlbumSlice";
 import updateAlbumSlice from "./album/updateAlbumSlice";
 import updateAlbumAvatarSlice from "./album/updateAlbumAvatarSlice";
@@ -30,6 +31,7 @@ import getMediaSlice from "./media/getMediaSlice";
 import getMediaWithoutEditSlice from "./media/getMediaWithoutEditSlice";
 import updateMediaSlice from "./media/updateMediaSlice";
 import infoAllVacations from "./vacation/getAllVacations";
+import infoProfileVacations from "./vacation/getProfileVacations";
 import infoHomeVacations from "./vacation/getHomeVacations";
 import infoAllAlbums from "./album/getAllAlbumsSlice";
 import createReactionSlice from "./reaction/createReactionSlice";
@@ -58,6 +60,7 @@ const rootReducer = combineReducers({
   createCommentSLice: createCommentSLice,
   createAlbum: createAlbumSlice,
   getAlbum: getAlbumSlice,
+  getHomeAlbum: getHomeAlbumSlice,
   getOtherUserAlbum: getOtherUserAlbumSlice,
   updateAlbum: updateAlbumSlice,
   updateAlbumAvatar: updateAlbumAvatarSlice,
@@ -69,6 +72,7 @@ const rootReducer = combineReducers({
   getAllVacations: infoAllVacations,
   getAllAlbums: infoAllAlbums,
   getHomeVacations: infoHomeVacations,
+  getProfileVacations: infoProfileVacations,
   createReaction: createReactionSlice,
   checkReactionSlice: checkReactionSlice,
 });

@@ -5,12 +5,18 @@ import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import Link from "next/link";
 import styles from "./Post.module.scss";
 
-const PostCard = () => {
+const UserVacationCard = ({ vacation, user, check }) => {
   return (
     <article className={styles.wrapper}>
-      <Link href="/">
+      <Link
+        href={
+          check
+            ? `/vacations/${vacation._id}`
+            : `/vacation-detail/${vacation._id}`
+        }
+      >
         <Image
-          src="/assets/paris.jpg"
+          src={vacation.avatarUrl}
           alt="Vacation Photo"
           width={0}
           height={0}
@@ -18,16 +24,22 @@ const PostCard = () => {
           style={{ width: "100%", height: "auto" }}
         />
       </Link>
-      <Link href="/">
-        <h2 style={{ marginLeft: 8 }}>Title</h2>
+      <Link
+        href={
+          check
+            ? `/vacations/${vacation._id}`
+            : `/vacation-detail/${vacation._id}`
+        }
+      >
+        <h2 style={{ marginLeft: 8 }}>{vacation.title}</h2>
       </Link>
       <span className={styles.location}>
         <BiLocationPlus />
-        Location: Vac Location
+        Location: {vacation.location}
       </span>
       <div className={styles.details}>
         <span>
-          123 views
+          {vacation.views} views
           <AiOutlineEye />
         </span>
         <span>
@@ -39,4 +51,4 @@ const PostCard = () => {
   );
 };
 
-export default PostCard;
+export default UserVacationCard;
