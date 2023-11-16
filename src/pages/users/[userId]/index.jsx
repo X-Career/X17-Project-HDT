@@ -20,6 +20,7 @@ import Head from "next/head";
 import { getUsersInfo } from "../../../../redux/reducer/user/getUsersInfoSlice";
 import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
 import { useRouter } from "next/router";
+import { getOtherUserAlbum } from "../../../../redux/reducer/album/getOtherUserAlbumSlice";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,29 @@ const User = () => {
       setCheck(false);
     }
   }, [user, crrUser]);
+
+  const resGetOtherUserAlbum = useSelector((state) => state.getOtherUserAlbum);
+  useEffect(() => {
+    if (userId) {
+      dispatch(
+        getOtherUserAlbum({
+          payload: {
+            query: {
+              params: userId,
+            },
+          },
+        })
+      );
+    }
+  }, [userId]);
+
+  const [album, setAlbum] = useState([])
+  useEffect(() => {
+    if (resGetOtherUserAlbum.data?.success && !resGetOtherUserAlbum.loading) {
+      setAlbum(resGetOtherUserAlbum?.data?.data);
+    }
+  }, [resGetOtherUserAlbum]);
+  console.log(album);
 
   return (
     <div className={styles.container}>
