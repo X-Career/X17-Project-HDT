@@ -11,7 +11,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { GrCircleInformation } from "react-icons/gr";
 import { PiNumberCircleSevenBold } from "react-icons/pi";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import PostCard from "../../../components/card/PostCard";
+import UserVacationCard from "../../../components/card/UserVacationCard";
+import UserAlbumCard from "../../../components/card/UserAlbumCard";
 import Ad from "../../../components/card/Ad";
 import UserHeader from "../../../components/userHeader/userHeader";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,18 +20,22 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { getUsersInfo } from "../../../../redux/reducer/user/getUsersInfoSlice";
 import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
-import { useRouter } from "next/router";
+import { getProfileVacations } from "../../../../redux/reducer/vacation/getProfileVacations";
 import { getOtherUserAlbum } from "../../../../redux/reducer/album/getOtherUserAlbumSlice";
+import { useRouter } from "next/router";
 
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [user, setUser] = useState({});
   const [crrUser, setCrrUser] = useState({});
-
   const { userId } = router.query;
   const resGetUsersInfo = useSelector((state) => state.getUsersInfo);
   const getUserInfo = useSelector((state) => state.getInfo);
+  const vacationData = useSelector((state) => state.getProfileVacations);
+  const albumData = useSelector((state) => state.getOtherUserAlbum);
+  const [vacations, setVacations] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     dispatch(getInfo());
@@ -75,6 +80,25 @@ const User = () => {
   useEffect(() => {
     if (userId) {
       dispatch(
+        getProfileVacations({
+          payload: {
+            query: {
+              params: `1/6/${userId}`,
+            },
+          },
+        })
+      );
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    if (vacationData.data?.success && !vacationData?.loading) {
+      setVacations(vacationData.data?.data);
+    }
+  }, [vacationData]);
+  useEffect(() => {
+    if (userId) {
+      dispatch(
         getOtherUserAlbum({
           payload: {
             query: {
@@ -86,13 +110,11 @@ const User = () => {
     }
   }, [userId]);
 
-  const [album, setAlbum] = useState([])
   useEffect(() => {
     if (resGetOtherUserAlbum.data?.success && !resGetOtherUserAlbum.loading) {
-      setAlbum(resGetOtherUserAlbum?.data?.data);
+      setAlbums(resGetOtherUserAlbum?.data?.data);
     }
   }, [resGetOtherUserAlbum]);
-  console.log(album);
 
   return (
     <div className={styles.container}>
@@ -167,12 +189,14 @@ const User = () => {
           <div className={styles.posts}>
             <h1>Your Vacations</h1>
             <div className={styles.postItem}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              {vacations?.map((vacation) => (
+                <UserVacationCard
+                  key={vacation._id}
+                  vacation={vacation}
+                  user={user}
+                  check={check}
+                />
+              ))}
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link
@@ -188,12 +212,14 @@ const User = () => {
           <div className={styles.albums}>
             <h1>Your Albums</h1>
             <div className={styles.postItem}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              {albums?.map((album) => (
+                <UserAlbumCard
+                  key={album._id}
+                  album={album}
+                  user={user}
+                  check={check}
+                />
+              ))}
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link
