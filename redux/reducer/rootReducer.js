@@ -32,6 +32,8 @@ import updateMediaSlice from "./media/updateMediaSlice";
 import infoAllVacations from "./vacation/getAllVacations";
 import infoHomeVacations from "./vacation/getHomeVacations";
 import infoAllAlbums from "./album/getAllAlbumsSlice";
+import createReactionSlice from "./reaction/createReactionSlice";
+import checkReactionSlice from "./reaction/checkReactionSlice";
 
 const rootReducer = combineReducers({
   register: authRegisterSlice,
@@ -67,6 +69,8 @@ const rootReducer = combineReducers({
   getAllVacations: infoAllVacations,
   getAllAlbums: infoAllAlbums,
   getHomeVacations: infoHomeVacations,
+  createReaction: createReactionSlice,
+  checkReactionSlice: checkReactionSlice,
 });
 
 export default rootReducer;
