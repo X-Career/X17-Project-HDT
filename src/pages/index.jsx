@@ -39,7 +39,7 @@ export default function Home() {
       getHomeVacations({
         payload: {
           query: {
-            params: "1/4",
+            params: "1/6",
           },
         },
       })
