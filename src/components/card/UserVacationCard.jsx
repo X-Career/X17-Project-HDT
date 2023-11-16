@@ -5,12 +5,12 @@ import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import Link from "next/link";
 import styles from "./Post.module.scss";
 
-const UserVacationCard = () => {
+const UserVacationCard = ({ vacation, user }) => {
   return (
     <article className={styles.wrapper}>
       <Link href="/">
         <Image
-          src="/assets/paris.jpg"
+          src={vacation.avatarUrl}
           alt="Vacation Photo"
           width={0}
           height={0}
@@ -19,15 +19,15 @@ const UserVacationCard = () => {
         />
       </Link>
       <Link href="/">
-        <h2 style={{ marginLeft: 8 }}>Title</h2>
+        <h2 style={{ marginLeft: 8 }}>{vacation.title}</h2>
       </Link>
       <span className={styles.location}>
         <BiLocationPlus />
-        Location: Vac Location
+        Location: {vacation.location}
       </span>
       <div className={styles.details}>
         <span>
-          123 views
+          {vacation.views} views
           <AiOutlineEye />
         </span>
         <span>

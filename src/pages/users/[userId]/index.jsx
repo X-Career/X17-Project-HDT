@@ -112,7 +112,7 @@ const User = () => {
   //   }
   // }, [albumData]);
 
-  console.log(vacationData);
+  // console.log(vacationData);
 
   return (
     <div className={styles.container}>
