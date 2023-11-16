@@ -7,7 +7,7 @@ import styles from "./Card.module.scss";
 
 const HomeCard = ({ vacation, user }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ marginBottom: "2rem" }}>
       <div className={styles.background}>
         <div className={styles.leftBg}>
           <Link href={`/vacations/${vacation._id}`}>
