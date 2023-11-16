@@ -21,6 +21,7 @@ import commentSlice from "./comment/getComment";
 import createCommentSLice from "./comment/createComment";
 import createAlbumSlice from "./album/albumSlice";
 import getAlbumSlice from "./album/getAlbumSlice";
+import getOtherUserAlbumSlice from "./album/getOtherUserAlbumSlice";
 import updateAlbumSlice from "./album/updateAlbumSlice";
 import updateAlbumAvatarSlice from "./album/updateAlbumAvatarSlice";
 import createMediaSlice from "./media/createMediaSlice";
@@ -55,6 +56,7 @@ const rootReducer = combineReducers({
   createCommentSLice: createCommentSLice,
   createAlbum: createAlbumSlice,
   getAlbum: getAlbumSlice,
+  getOtherUserAlbum: getOtherUserAlbumSlice,
   updateAlbum: updateAlbumSlice,
   updateAlbumAvatar: updateAlbumAvatarSlice,
   createMedia: createMediaSlice,

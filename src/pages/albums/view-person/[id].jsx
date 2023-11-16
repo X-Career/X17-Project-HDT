@@ -1,37 +1,52 @@
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
 import { useRouter } from "next/router";
-import css from "@/styles/album.module.scss";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllAlbums } from "../../../../redux/reducer/album/getAllAlbumsSlice";
+import Head from "next/head";
+import css from "@/styles/albumDetails.module.scss";
 import { Container, Grid, CardMedia } from "@mui/material";
-import Link from "next/link";
+import { getMediaWithoutEdit } from "../../../../redux/reducer/media/getMediaWithoutEditSlice";
 
-function AlbumsOnlyView() {
+function AlbumViewOnlyDetails() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [albums, setAlbums] = useState([]);
+  const { id } = router.query;
+  const [media, setMedia] = useState([]);
 
-  const resGetAllAlbums = useSelector((state) => state.getAllAlbums);
+  const resGetMediaWithoutEdit = useSelector(
+    (state) => state.getMediaWithoutEdit
+  );
 
   useEffect(() => {
-    dispatch(getAllAlbums());
-  }, []);
-
-  useEffect(() => {
-    if (resGetAllAlbums.data?.success && !resGetAllAlbums?.loading) {
-      setAlbums(resGetAllAlbums.data?.data);
+    if (id) {
+      dispatch(
+        getMediaWithoutEdit({
+          payload: {
+            query: {
+              params: id,
+            },
+          },
+        })
+      );
     }
-  }, [resGetAllAlbums]);
+  }, [id]);
+
+  useEffect(() => {
+    if (
+      resGetMediaWithoutEdit.data?.success &&
+      !resGetMediaWithoutEdit?.loading
+    ) {
+      setMedia(resGetMediaWithoutEdit.data?.data);
+    }
+  }, [resGetMediaWithoutEdit]);
 
   return (
-    <div className={css.album}>
+    <div className={css.media}>
       <Head>
-        <title>Albums</title>
+        <title>Album Details</title>
       </Head>
       <Container maxWidth="lg">
         <Grid container spacing={0}>
-          {albums?.length === 0 ? (
+          {media?.length === 0 ? (
             <p
               style={{
                 fontSize: 22,
@@ -41,10 +56,10 @@ function AlbumsOnlyView() {
                 margin: "0 auto",
               }}
             >
-              Chưa tải lên album nào. 😥
+              Chưa có ảnh và video nào được tải lên. 😥
             </p>
           ) : (
-            albums?.map((item, index) => (
+            media?.map((item, index) => (
               <Grid
                 style={{
                   marginBottom: "12px",
@@ -60,25 +75,28 @@ function AlbumsOnlyView() {
                 lg={3}
                 key={item._id}
               >
-                <div className={`${css.image}`}>
-                  <div
-                    style={{ cursor: "pointer", margin: 0, padding: 0 }}
-                    onClick={() => {
-                      router.push(`/albums/view/${item._id}`);
-                    }}
-                  >
+                <div className={css.image}>
+                  {item.type === "image" ? (
                     <CardMedia
                       component="img"
                       alt="Album Image"
                       height="200"
-                      image={item.coverUrl}
+                      image={item.mediaUrl}
                       style={{ borderRadius: 8 }}
                     />
-                  </div>
+                  ) : (
+                    <video
+                      src={item.mediaUrl}
+                      controls
+                      width="200"
+                      height="200"
+                      style={{ borderRadius: 8 }}
+                    />
+                  )}
                 </div>
                 <div className={css.imageTitle}>
                   <span
-                    id="albumName"
+                    id="title"
                     style={{
                       all: "unset",
                       margin: 0,
@@ -92,17 +110,8 @@ function AlbumsOnlyView() {
                       backgroundColor: "transparent",
                     }}
                   >
-                    {item.albumName}
+                    {item.title}
                   </span>
-                  <Link
-                    href={`/users/${item.userId._id}`}
-                    style={{
-                      all: "unset",
-                      padding: "0 6px",
-                    }}
-                  >
-                    Owner: {item.owner}
-                  </Link>
                 </div>
               </Grid>
             ))
@@ -113,4 +122,4 @@ function AlbumsOnlyView() {
   );
 }
 
-export default AlbumsOnlyView;
+export default AlbumViewOnlyDetails;

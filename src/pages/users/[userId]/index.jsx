@@ -18,14 +18,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import { getUsersInfo } from "../../../../redux/reducer/user/getUsersInfoSlice";
+import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
 import { useRouter } from "next/router";
 
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [user, setUser] = useState({});
+  const [crrUser, setCrrUser] = useState({});
+
   const { userId } = router.query;
   const resGetUsersInfo = useSelector((state) => state.getUsersInfo);
+  const getUserInfo = useSelector((state) => state.getInfo);
+
+  useEffect(() => {
+    dispatch(getInfo());
+  }, []);
+
+  useEffect(() => {
+    if (getUserInfo.data?.data) {
+      setCrrUser(getUserInfo?.data?.data);
+    }
+  }, [getUserInfo]);
 
   useEffect(() => {
     if (userId) {
@@ -47,13 +61,22 @@ const User = () => {
     }
   }, [resGetUsersInfo]);
 
+  const [check, setCheck] = useState(null);
+  useEffect(() => {
+    if (user._id === crrUser._id) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  }, [user, crrUser]);
+
   return (
     <div className={styles.container}>
       <Head>
         <title>{user.firstName + " " + user.lastName}</title>
       </Head>
       {/* Header */}
-      <UserHeader user={user} />
+      <UserHeader user={user} check={check} />
       <div className={styles.mainContent}>
         {/* Left */}
         <div className={styles.leftContent}>
@@ -146,7 +169,13 @@ const User = () => {
               <PostCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/albums" className={styles.moreBtn}>
+              <Link
+                href={check ? "/albums" : "/albums/view-person"}
+                className={styles.moreBtn}
+                onClick={() => {
+                  localStorage.setItem("otherUserId", user._id);
+                }}
+              >
                 View More
                 <AiOutlineArrowRight />
               </Link>
