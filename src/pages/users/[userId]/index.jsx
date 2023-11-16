@@ -11,7 +11,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { GrCircleInformation } from "react-icons/gr";
 import { PiNumberCircleSevenBold } from "react-icons/pi";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import PostCard from "../../../components/card/PostCard";
+import UserVacationCard from "../../../components/card/UserVacationCard";
+import UserAlbumCard from "../../../components/card/UserAlbumCard";
 import Ad from "../../../components/card/Ad";
 import UserHeader from "../../../components/userHeader/userHeader";
 import { useDispatch, useSelector } from "react-redux";
@@ -120,12 +121,12 @@ const User = () => {
           <div className={styles.posts}>
             <h1>Your Vacations</h1>
             <div className={styles.postItem}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              <UserVacationCard />
+              <UserVacationCard />
+              <UserVacationCard />
+              <UserVacationCard />
+              <UserVacationCard />
+              <UserVacationCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link
@@ -141,12 +142,12 @@ const User = () => {
           <div className={styles.albums}>
             <h1>Your Albums</h1>
             <div className={styles.postItem}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              <UserAlbumCard />
+              <UserAlbumCard />
+              <UserAlbumCard />
+              <UserAlbumCard />
+              <UserAlbumCard />
+              <UserAlbumCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link

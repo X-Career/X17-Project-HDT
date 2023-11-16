@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import { BiLocationPlus } from "react-icons/bi";
-import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
+import { MdLockOutline } from "react-icons/md";
 import Link from "next/link";
 import styles from "./Post.module.scss";
 
-const PostCard = () => {
+const UserAlbumCard = () => {
   return (
     <article className={styles.wrapper}>
       <Link href="/">
@@ -21,11 +21,20 @@ const PostCard = () => {
       <Link href="/">
         <h2 style={{ marginLeft: 8 }}>Title</h2>
       </Link>
-      <span className={styles.location}>
-        <BiLocationPlus />
-        Location: Vac Location
-      </span>
-      <div className={styles.details}>
+      <div className={styles.privacy}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+            gap: 4,
+          }}
+        >
+          <MdLockOutline style={{ fontSize: 16 }} />
+          Privacy: Album Privacy
+        </div>
+      </div>
+      {/* <div className={styles.details}>
         <span>
           123 views
           <AiOutlineEye />
@@ -34,9 +43,9 @@ const PostCard = () => {
           123 reactions
           <AiOutlineLike />
         </span>
-      </div>
+      </div> */}
     </article>
   );
 };
 
-export default PostCard;
+export default UserAlbumCard;
