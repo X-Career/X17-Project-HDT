@@ -16,9 +16,7 @@ import { useShowFooter } from "../components/context/FooterContext";
 export default function Home() {
   const { setShowHeader } = useShowFooter();
   setShowHeader(true);
-
   const dispatch = useDispatch();
-
   const vacationData = useSelector((state) => state.getHomeVacations);
   const albumData = useSelector((state) => state.getAllAlbums);
   const [user, setUser] = useState({});

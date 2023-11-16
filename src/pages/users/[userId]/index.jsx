@@ -20,6 +20,8 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { getUsersInfo } from "../../../../redux/reducer/user/getUsersInfoSlice";
 import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
+import { getProfileVacations } from "../../../../redux/reducer/vacation/getProfileVacations";
+import { getOtherUserAlbum } from "../../../../redux/reducer/album/getOtherUserAlbumSlice";
 import { useRouter } from "next/router";
 
 const User = () => {
@@ -27,10 +29,13 @@ const User = () => {
   const router = useRouter();
   const [user, setUser] = useState({});
   const [crrUser, setCrrUser] = useState({});
-
   const { userId } = router.query;
   const resGetUsersInfo = useSelector((state) => state.getUsersInfo);
   const getUserInfo = useSelector((state) => state.getInfo);
+  const vacationData = useSelector((state) => state.getProfileVacations);
+  const albumData = useSelector((state) => state.getOtherUserAlbum);
+  const [vacations, setVacations] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     dispatch(getInfo());
@@ -70,6 +75,44 @@ const User = () => {
       setCheck(false);
     }
   }, [user, crrUser]);
+
+  useEffect(() => {
+    dispatch(
+      getProfileVacations({
+        payload: {
+          query: {
+            params: "1/6",
+          },
+        },
+      })
+    );
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(
+  //     getOtherUserAlbum({
+  //       payload: {
+  //         query: {
+  //           params: ,
+  //         },
+  //       },
+  //     })
+  //   );
+  // }, []);
+
+  useEffect(() => {
+    if (vacationData.data?.success && !vacationData?.loading) {
+      setVacations(vacationData.data?.data);
+    }
+  }, [vacationData]);
+
+  // useEffect(() => {
+  //   if (albumData.data?.success && !albumData?.loading) {
+  //     setAlbums(albumData.data?.data);
+  //   }
+  // }, [albumData]);
+
+  console.log(vacationData);
 
   return (
     <div className={styles.container}>
@@ -144,12 +187,13 @@ const User = () => {
           <div className={styles.posts}>
             <h1>Your Vacations</h1>
             <div className={styles.postItem}>
-              <UserVacationCard />
-              <UserVacationCard />
-              <UserVacationCard />
-              <UserVacationCard />
-              <UserVacationCard />
-              <UserVacationCard />
+              {vacations?.map((vacation) => (
+                <UserVacationCard
+                  key={vacation._id}
+                  vacation={vacation}
+                  user={user}
+                />
+              ))}
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
               <Link

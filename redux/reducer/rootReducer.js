@@ -30,6 +30,7 @@ import getMediaSlice from "./media/getMediaSlice";
 import getMediaWithoutEditSlice from "./media/getMediaWithoutEditSlice";
 import updateMediaSlice from "./media/updateMediaSlice";
 import infoAllVacations from "./vacation/getAllVacations";
+import infoProfileVacations from "./vacation/getProfileVacations";
 import infoHomeVacations from "./vacation/getHomeVacations";
 import infoAllAlbums from "./album/getAllAlbumsSlice";
 import createReactionSlice from "./reaction/createReactionSlice";
@@ -69,6 +70,7 @@ const rootReducer = combineReducers({
   getAllVacations: infoAllVacations,
   getAllAlbums: infoAllAlbums,
   getHomeVacations: infoHomeVacations,
+  getProfileVacations: infoProfileVacations,
   createReaction: createReactionSlice,
   checkReactionSlice: checkReactionSlice,
 });
