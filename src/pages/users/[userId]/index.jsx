@@ -151,8 +151,11 @@ const User = () => {
               <PostCard />
             </div>
             <div style={{ margin: "0 auto", marginTop: 20 }}>
-              <Link href="/vacations" className={styles.moreBtn}>
-                View More
+              <Link
+                href={`/users/${user._id}/vacations`}
+                className={styles.moreBtn}
+              >
+                View All
                 <AiOutlineArrowRight />
               </Link>
             </div>

@@ -27,7 +27,10 @@ const HomeCard = ({ vacation, user }) => {
         <Link href={`/vacations/${vacation._id}`}>
           <h2>{vacation.title}</h2>
         </Link>
-        <Link href={`/users/${user._id}`} className={styles.detailsBox}>
+        <Link
+          href={`/users/${vacation.host._id}`}
+          className={styles.detailsBox}
+        >
           <BiSolidUser />
           <p style={{ fontWeight: 700 }}>Host by: @{vacation.host.username}</p>
         </Link>

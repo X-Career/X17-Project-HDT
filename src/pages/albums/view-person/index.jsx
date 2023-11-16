@@ -35,9 +35,6 @@ function OnlyViewPersonAlbums() {
 
   return (
     <div className={css.album}>
-      <Head>
-        <title>Albums of </title>
-      </Head>
       <Container maxWidth="lg">
         <Grid container spacing={0}>
           {albumDetails?.length === 0 ? (
@@ -69,6 +66,9 @@ function OnlyViewPersonAlbums() {
                 lg={3}
                 key={item._id}
               >
+                <Head>
+                  <title>Albums of {item.owner} </title>
+                </Head>
                 <div className={`${css.image}`}>
                   <div
                     style={{ cursor: "pointer", margin: 0, padding: 0 }}

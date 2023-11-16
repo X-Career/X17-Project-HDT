@@ -64,7 +64,7 @@ function AlbumsOnlyView() {
                   <div
                     style={{ cursor: "pointer", margin: 0, padding: 0 }}
                     onClick={() => {
-                      router.push(`/albums/view-all/${item._id}`);
+                      router.push(`/albums/view-person/${item._id}`);
                     }}
                   >
                     <CardMedia
