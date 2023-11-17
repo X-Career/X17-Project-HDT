@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useShowFooter } from "../../components/context/FooterContext";
 import { useDispatch, useSelector } from "react-redux";
-import { createAlbum } from "../../../redux/reducer/album/albumSlice";
+import { createAlbum, clean } from "../../../redux/reducer/album/albumSlice";
 import { createMedia } from "../../../redux/reducer/media/createMediaSlice";
 import { useRouter } from "next/router";
 
@@ -147,6 +147,7 @@ const CreateAlbum = () => {
   }, [createAlbumResponse]);
   useEffect(() => {
     if (createMediaResponse?.data?.success && !createMediaResponse?.loading) {
+      dispatch(clean());
       setTimeout(() => {
         router.push("/albums");
       }, 1200);

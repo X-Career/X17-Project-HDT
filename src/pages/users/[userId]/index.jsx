@@ -33,7 +33,6 @@ const User = () => {
   const resGetUsersInfo = useSelector((state) => state.getUsersInfo);
   const getUserInfo = useSelector((state) => state.getInfo);
   const vacationData = useSelector((state) => state.getProfileVacations);
-  const albumData = useSelector((state) => state.getOtherUserAlbum);
   const [vacations, setVacations] = useState([]);
   const [albums, setAlbums] = useState([]);
 

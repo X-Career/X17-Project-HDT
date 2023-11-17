@@ -6,13 +6,28 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import styles from "./Card.module.scss";
+import { useEffect, useState } from "react";
 
 const HomeCard = ({ vacation, user }) => {
+  const [check, setCheck] = useState(null);
+  useEffect(() => {
+    if (user._id === vacation.host._id) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  }, [user, vacation]);
   return (
     <div className={styles.container} style={{ marginBottom: "2rem" }}>
       <div className={styles.background}>
         <div className={styles.leftBg}>
-          <Link href={`/vacations/${vacation._id}`}>
+          <Link
+            href={
+              check
+                ? `/vacations/${vacation._id}`
+                : `/vacation-detail/${vacation._id}`
+            }
+          >
             <Image
               src={vacation.avatarUrl}
               width={0}
@@ -26,7 +41,13 @@ const HomeCard = ({ vacation, user }) => {
         <div className={styles.rightBg}></div>
       </div>
       <div className={styles.content}>
-        <Link href={`/vacations/${vacation._id}`}>
+        <Link
+          href={
+            check
+              ? `/vacations/${vacation._id}`
+              : `/vacation-detail/${vacation._id}`
+          }
+        >
           <h2>{vacation.title}</h2>
         </Link>
         <Link
