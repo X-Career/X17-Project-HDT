@@ -4,7 +4,7 @@ import { dataEx } from "../../utils";
 import { formatCustomDate } from "../../utils";
 import Image from "next/image";
 import { AiOutlineHeart } from "react-icons/ai";
-
+import Head from "next/head";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Loading from "../../components/loadingPage/Loading";
@@ -93,6 +93,9 @@ const VacationDetail = () => {
     <>
       {success ? (
         <div className={styles["container"]}>
+          <Head>
+            <title>Vacations</title>
+          </Head>
           <div className={styles["header"]}>
             <div className={styles.coverImg}>
               <Image
