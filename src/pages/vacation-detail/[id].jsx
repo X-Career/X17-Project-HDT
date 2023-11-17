@@ -14,8 +14,8 @@ import MilestoneReadOnly from "../../components/MilestoneDetails";
 import { FaHeart } from "react-icons/fa";
 import { checkReaction } from "../../../redux/reducer/reaction/checkReactionSlice";
 import { createReaction } from "../../../redux/reducer/reaction/createReactionSlice";
-
 import Comment from "../../components/comment";
+
 const VacationDetail = () => {
   const dispatch = useDispatch();
   const [success, setSucsses] = useState(false);
@@ -27,12 +27,14 @@ const VacationDetail = () => {
   );
   const createReactionData = useSelector((state) => state.createReaction.data);
   const { id } = router.query;
+
   useEffect(() => {
     if (checkReactionData?.data && checkReactionData.message === "success") {
       setcheck(checkReactionData.data?.like);
       setCount(checkReactionData.data?.total);
     }
   }, [checkReactionData]);
+
   useEffect(() => {
     if (createReactionData?.data && createReactionData.success) {
       dispatch(
