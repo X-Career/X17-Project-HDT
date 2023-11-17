@@ -39,7 +39,7 @@ const UserVacationCard = ({ vacation, user, check }) => {
       </span>
       <div className={styles.details}>
         <span>
-          {vacation.views} views
+          {Math.floor(vacation.views / 2)} views
           <AiOutlineEye />
         </span>
         <span>
