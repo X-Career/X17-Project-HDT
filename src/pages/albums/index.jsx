@@ -18,6 +18,7 @@ import { updateAlbumAvatar } from "../../../redux/reducer/album/updateAlbumAvata
 import { useRouter } from "next/router";
 import { cleanUpdateAlbum } from "../../../redux/reducer/album/updateAlbumSlice";
 import { cleanUpdateAlbumAvatar } from "../../../redux/reducer/album/updateAlbumAvatarSlice";
+import { cleanCreateMedia } from "../../../redux/reducer/media/createMediaSlice";
 
 const Albums = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const Albums = () => {
 
   useEffect(() => {
     dispatch(getAlbum());
+    dispatch(cleanCreateMedia());
   }, [resUpdateAlbumAvatar]);
 
   const getAlbumDetails = useSelector((state) => state.getAlbum);
