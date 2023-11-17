@@ -3,6 +3,8 @@ import Image from "next/image";
 import { BiSolidUser } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
 import { BsFillCalendarFill } from "react-icons/bs";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaHeart } from "react-icons/fa";
 import styles from "./Card.module.scss";
 import { useEffect, useState } from "react";
 
@@ -58,6 +60,14 @@ const HomeCard = ({ vacation, user }) => {
         <div className={styles.detailsBox}>
           <MdLocationOn />
           <p>Location: {vacation.location}</p>
+        </div>
+        <div className={styles.detailsBox}>
+          <IoEyeSharp />
+          <p>Views: {Math.floor(vacation.views / 2)}</p>
+        </div>
+        <div className={styles.detailsBox}>
+          <FaHeart />
+          <p>Reactions: {vacation.reactions}</p>
         </div>
         <div className={styles.detailsBox}>
           <BsFillCalendarFill />

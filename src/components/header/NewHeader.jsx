@@ -38,6 +38,12 @@ const NewHeader = () => {
             <Link href="/" className={styles.navItem}>
               Home
             </Link>
+            <Link href="/vacations" className={styles.navItem}>
+              Vacations
+            </Link>
+            <Link href="/albums" className={styles.navItem}>
+              Albums
+            </Link>
             <Link href="/create-vacation" className={styles.navItem}>
               Create Vacation
             </Link>

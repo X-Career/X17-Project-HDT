@@ -16,6 +16,8 @@ const AlbumCard = ({ album, user }) => {
     }
   }, [user, album]);
 
+  // console.log(user);
+
   return (
     <div className={styles.container}>
       <div className={styles.background}>
