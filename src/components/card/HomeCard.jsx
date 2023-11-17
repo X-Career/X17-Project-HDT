@@ -4,12 +4,12 @@ import { BiSolidUser } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
-import { FaHeart } from "react-icons/fa";
 import styles from "./Card.module.scss";
 import { useEffect, useState } from "react";
 
 const HomeCard = ({ vacation, user }) => {
   const [check, setCheck] = useState(null);
+
   useEffect(() => {
     if (user._id === vacation.host._id) {
       setCheck(true);
@@ -17,6 +17,7 @@ const HomeCard = ({ vacation, user }) => {
       setCheck(false);
     }
   }, [user, vacation]);
+
   return (
     <div className={styles.container} style={{ marginBottom: "2rem" }}>
       <div className={styles.background}>
@@ -64,10 +65,6 @@ const HomeCard = ({ vacation, user }) => {
         <div className={styles.detailsBox}>
           <IoEyeSharp />
           <p>Views: {Math.floor(vacation.views / 2)}</p>
-        </div>
-        <div className={styles.detailsBox}>
-          <FaHeart />
-          <p>Reactions: {vacation.reactions}</p>
         </div>
         <div className={styles.detailsBox}>
           <BsFillCalendarFill />
