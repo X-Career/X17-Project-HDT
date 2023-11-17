@@ -5,7 +5,7 @@ import { createAction } from "@reduxjs/toolkit";
 
 export const getUserVacations = createApiThunk(
   METHODS.GET,
-  "/vacation/getUserVacations"
+  "/vacation/getUserVacations/$params"
 );
 
 const infoUserVacations = createAsyncSlice(
