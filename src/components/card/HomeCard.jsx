@@ -6,10 +6,8 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 import styles from "./Card.module.scss";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const HomeCard = ({ vacation, user }) => {
-  const dispatch = useDispatch();
   const [check, setCheck] = useState(null);
 
   useEffect(() => {
