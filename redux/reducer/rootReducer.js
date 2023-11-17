@@ -36,6 +36,7 @@ import infoHomeVacations from "./vacation/getHomeVacations";
 import infoAllAlbums from "./album/getAllAlbumsSlice";
 import createReactionSlice from "./reaction/createReactionSlice";
 import checkReactionSlice from "./reaction/checkReactionSlice";
+import deleteCommentSLice from "./comment/deleteComment";
 
 const rootReducer = combineReducers({
   register: authRegisterSlice,
@@ -75,6 +76,7 @@ const rootReducer = combineReducers({
   getProfileVacations: infoProfileVacations,
   createReaction: createReactionSlice,
   checkReactionSlice: checkReactionSlice,
+  deleteCommentSLice: deleteCommentSLice,
 });
 
 export default rootReducer;

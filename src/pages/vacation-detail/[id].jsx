@@ -4,6 +4,7 @@ import { dataEx } from "../../utils";
 import { formatCustomDate } from "../../utils";
 import Image from "next/image";
 import { AiOutlineHeart } from "react-icons/ai";
+import Link from "next/link";
 import Head from "next/head";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -98,12 +99,17 @@ const VacationDetail = () => {
           </Head>
           <div className={styles["header"]}>
             <div className={styles.coverImg}>
-              <Image
-                src={vacationData?.data?.avatarUrl}
-                alt="coverImg"
-                width={2000}
-                height={2000}
-              />
+              <Link
+                href={`/users/${vacationData?.data?.host?._id}`}
+                className={styles.coverImg}
+              >
+                <Image
+                  src={vacationData?.data?.avatarUrl}
+                  alt="coverImg"
+                  width={2000}
+                  height={2000}
+                />
+              </Link>
             </div>
             <div className={styles["userinfo"]}>
               <div className={styles["userinfo-leftSide"]}>
@@ -118,10 +124,15 @@ const VacationDetail = () => {
                   height={50}
                 />
                 <div className={styles["textInfo"]}>
-                  <p>{vacationData?.data?.host?.username}</p>
+                  <Link
+                    href={`/users/${vacationData?.data?.host?._id}`}
+                    style={{ fontWeight: "bold", fontSize: "20px" }}
+                  >
+                    {vacationData?.data?.host?.username}
+                  </Link>
                   <p>
                     {formatCustomDate(vacationData?.data?.createdAt)} •
-                    {vacationData?.data?.views / 2} views
+                    {Math.floor(vacationData?.data?.views / 2)} views
                   </p>
                 </div>
               </div>
