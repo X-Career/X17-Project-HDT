@@ -8,18 +8,26 @@ import { createComments } from "../../../redux/reducer/comment/createComment";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComments } from "../../../redux/reducer/comment/deleteComment";
 import { clean } from "../../../redux/reducer/comment/deleteComment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Comment = ({ vacationId }) => {
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 1000,
+    pauseOnHover: true,
+    draggable: true,
+  };
   const commentData = useSelector((state) => state.commentSlice.data);
   const commentStt = useSelector((state) => state.createCommentSLice.data);
   const userData = useSelector((state) => state.getInfo.data);
   const deleteStt = useSelector((state) => state.deleteCommentSLice.data);
   const dispatch = useDispatch();
-  const [existingCmt, setExistingCmt] = useState(false);
   const [comment, setComment] = useState("");
   useEffect(() => {
     if (deleteStt) {
       if (deleteStt.message === "Comment has been deleted!") dispatch(clean());
-      alert("Comment has been deleted!");
+      toast.success("Comment has been deleted!", toastOptions);
       dispatch(
         getComments({
           payload: {
@@ -54,12 +62,6 @@ const Comment = ({ vacationId }) => {
     );
   };
 
-  useEffect(() => {
-    if (commentData?.data.length > 0) {
-      setExistingCmt(true);
-    }
-  }, [commentData]);
-
   const handleOnchange = (event) => {
     setComment(event.target.value);
   };
@@ -89,7 +91,15 @@ const Comment = ({ vacationId }) => {
         },
       })
     );
+    setComment("");
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleCreateCmt();
+    }
+  };
+
   return (
     <>
       <div className={styles["form-comment"]} style={{ marginTop: "5rem" }}>
@@ -99,13 +109,14 @@ const Comment = ({ vacationId }) => {
           id=""
           placeholder="Write comment..."
           value={comment}
+          onKeyDown={handleKeyDown}
           onChange={handleOnchange}
         />
         <button>
           <PiPaperPlaneRightFill onClick={handleCreateCmt} />
         </button>
       </div>
-      {existingCmt ? (
+      {commentData?.data?.length > 0 ? (
         commentData?.data?.map((comment, index) => (
           <div
             className={styles["commentItem"]}
@@ -147,6 +158,11 @@ const Comment = ({ vacationId }) => {
                 Xóa
               </button>
             )}
+            <ToastContainer
+              style={{
+                width: "fit-content",
+              }}
+            />
           </div>
         ))
       ) : (
