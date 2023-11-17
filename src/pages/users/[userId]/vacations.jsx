@@ -7,9 +7,12 @@ import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
 import { clean } from "../../../../redux/reducer/vacation/getAllVacations";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getUserVacations } from "../../../../redux/reducer/vacation/getUserVacations";
+import { useRouter } from "next/router";
 
 const UserVacations = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { userId } = router.query;
   const vacationData = useSelector((state) => state.getUserVacations);
   const getUserInfo = useSelector((state) => state.getInfo);
   const [user, setUser] = useState({});
@@ -18,7 +21,15 @@ const UserVacations = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const fetchData = () => {
-    dispatch(getUserVacations());
+    dispatch(
+      getUserVacations({
+        payload: {
+          query: {
+            params: userId,
+          },
+        },
+      })
+    );
   };
 
   useEffect(() => {
@@ -58,14 +69,10 @@ const UserVacations = () => {
       // Set hasMore based on whether new data is available
       setHasMore(vacationData.data?.data.length > 0);
     }
-  }, [vacationData?.data?.data]);
+  }, [vacationData]);
 
   return (
     <main style={{ marginTop: 80 }}>
-      <Head>
-        <title>Your Vacations</title>
-      </Head>
-
       <div className={styles.container}>
         <div className={styles.miniHeader}>
           <h1 className={styles.title}>Your Vacations</h1>
@@ -79,7 +86,15 @@ const UserVacations = () => {
           style={{ overflow: "hidden", marginLeft: 200 }}
         >
           {vacationCombine.map((vacation) => (
-            <HomeCard key={vacation._id} vacation={vacation} user={user} />
+            <>
+              <Head>
+                <title>
+                  Vacations of{" "}
+                  {vacation.host.firstName + " " + vacation.host.lastName}
+                </title>
+              </Head>
+              <HomeCard key={vacation._id} vacation={vacation} user={user} />
+            </>
           ))}
         </InfiniteScroll>
       </div>
