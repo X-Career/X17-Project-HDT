@@ -4,7 +4,7 @@ import { BiSolidUser } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
 import { BsFillCalendarFill } from "react-icons/bs";
 import styles from "./Card.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const HomeCard = ({ vacation, user }) => {
   const [check, setCheck] = useState(null);
@@ -14,7 +14,7 @@ const HomeCard = ({ vacation, user }) => {
     } else {
       setCheck(false);
     }
-  }, [user, album]);
+  }, [user, vacation]);
   return (
     <div className={styles.container} style={{ marginBottom: "2rem" }}>
       <div className={styles.background}>
