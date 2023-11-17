@@ -10,6 +10,7 @@ import { deleteComments } from "../../../redux/reducer/comment/deleteComment";
 import { clean } from "../../../redux/reducer/comment/deleteComment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 
 const Comment = ({ vacationId }) => {
   const toastOptions = {
@@ -131,12 +132,14 @@ const Comment = ({ vacationId }) => {
                 height={40}
               />
             ) : (
-              <Image
-                src={comment?.user?.avatarUrl}
-                alt=""
-                width={40}
-                height={40}
-              />
+              <Link href={`/users/${comment?.user?._id}`}>
+                <Image
+                  src={comment?.user?.avatarUrl}
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+              </Link>
             )}
             <div className={styles["comment-info"]}>
               <span>{comment?.user?.username}</span>

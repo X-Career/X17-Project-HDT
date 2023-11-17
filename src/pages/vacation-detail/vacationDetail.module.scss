@@ -1,7 +1,7 @@
 .container {
-  margin-top: 10%;
   width: 100%;
-  margin-bottom: 50px;
+  max-width: 1120px;
+  margin: 10% auto 50px;
   .header {
     .coverImg {
       width: 100%;
@@ -25,7 +25,7 @@
         img {
           border-radius: 50%;
           &:hover {
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            box-shadow: #00000059 0px 5px 15px;
             cursor: pointer;
           }
         }
@@ -105,6 +105,7 @@
       }
     }
     .commentZone {
+      margin-bottom: 4rem;
       .commentItem {
         display: flex;
         gap: 1rem;

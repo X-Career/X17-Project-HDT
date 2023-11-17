@@ -1,6 +1,7 @@
 import { createApiThunk, createAsyncSlice } from "../../reduxToolkit";
 import { METHODS } from "../../../global";
 import { initialState } from "../../../global/initState";
+import { createAction } from "@reduxjs/toolkit";
 
 export const createMedia = createApiThunk(
   METHODS.POST,
@@ -12,6 +13,13 @@ export const createMedia = createApiThunk(
 const createMediaSlice = createAsyncSlice(
   "createMedia",
   createMedia,
-  initialState
+  initialState,
+  {
+    cleanCreateMedia: (state) => {
+      state.data = initialState.data;
+    },
+  }
 );
+
+export const cleanCreateMedia = createAction(`createMedia/clean`);
 export default createMediaSlice.reducer;

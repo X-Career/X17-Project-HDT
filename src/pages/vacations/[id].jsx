@@ -3,6 +3,7 @@ import { useState } from "react";
 import upload from "@/assets/img/upload.png";
 import Image from "next/image";
 import styles from "./vacationDetail.module.scss";
+import css from "../vacation-detail/vacationDetail.module.scss";
 import { DatePicker } from "antd";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -30,6 +31,7 @@ import { AiFillSave } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 import Loading from "../../components/loadingPage/Loading";
 import Head from "next/head";
+import Comment from "../../components/comment/index.jsx";
 
 const VacationsDetail = () => {
   const antIcon = (
@@ -325,7 +327,7 @@ const VacationsDetail = () => {
   return (
     <>
       {vacationData ? (
-        <div className={styles["container"]}>
+        <div className={`${styles["container"]} ${css.container}`}>
           <Head>
             <title>Vacations</title>
           </Head>
@@ -619,6 +621,11 @@ const VacationsDetail = () => {
             </div>
             <div className={styles["milestoneContent"]}>
               <Milestone vacationId={id} saveCount={saveCount} />
+            </div>
+          </div>
+          <div className={css["comment"]}>
+            <div className={css["commentZone"]}>
+              <Comment vacationId={id} />
             </div>
           </div>
           <ToastContainer

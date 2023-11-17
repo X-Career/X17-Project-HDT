@@ -115,16 +115,18 @@ const VacationDetail = () => {
             </div>
             <div className={styles["userinfo"]}>
               <div className={styles["userinfo-leftSide"]}>
-                <Image
-                  src={
-                    vacationData?.data?.host?.avatarUrl !== ""
-                      ? vacationData?.data?.host?.avatarUrl
-                      : dataEx.host.avatarUrl
-                  }
-                  alt=""
-                  width={50}
-                  height={50}
-                />
+                <Link href={`/users/${vacationData?.data?.host?._id}`}>
+                  <Image
+                    src={
+                      vacationData?.data?.host?.avatarUrl !== ""
+                        ? vacationData?.data?.host?.avatarUrl
+                        : dataEx.host.avatarUrl
+                    }
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
+                </Link>
                 <div className={styles["textInfo"]}>
                   <Link
                     href={`/users/${vacationData?.data?.host?._id}`}
