@@ -45,17 +45,6 @@ const MilestoneReadOnly = ({ vacationId }) => {
                     >
                       {formatCustomDate(milestone.date)}
                     </span>
-                    <h1
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        color: "#ccc",
-                      }}
-                    >
-                      {milestone.title !== ""
-                        ? milestone.title
-                        : "Add Subtitle"}
-                    </h1>
                   </>
                 ),
                 children: <Post milestoneId={milestone._id} />,

@@ -10,7 +10,7 @@ const HomeCard = ({ vacation, user }) => {
     <div className={styles.container} style={{ marginBottom: "2rem" }}>
       <div className={styles.background}>
         <div className={styles.leftBg}>
-          <Link href={`/vacations/${vacation._id}`}>
+          <Link href={`/vacation-detail/${vacation._id}`}>
             <Image
               src={vacation.avatarUrl}
               width={0}
