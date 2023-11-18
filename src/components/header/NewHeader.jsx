@@ -41,7 +41,7 @@ const NewHeader = () => {
             <Link href="/vacations" className={styles.navItem}>
               Vacations
             </Link>
-            <Link href="/albums" className={styles.navItem}>
+            <Link href="/albums/view-all" className={styles.navItem}>
               Albums
             </Link>
             <Link href="/create-vacation" className={styles.navItem}>
