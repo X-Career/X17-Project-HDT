@@ -21,5 +21,5 @@ const createMediaSlice = createAsyncSlice(
   }
 );
 
-export const cleanCreateMedia = createAction(`createMedia/clean`);
+export const cleanCreateMedia = createAction(`createMedia/cleanCreateMedia`);
 export default createMediaSlice.reducer;
