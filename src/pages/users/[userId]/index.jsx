@@ -23,6 +23,8 @@ import { getInfo } from "../../../../redux/reducer/user/getInfoSlice";
 import { getProfileVacations } from "../../../../redux/reducer/vacation/getProfileVacations";
 import { getOtherUserAlbum } from "../../../../redux/reducer/album/getOtherUserAlbumSlice";
 import { useRouter } from "next/router";
+import { cleanUpdateAlbumAvatar } from "../../../../redux/reducer/album/updateAlbumAvatarSlice";
+import { cleanUpdateAlbum } from "../../../../redux/reducer/album/updateAlbumSlice";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -38,6 +40,8 @@ const User = () => {
 
   useEffect(() => {
     dispatch(getInfo());
+    dispatch(cleanUpdateAlbumAvatar());
+    dispatch(cleanUpdateAlbum());
   }, []);
 
   useEffect(() => {
@@ -111,7 +115,15 @@ const User = () => {
 
   useEffect(() => {
     if (resGetOtherUserAlbum.data?.success && !resGetOtherUserAlbum.loading) {
-      setAlbums(resGetOtherUserAlbum?.data?.data);
+      if (check) {
+        setAlbums(resGetOtherUserAlbum?.data?.data);
+      } else {
+        setAlbums(
+          resGetOtherUserAlbum?.data?.data?.filter(
+            (album) => album.privacy === "public"
+          )
+        );
+      }
     }
   }, [resGetOtherUserAlbum]);
 

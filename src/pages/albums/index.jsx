@@ -19,6 +19,9 @@ import { useRouter } from "next/router";
 import { cleanUpdateAlbum } from "../../../redux/reducer/album/updateAlbumSlice";
 import { cleanUpdateAlbumAvatar } from "../../../redux/reducer/album/updateAlbumAvatarSlice";
 import { cleanCreateMedia } from "../../../redux/reducer/media/createMediaSlice";
+import { Select, MenuItem } from "@mui/material";
+import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
+import LockRoundedIcon from "@mui/icons-material/LockRounded";
 
 const Albums = () => {
   const dispatch = useDispatch();
@@ -40,17 +43,17 @@ const Albums = () => {
   const [albumDetails, setAlbumDetails] = useState([]);
   const [requestData, setRequestData] = useState("");
   const [show, setShow] = useState(false);
+  const [id, setId] = useState("");
+  const [idx, setIdx] = useState("");
+  const [privacy, setPrivacy] = useState("");
 
   useEffect(() => {
     if (getAlbumDetails.data?.success && !getAlbumDetails?.loading) {
       setAlbumDetails(getAlbumDetails.data?.data);
     }
-  }, [getAlbumDetails]);
+  }, [getAlbumDetails, privacy]);
 
   const avatarAlbumRef = useRef(null);
-
-  const [id, setId] = useState("");
-  const [idx, setIdx] = useState("");
   const handleAvatarChange = (e, id) => {
     const file = e.target.files[0];
     if (file) {
@@ -143,6 +146,43 @@ const Albums = () => {
     }
   }, [resUpdateInfo]);
 
+  const renderOption = (label, icon) => (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "0.5rem",
+        fontSize: "14px",
+      }}
+    >
+      {icon} {label}
+    </div>
+  );
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setPrivacy(value);
+    dispatch(
+      updateAlbum({
+        payload: {
+          query: {
+            params: id,
+          },
+          body: { privacy: value },
+        },
+      })
+    );
+    setTimeout(() => {
+      setPrivacy(value);
+      setShow(false);
+    }, 800);
+  };
+
+  useEffect(() => {
+    if (resUpdateInfo?.data?.success && !resUpdateInfo.loading) {
+      setPrivacy(resUpdateInfo?.data?.data?.privacy);
+    }
+  }, [resUpdateInfo, show]);
   return (
     <div className={css.album}>
       <Head>
@@ -226,6 +266,7 @@ const Albums = () => {
                       setShow(true);
                       setId(item._id);
                       setIdx(index);
+                      setPrivacy(item.privacy);
                     }}
                     data-title="Chỉnh sửa"
                   >
@@ -260,6 +301,44 @@ const Albums = () => {
                         className="btnEditAlbum"
                       >
                         Update Avatar
+                      </button>
+                      <button className="btnEditAlbum">
+                        <Select
+                          value={privacy}
+                          name="privacy"
+                          onChange={handleChange}
+                          displayEmpty
+                          sx={{
+                            color: "white",
+                            p: "2px",
+                            "& .MuiSelect-select": {
+                              padding: 0,
+                              all: "unset",
+                            },
+                            "& .MuiSelect-iconOutlined": {
+                              color: "white",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                              border: "none",
+                            },
+                          }}
+                        >
+                          <MenuItem value="" disabled>
+                            Select privacy
+                          </MenuItem>
+                          <MenuItem value="public">
+                            {renderOption(
+                              "Public",
+                              <PublicRoundedIcon style={{ fontSize: 20 }} />
+                            )}
+                          </MenuItem>
+                          <MenuItem value="private">
+                            {renderOption(
+                              "Private",
+                              <LockRoundedIcon style={{ fontSize: 20 }} />
+                            )}
+                          </MenuItem>
+                        </Select>
                       </button>
                       <button
                         onClick={() => {
