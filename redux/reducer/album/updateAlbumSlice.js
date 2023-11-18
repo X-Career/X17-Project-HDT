@@ -17,5 +17,5 @@ const updateAlbumSlice = createAsyncSlice(
     },
   }
 );
-export const cleanUpdateAlbum = createAction(`updateAlbum/clean`);
+export const cleanUpdateAlbum = createAction(`updateAlbum/cleanUpdateAlbum`);
 export default updateAlbumSlice.reducer;
