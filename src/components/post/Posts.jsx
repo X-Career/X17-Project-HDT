@@ -15,11 +15,17 @@ import {
   cleanPost,
   createPost,
 } from "../../../redux/reducer/post/createPostSlice";
-import { deletePost } from "../../../redux/reducer/post/deletePostSlice";
+import {
+  cleanPostD,
+  deletePost,
+} from "../../../redux/reducer/post/deletePostSlice";
 import toastOptions from "@/utils/index.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { updatePost } from "../../../redux/reducer/post/updatePostSlice";
+import {
+  cleanPostU,
+  updatePost,
+} from "../../../redux/reducer/post/updatePostSlice";
 
 const Posts = ({ milestoneId }) => {
   const dispatch = useDispatch();
@@ -116,6 +122,7 @@ const Posts = ({ milestoneId }) => {
   useEffect(() => {
     if (deletePostStt) {
       if (deletePostStt.message === "Post has been deleted!") {
+        dispatch(cleanPostD());
         dispatch(
           getMilestonePosts({
             payload: {
@@ -133,6 +140,7 @@ const Posts = ({ milestoneId }) => {
     if (updatePostStt) {
       if (updatePostStt.message === "Success!") {
         setIsEditModalVisible(false);
+        dispatch(cleanPostU());
         dispatch(
           getMilestonePosts({
             payload: {
