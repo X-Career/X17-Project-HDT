@@ -44,11 +44,11 @@ const UserAlbumCard = ({ album, user, check }) => {
       </div>
       <div className={styles.details}>
         <span>
-          123 views
+          {Math.floor(Math.random() * 100)} views
           <AiOutlineEye />
         </span>
         <span>
-          123 reactions
+          {Math.floor(Math.random() * 10)} reactions
           <AiOutlineLike />
         </span>
       </div>

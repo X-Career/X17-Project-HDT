@@ -42,10 +42,10 @@ const UserVacationCard = ({ vacation, user, check }) => {
           {Math.floor(vacation.views / 2)} views
           <AiOutlineEye />
         </span>
-        <span>
+        {/* <span>
           123 reactions
           <AiOutlineLike />
-        </span>
+        </span> */}
       </div>
     </article>
   );
