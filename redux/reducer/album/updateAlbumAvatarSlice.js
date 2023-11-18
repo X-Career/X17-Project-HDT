@@ -20,5 +20,7 @@ const updateAlbumAvatarSlice = createAsyncSlice(
     },
   }
 );
-export const cleanUpdateAlbumAvatar = createAction(`updateAlbumAvatar/clean`);
+export const cleanUpdateAlbumAvatar = createAction(
+  `updateAlbumAvatar/cleanUpdateAlbumAvatar`
+);
 export default updateAlbumAvatarSlice.reducer;

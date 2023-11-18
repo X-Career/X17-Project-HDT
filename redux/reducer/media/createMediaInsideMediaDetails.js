@@ -21,6 +21,6 @@ const createMediaInsideMediaDetailsSlice = createAsyncSlice(
   }
 );
 export const cleanCreateMediaInsideMediaDetails = createAction(
-  `createMediaInsideMediaDetails/clean`
+  `createMediaInsideMediaDetails/cleanCreateMediaInsideMediaDetails`
 );
 export default createMediaInsideMediaDetailsSlice.reducer;

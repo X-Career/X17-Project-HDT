@@ -17,5 +17,5 @@ const updateMediaSlice = createAsyncSlice(
     },
   }
 );
-export const cleanUpdateMedia = createAction(`updateMedia/clean`);
+export const cleanUpdateMedia = createAction(`updateMedia/cleanUpdateMedia`);
 export default updateMediaSlice.reducer;
