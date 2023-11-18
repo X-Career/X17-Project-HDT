@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllAlbums } from "../../../../redux/reducer/album/getAllAlbumsSlice";
 import { Container, Grid, CardMedia } from "@mui/material";
 import Link from "next/link";
+import { cleanUpdateAlbum } from "../../../../redux/reducer/album/updateAlbumSlice";
 
 function AlbumsOnlyView() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function AlbumsOnlyView() {
 
   useEffect(() => {
     dispatch(getAllAlbums());
+    dispatch(cleanUpdateAlbum());
   }, []);
 
   useEffect(() => {
