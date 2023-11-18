@@ -41,6 +41,7 @@ import { FaWindowClose } from "react-icons/fa";
 import Loading from "../../components/loadingPage/Loading";
 import Head from "next/head";
 import Comment from "../../components/comment/index.jsx";
+import { cleanUpdateImageCoverVa } from "../../../redux/reducer/milestone/updateCoverImgSLice";
 
 const VacationsDetail = () => {
   const antIcon = (
@@ -334,6 +335,7 @@ const VacationsDetail = () => {
       setCoverUrl(uploadLoading.data.data.avatarUrl);
       setIsModalChangeImgOpen(false);
       dispatch(cleanVacationU());
+      dispatch(cleanUpdateImageCoverVa());
       toast.success(uploadLoading.data.message, toastOptions);
     }
   }, [uploadLoading.data]);

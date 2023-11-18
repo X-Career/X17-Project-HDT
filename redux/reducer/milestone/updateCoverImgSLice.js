@@ -1,6 +1,8 @@
 import { createApiThunk, createAsyncSlice } from "../../reduxToolkit";
 import { initialState } from "../../../global/initState";
 import { METHODS } from "../../../global/index";
+import { createAction } from "@reduxjs/toolkit";
+
 export const updateImageCover = createApiThunk(
   METHODS.POST,
   "vacation/updateCover/$params",
@@ -11,6 +13,15 @@ export const updateImageCover = createApiThunk(
 const updateCoverImgSlice = createAsyncSlice(
   "updateImage",
   updateImageCover,
-  initialState
+  initialState,
+  {
+    cleanUpdateImageCoverVa: (state) => {
+      state.data = initialState.data;
+    },
+  }
+);
+
+export const cleanUpdateImageCoverVa = createAction(
+  `updateImage/cleanUpdateImageCoverVa`
 );
 export default updateCoverImgSlice.reducer;
