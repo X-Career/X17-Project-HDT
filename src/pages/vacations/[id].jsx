@@ -13,15 +13,24 @@ import { AiOutlineClose } from "react-icons/ai";
 import { IoMdPersonAdd } from "react-icons/io";
 import { isValidEmail } from "../../utils/index.js";
 const { RangePicker } = DatePicker;
-import { addTripmate } from "../../../redux/reducer/vacation/addTripmate";
-import { removeTripmate } from "../../../redux/reducer/vacation/removeTripmate";
+import {
+  addTripmate,
+  cleanTripmateA,
+} from "../../../redux/reducer/vacation/addTripmate";
+import {
+  cleanTripmateR,
+  removeTripmate,
+} from "../../../redux/reducer/vacation/removeTripmate";
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getVacation } from "../../../redux/reducer/vacation/vacationDetail";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { RESET_CREATE_POST } from "../../../redux/reducer/resetReducer/index.js";
-import { updateVacation } from "../../../redux/reducer/vacation/updateVacationSlice";
+import {
+  cleanVacationU,
+  updateVacation,
+} from "../../../redux/reducer/vacation/updateVacationSlice";
 import { updateImageCover } from "../../../redux/reducer/milestone/updateCoverImgSLice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -76,6 +85,7 @@ const VacationsDetail = () => {
   useEffect(() => {
     if (removeTripmateStt) {
       if (removeTripmateStt.message === "Participant removed successfully") {
+        dispatch(cleanTripmateR());
         setParticipants(removeTripmateStt.data.participants);
         toast.success(removeTripmateStt.message, toastOptions);
       }
@@ -85,6 +95,7 @@ const VacationsDetail = () => {
   useEffect(() => {
     if (addTripmateStt) {
       if (addTripmateStt.message === "Participants added successfully") {
+        dispatch(cleanTripmateA());
         setParticipants(addTripmateStt.data.participants);
         toast.success(addTripmateStt.message, toastOptions);
         setListAdd([]);
@@ -245,6 +256,7 @@ const VacationsDetail = () => {
   };
   useEffect(() => {
     if (updateCheck) {
+      dispatch(cleanVacationU());
       setValue([
         dayjs(updateCheck.data?.startDay),
         dayjs(updateCheck.data?.endDay),
@@ -321,6 +333,7 @@ const VacationsDetail = () => {
     ) {
       setCoverUrl(uploadLoading.data.data.avatarUrl);
       setIsModalChangeImgOpen(false);
+      dispatch(cleanVacationU());
       toast.success(uploadLoading.data.message, toastOptions);
     }
   }, [uploadLoading.data]);

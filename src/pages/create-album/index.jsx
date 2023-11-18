@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createAlbum, clean } from "../../../redux/reducer/album/albumSlice";
 import { createMedia } from "../../../redux/reducer/media/createMediaSlice";
 import { useRouter } from "next/router";
-
+import { cleanCreateMedia } from "../../../redux/reducer/media/createMediaSlice";
 const CreateAlbum = () => {
   const { setShowFooter } = useShowFooter();
   setShowFooter(false);

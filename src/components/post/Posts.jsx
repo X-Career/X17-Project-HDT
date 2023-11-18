@@ -11,12 +11,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMilestonePosts } from "../../../redux/reducer/post/getPostSlice";
 import { set } from "date-fns";
 import { padding } from "@mui/system";
-import { createPost } from "../../../redux/reducer/post/createPostSlice";
-import { deletePost } from "../../../redux/reducer/post/deletePostSlice";
+import {
+  cleanPost,
+  createPost,
+} from "../../../redux/reducer/post/createPostSlice";
+import {
+  cleanPostD,
+  deletePost,
+} from "../../../redux/reducer/post/deletePostSlice";
 import toastOptions from "@/utils/index.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { updatePost } from "../../../redux/reducer/post/updatePostSlice";
+import {
+  cleanPostU,
+  updatePost,
+} from "../../../redux/reducer/post/updatePostSlice";
 
 const Posts = ({ milestoneId }) => {
   const dispatch = useDispatch();
@@ -113,6 +122,7 @@ const Posts = ({ milestoneId }) => {
   useEffect(() => {
     if (deletePostStt) {
       if (deletePostStt.message === "Post has been deleted!") {
+        dispatch(cleanPostD());
         dispatch(
           getMilestonePosts({
             payload: {
@@ -130,6 +140,7 @@ const Posts = ({ milestoneId }) => {
     if (updatePostStt) {
       if (updatePostStt.message === "Success!") {
         setIsEditModalVisible(false);
+        dispatch(cleanPostU());
         dispatch(
           getMilestonePosts({
             payload: {
@@ -147,6 +158,7 @@ const Posts = ({ milestoneId }) => {
   useEffect(() => {
     if (createPostStt) {
       if (createPostStt.message === "Post has been created!") {
+        dispatch(cleanPost());
         setIsModalOpen(false);
         dispatch(
           getMilestonePosts({

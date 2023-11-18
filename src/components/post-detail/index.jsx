@@ -70,7 +70,7 @@ const Post = ({ milestoneId }) => {
         ))
       )}
       <Modal
-        title="Deatail Post"
+        title="Detail Post"
         open={isEditModalVisible}
         onCancel={() => setIsEditModalVisible(false)}
         okText="Ok"
